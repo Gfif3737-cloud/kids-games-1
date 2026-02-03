@@ -1,0 +1,1484 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1251">
+<meta name=Generator content="Microsoft Word 15 (filtered)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:"Segoe UI";
+	panose-1:2 11 5 2 4 2 4 2 2 3;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:8.0pt;
+	margin-left:0cm;
+	line-height:107%;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+.MsoChpDefault
+	{font-family:"Calibri",sans-serif;}
+.MsoPapDefault
+	{margin-bottom:8.0pt;
+	line-height:107%;}
+@page WordSection1
+	{size:595.3pt 841.9pt;
+	margin:2.0cm 42.5pt 2.0cm 3.0cm;}
+div.WordSection1
+	{page:WordSection1;}
+-->
+</style>
+
+</head>
+
+<body lang=RU>
+
+<div class=WordSection1>
+
+<p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:black;
+background:#EEFFDE'>const game = document.getElementById(&quot;game&quot;);</span></span><span
+style='font-family:"Segoe UI",sans-serif;color:black'><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<br style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>/* ===== НАЙДИ ПАРУ
+===== */</span></span><br style='box-sizing: border-box;font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>function
+showPairs() {</span></span><br style='box-sizing: border-box;font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>game.innerHTML = &quot;&lt;h2&gt;</span></span></span><img
+width=64 height=64 id="Рисунок 24" src="script.js.files/image001.png" alt="&#128308;"><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>Линия памяти&lt;/h2&gt;&quot;;</span></span><span
+style='font-family:"Segoe UI",sans-serif;color:black'><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<br style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>const characters = [</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>&quot;</span></span></span><img width=64
+height=64 id="Рисунок 23" src="script.js.files/image002.png" alt="&#128059;"><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>Винни&quot;, &quot;</span></span><img width=64
+height=64 id="Рисунок 22" src="script.js.files/image002.png" alt="&#128059;"><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>Винни&quot;,</span></span><span style='font-family:
+"Segoe UI",sans-serif;color:black'><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>&quot;</span></span></span><img width=64
+height=64 id="Рисунок 21" src="script.js.files/image003.png" alt="&#128010;"><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>Гена&quot;, &quot;</span></span><img width=64
+height=64 id="Рисунок 20" src="script.js.files/image003.png" alt="&#128010;"><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>Гена&quot;,</span></span><span style='font-family:
+"Segoe UI",sans-serif;color:black'><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>&quot;</span></span></span><img width=64
+height=64 id="Рисунок 19" src="script.js.files/image004.png" alt="&#128309;"><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>Крош&quot;, &quot;</span></span><img width=64
+height=64 id="Рисунок 18" src="script.js.files/image004.png" alt="&#128309;"><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>Крош&quot;,</span></span><span style='font-family:
+"Segoe UI",sans-serif;color:black'><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>&quot;</span></span></span><img width=64
+height=64 id="Рисунок 17" src="script.js.files/image005.png" alt="&#129428;"><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>Ёжик&quot;, &quot;</span></span><img width=64
+height=64 id="Рисунок 16" src="script.js.files/image005.png" alt="&#129428;"><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>Ёжик&quot;,</span></span><span style='font-family:
+"Segoe UI",sans-serif;color:black'><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>&quot;</span></span></span><img width=64
+height=64 id="Рисунок 15" src="script.js.files/image006.png" alt="&#128048;"><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>Нюша&quot;, &quot;</span></span><img width=64
+height=64 id="Рисунок 14" src="script.js.files/image006.png" alt="&#128048;"><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>Нюша&quot;,</span></span><span style='font-family:
+"Segoe UI",sans-serif;color:black'><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>&quot;</span></span></span><img width=64
+height=64 id="Рисунок 13" src="script.js.files/image007.png" alt="&#128295;"><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>Нолик&quot;, &quot;</span></span><img width=64
+height=64 id="Рисунок 12" src="script.js.files/image007.png" alt="&#128295;"><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>Нолик&quot;,</span></span><span style='font-family:
+"Segoe UI",sans-serif;color:black'><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>&quot;</span></span></span><img width=64
+height=64 id="Рисунок 11" src="script.js.files/image008.png" alt="&#9881;&#65039;"><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>Симка&quot;, &quot;</span></span><img width=64
+height=64 id="Рисунок 10" src="script.js.files/image008.png" alt="&#9881;&#65039;"><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>Симка&quot;,</span></span><span style='font-family:
+"Segoe UI",sans-serif;color:black'><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>&quot;</span></span></span><img width=64
+height=64 id="Рисунок 9" src="script.js.files/image009.png" alt="&#129504;"><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>Пин&quot;, &quot;</span></span><img width=64
+height=64 id="Рисунок 8" src="script.js.files/image009.png" alt="&#129504;"><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>Пин&quot;</span></span><span style='font-family:
+"Segoe UI",sans-serif;color:black'><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>];</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<br style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>characters.sort(() =&gt; 0.5 - Math.random());</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<br style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>let firstCard = null;</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>let lock = false;</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>let foundPairs = 0;</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<br style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>characters.forEach(char =&gt; {</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>const card =
+document.createElement(&quot;div&quot;);</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>card.className = &quot;card&quot;;</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>card.textContent = &quot;</span></span></span><img
+width=64 height=64 id="Рисунок 7" src="script.js.files/image010.png" alt="&#128647;"><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>&quot;;</span></span><span
+style='font-family:"Segoe UI",sans-serif;color:black'><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<br style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>card.onclick = () =&gt; {</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>if (lock || card.textContent !== </span></span><span
+lang=EN-US style='font-family:"Segoe UI",sans-serif;color:black;background:
+#EEFFDE'>&quot;</span></span><img width=64 height=64 id="Рисунок 6"
+src="script.js.files/image010.png" alt="&#128647;"><span lang=EN-US
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>&quot;)
+return;</span></span><span lang=EN-US style='font-family:"Segoe UI",sans-serif;
+color:black'><br style='box-sizing: border-box;font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<br style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>card.textContent = char;</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<br style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>if (!firstCard) {</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>firstCard = card;</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>} else {</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>if (firstCard.textContent !== card.textContent) {</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>lock = true;</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>setTimeout(() =&gt; {</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>card.textContent = &quot;</span></span></span><img
+width=64 height=64 id="Рисунок 5" src="script.js.files/image010.png" alt="&#128647;"><span
+lang=EN-US style='font-family:"Segoe UI",sans-serif;color:black;background:
+#EEFFDE'>&quot;;</span></span><span lang=EN-US style='font-family:"Segoe UI",sans-serif;
+color:black'><br style='box-sizing: border-box;font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>firstCard.textContent = &quot;</span></span></span><img
+width=64 height=64 id="Рисунок 4" src="script.js.files/image010.png" alt="&#128647;"><span
+lang=EN-US style='font-family:"Segoe UI",sans-serif;color:black;background:
+#EEFFDE'>&quot;;</span></span><span lang=EN-US style='font-family:"Segoe UI",sans-serif;
+color:black'><br style='box-sizing: border-box;font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>firstCard = null;</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>lock = false;</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>}, 800);</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>} else {</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>firstCard = null;</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>foundPairs++;</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<br style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>if (foundPairs === characters.length / 2) {</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>setTimeout(() =&gt; {</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>alert(&quot;</span></span></span><img width=64
+height=64 id="Рисунок 3" src="script.js.files/image011.png" alt="&#127881;"><span
+lang=EN-US style='font-family:"Segoe UI",sans-serif;color:black;background:
+#EEFFDE'>&nbsp;</span></span><span style='font-family:"Segoe UI",sans-serif;
+color:black;background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>Все</span><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'> </span><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>станции</span><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'> </span><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>пройдены</span><span
+lang=EN-US style='font-family:"Segoe UI",sans-serif;color:black;background:
+#EEFFDE'>!&quot;);</span></span><span lang=EN-US style='font-family:"Segoe UI",sans-serif;
+color:black'><br style='box-sizing: border-box;font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>}, 300);</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>}</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>}</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>}</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>};</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<br style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>game.appendChild(card);</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>});</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>}</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<br style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>/* ===== </span></span><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>ЛАБИРИНТ</span><span
+lang=EN-US style='font-family:"Segoe UI",sans-serif;color:black;background:
+#EEFFDE'> ===== */</span></span><span lang=EN-US style='font-family:"Segoe UI",sans-serif;
+color:black'><br style='box-sizing: border-box;font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>const mazeMap = [</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>[1,1,1,1,1],</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>[1,0,0,0,1],</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>[1,0,1,0,1],</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>[1,0,0,2,1],</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>[1,1,1,1,1]</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>];</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<br style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>let player = { x:
+1, y: 1 };</span></span><br style='box-sizing: border-box;font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<br style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>function showMaze()
+{</span></span><br style='box-sizing: border-box;font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>game.innerHTML = `</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>&lt;h2&gt;</span></span></span><img width=64
+height=64 id="Рисунок 2" src="script.js.files/image004.png" alt="&#128309;"><span
+lang=EN-US style='font-family:"Segoe UI",sans-serif;color:black;background:
+#EEFFDE'>&nbsp;</span></span><span style='font-family:"Segoe UI",sans-serif;
+color:black;background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>Линия</span><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'> </span><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>лабиринта</span><span
+lang=EN-US style='font-family:"Segoe UI",sans-serif;color:black;background:
+#EEFFDE'>&lt;/h2&gt;</span></span><span lang=EN-US style='font-family:"Segoe UI",sans-serif;
+color:black'><br style='box-sizing: border-box;font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>&lt;p&gt;</span></span><span style='font-family:
+"Segoe UI",sans-serif;color:black;background:#EEFFDE'>Доведи</span><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'> </span><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>поезд</span><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'> </span><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>до</span><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'> </span><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>конечной</span><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'> </span><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>станции</span><span
+lang=EN-US style='font-family:"Segoe UI",sans-serif;color:black;background:
+#EEFFDE'>&lt;/p&gt;</span></span><span lang=EN-US style='font-family:"Segoe UI",sans-serif;
+color:black'><br style='box-sizing: border-box;font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>&lt;div id=&quot;maze&quot;&gt;&lt;/div&gt;</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>&lt;br&gt;</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>&lt;button class=&quot;control-btn&quot;
+onclick=&quot;move('up')&quot;&gt;&#8593;&lt;/button&gt;&lt;br&gt;</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>&lt;button class=&quot;control-btn&quot;
+onclick=&quot;move('left')&quot;&gt;&#8592;&lt;/button&gt;</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>&lt;button class=&quot;control-btn&quot;
+onclick=&quot;move('right')&quot;&gt;&#8594;&lt;/button&gt;&lt;br&gt;</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>&lt;button class=&quot;control-btn&quot; onclick=&quot;move('down')&quot;&gt;&#8595;&lt;/button&gt;</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>`;</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>drawMaze();</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>}</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<br style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>function drawMaze()
+{</span></span><br style='box-sizing: border-box;font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>const maze =
+document.getElementById(&quot;maze&quot;);</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>maze.innerHTML = &quot;&quot;;</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<br style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>mazeMap.forEach((row, y) =&gt; {</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>row.forEach((cell, x) =&gt; {</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>const div = document.createElement(&quot;div&quot;);</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>div.className = &quot;cell&quot;;</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<br style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>if (cell === 1)
+div.classList.add(&quot;wall&quot;);</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>if (cell === 2)
+div.classList.add(&quot;finish&quot;);</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>if (player.x === x &amp;&amp; player.y === y)
+div.classList.add(&quot;player&quot;);</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<br style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>maze.appendChild(div);</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>});</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>maze.appendChild(document.createElement(&quot;br&quot;));</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>});</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>}</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<br style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>function move(dir) {</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>let x = player.x;</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>let y = player.y;</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<br style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>if (dir === &quot;up&quot;) y--;</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>if (dir === &quot;down&quot;) y++;</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>if (dir === &quot;left&quot;) x--;</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>if (dir === &quot;right&quot;) x++;</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<br style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>if (mazeMap[y][x] !== 1) {</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>player = { x, y };</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>drawMaze();</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<br style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>if (mazeMap[y][x] === 2) {</span></span><br
+style='box-sizing: border-box;font-variant-ligatures: normal;font-variant-caps: normal;
+orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>alert(&quot;</span></span></span><img width=64
+height=64 id="Рисунок 1" src="script.js.files/image011.png" alt="&#127881;"><span
+lang=EN-US style='font-family:"Segoe UI",sans-serif;color:black;background:
+#EEFFDE'>&nbsp;</span></span><span style='font-family:"Segoe UI",sans-serif;
+color:black;background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>Поезд</span><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'> </span><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>прибыл</span><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'> </span><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>на</span><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'> </span><span
+style='font-family:"Segoe UI",sans-serif;color:black;background:#EEFFDE'>конечную</span><span
+lang=EN-US style='font-family:"Segoe UI",sans-serif;color:black;background:
+#EEFFDE'>!&quot;);</span></span><span lang=EN-US style='font-family:"Segoe UI",sans-serif;
+color:black'><br style='box-sizing: border-box;font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;word-spacing:0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>}</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
+text-align:start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;
+text-decoration-thickness: initial;text-decoration-style: initial;text-decoration-color: initial;
+float:none;word-spacing:0px'>}</span></span><br style='box-sizing: border-box;
+font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;text-align:
+start;widows: 2;-webkit-text-stroke-width: 0px;white-space:pre-wrap;text-decoration-thickness: initial;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'>
+<span style='background:#EEFFDE'><span style='font-variant-ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-text-stroke-width: 0px;
+white-space:pre-wrap;text-decoration-thickness: initial;text-decoration-style: initial;
+text-decoration-color: initial;float:none;word-spacing:0px'>}</span></span></span></p>
+
+</div>
+
+</body>
+
+</html>
