@@ -1,3 +1,4 @@
+alert("JS работает!");
 const game = document.getElementById("game");
 
 function showPairs() {
