@@ -53,3 +53,51 @@ button {
     height: 55px;
     opacity: 0.9;
 }
+.menu button {
+  display: block;
+  width: 90%;
+  max-width: 300px;
+  margin: 10px auto;
+  padding: 15px;
+  font-size: 18px;
+  border-radius: 12px;
+  border: none;
+  background: #e53935;
+  color: white;
+  font-weight: bold;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  max-width: 300px;
+  margin: auto;
+}
+
+.card {
+  font-size: 32px;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.maze {
+  font-size: 22px;
+  line-height: 1.4;
+  margin: 10px auto;
+  background: #111;
+  padding: 10px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.controls {
+  margin: 15px 0;
+}
+
+.controls button {
+  font-size: 24px;
+  padding: 15px 20px;
+  margin: 5px;
+  border-radius: 10px;
+}
