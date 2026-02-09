@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Игры в метро</title>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #b11217;
+  color: white;
+  text-align: center;
+}
+
+button {
+  padding: 14px 22px;
+  margin: 10px;
+  font-size: 18px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+}
+
+.main-btn {
+  background: white;
+  color: black;
+  font-weight: bold;
+}
+
+.small-btn {
+  background: white;
+  color: black;
+  font-size: 16px;
+}
+
+.hidden { display: none; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 70px);
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.card {
+  width: 70px;
+  height: 70px;
+  background: #333;
+  border-radius: 12px;
+  font-size: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.card.open {
+  background: white;
+  color: black;
+}
+
+#maze {
+  display: grid;
+  grid-template-columns: repeat(7, 45px);
+  gap: 4px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.cell {
+  width: 45px;
+  height: 45px;
+  background: #222;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+}
+
+.path { background: #eee; color: black; }
+.player { background: #4caf50; }
+.goal { background: gold; }
+
+.controls button {
+  width: 70px;
+  height: 50px;
+  font-size: 22px;
+  border-radius: 14px;
+}
+</style>
+</head>
+<body>
+
+<!-- ГЛАВНЫЙ ЭКРАН -->
+<div id="home">
+  <h1 style="font-size:42px;">ИГРЫ В МЕТРО</h1>
+  <h2>Выбери линию</h2>
+
+  <button class="main-btn" onclick="showMemoryLine()">🔴 Линия памяти</button><br>
+  <button class="main-btn" onclick="showMazeLine()">🔵 Линия лабиринта</button>
+</div>
+
+<!-- ЛИНИЯ ПАМЯТИ -->
+<div id="memoryLine" class="hidden">
+  <h1>🔴 Линия памяти</h1>
+  <h3>Выбери персонажей</h3>
+
+  <button class="small-btn" onclick="startMemory('smeshariki')">Смешарики</button>
+  <button class="small-btn" onclick="startMemory('fixiki')">Фиксики</button>
+  <button class="small-btn" onclick="startMemory('masha')">Маша и Медведь</button>
+  <button class="small-btn" onclick="startMemory('winnie')">Винни Пух</button>
+  <button class="small-btn" onclick="startMemory('prostokvashino')">Простоквашино</button>
+
+  <br><br>
+  <button class="small-btn" onclick="goHome()">⬅ Назад</button>
+</div>
+
+<!-- ИГРА НАЙДИ ПАРУ -->
+<div id="memoryGame" class="hidden">
+  <h1>Найди пару</h1>
+  <h3 id="memoryTitle"></h3>
+  <div class="grid" id="memoryGrid"></div>
+  <br>
+  <button class="small-btn" onclick="showMemoryLine()">⬅ Назад</button>
+</div>
+
+<!-- ЛИНИЯ ЛАБИРИНТА -->
+<div id="mazeLine" class="hidden">
+  <h1>🔵 Линия лабиринта</h1>
+  <h3>Выбери персонажа</h3>
+
+  <button class="small-btn" onclick="startMaze('cheburashka')">Чебурашка 🍊</button>
+  <button class="small-btn" onclick="startMaze('pin')">Пин 🤖</button>
+  <button class="small-btn" onclick="startMaze('matroskin')">Матроскин 🐄</button>
+  <button class="small-btn" onclick="startMaze('masha')">Маша 🏠</button>
+
+  <br><br>
+  <button class="small-btn" onclick="goHome()">⬅ Назад</button>
+</div>
+
+<!-- ИГРА ЛАБИРИНТ -->
+<div id="mazeGame" class="hidden">
+  <h1 id="mazeTitle"></h1>
+  <div id="maze"></div>
+
+  <div class="controls">
+    <br>
+    <button onclick="move(0,-1)">⬆</button><br>
+    <button onclick="move(-1,0)">⬅</button>
+    <button onclick="move(1,0)">➡</button><br>
+    <button onclick="move(0,1)">⬇</button>
+  </div>
+
+  <br>
+  <button class="small-btn" onclick="showMazeLine()">⬅ Назад</button>
+</div>
+
+<script>
+function hideAll() {
+  home.style.display = "none";
+  memoryLine.style.display = "none";
+  memoryGame.style.display = "none";
+  mazeLine.style.display = "none";
+  mazeGame.style.display = "none";
+}
+
+function goHome() {
+  hideAll();
+  home.style.display = "block";
+}
+
+function showMemoryLine() {
+  hideAll();
+  memoryLine.style.display = "block";
+}
+
+function showMazeLine() {
+  hideAll();
+  mazeLine.style.display = "block";
+}
+
+/* ---------- НАЙДИ ПАРУ ---------- */
+
+const memorySets = {
+  smeshariki: ["🐰","🐻","🐧","🐷","🐰","🐻","🐧","🐷"],
+  fixiki: ["🔧","⚙️","🔌","💡","🔧","⚙️","🔌","💡"],
+  masha: ["👧","🐻","🌲","🍯","👧","🐻","🌲","🍯"],
+  winnie: ["🐻","🍯","🐷","🐯","🐻","🍯","🐷","🐯"],
+  prostokvashino: ["🐱","🐶","🐄","📮","🐱","🐶","🐄","📮"]
+};
+
+let firstCard = null;
+let lock = false;
+
+function startMemory(type) {
+  hideAll();
+  memoryGame.style.display = "block";
+  memoryTitle.textContent = "Персонажи: " + type;
+
+  const cards = [...memorySets[type]].sort(() => Math.random() - 0.5);
+  memoryGrid.innerHTML = "";
+  firstCard = null;
+  lock = false;
+
+  cards.forEach(icon => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.textContent = "";
+    card.dataset.icon = icon;
+    card.onclick = () => flip(card);
+    memoryGrid.appendChild(card);
+  });
+}
+
+function flip(card) {
+  if (lock || card.classList.contains("open")) return;
+
+  card.classList.add("open");
+  card.textContent = card.dataset.icon;
+
+  if (!firstCard) {
+    firstCard = card;
+  } else {
+    if (firstCard.dataset.icon === card.dataset.icon) {
+      firstCard = null;
+    } else {
+      lock = true;
+      setTimeout(() => {
+        card.classList.remove("open");
+        card.textContent = "";
+        firstCard.classList.remove("open");
+        firstCard.textContent = "";
+        firstCard = null;
+        lock = false;
+      }, 700);
+    }
+  }
+}
+
+/* ---------- ЛАБИРИНТ ---------- */
+
+let mazeData, playerPos, goalPos, playerIcon;
+
+const mazeTemplates = [
+  [
+    "#######",
+    "#.....#",
+    "#.###.#",
+    "#.#...#",
+    "#.#.###",
+    "#.....#",
+    "#######"
+  ],
+  [
+    "#######",
+    "#.....#",
+    "#.###.#",
+    "#...#.#",
+    "###.#.#",
+    "#.....#",
+    "#######"
+  ]
+];
+
+const mazeCharacters = {
+  cheburashka: { icon: "🐻", goal: "🍊", text: "Чебурашка идёт к 🍊" },
+  pin: { icon: "🐧", goal: "🤖", text: "Пин идёт к Биби 🤖" },
+  matroskin: { icon: "🐱", goal: "🐄", text: "Матроскин идёт к Мурке 🐄" },
+  masha: { icon: "👧", goal: "🏠", text: "Маша идёт к дому Мишки 🏠" }
+};
+
+function startMaze(type) {
+  hideAll();
+  mazeGame.style.display = "block";
+
+  const char = mazeCharacters[type];
+  mazeTitle.textContent = char.text;
+  playerIcon = char.icon;
+
+  const template = mazeTemplates[Math.floor(Math.random() * mazeTemplates.length)];
+  mazeData = template.map(row => row.split(""));
+
+  playerPos = { x: 1, y: 1 };
+  goalPos = { x: 5, y: 5 };
+
+  drawMaze();
+}
+
+function drawMaze() {
+  maze.innerHTML = "";
+  mazeData.forEach((row, y) => {
+    row.forEach((cell, x) => {
+      const div = document.createElement("div");
+      div.className = "cell";
+
+      if (cell === "#") div.style.background = "#000";
+      else div.classList.add("path");
+
+      if (x === playerPos.x && y === playerPos.y) {
+        div.textContent = playerIcon;
+        div.classList.add("player");
+      }
+
+      if (x === goalPos.x && y === goalPos.y) {
+        div.textContent = mazeCharactersGoal();
+        div.classList.add("goal");
+      }
+
+      maze.appendChild(div);
+    });
+  });
+}
+
+function mazeCharactersGoal() {
+  return mazeTitle.textContent.includes("🍊") ? "🍊" :
+         mazeTitle.textContent.includes("🤖") ? "🤖" :
+         mazeTitle.textContent.includes("🐄") ? "🐄" :
+         "🏠";
+}
+
+function move(dx, dy) {
+  const nx = playerPos.x + dx;
+  const ny = playerPos.y + dy;
+
+  if (mazeData[ny][nx] === "#") return;
+
+  playerPos.x = nx;
+  playerPos.y = ny;
+  drawMaze();
+
+  if (nx === goalPos.x && ny === goalPos.y) {
+    setTimeout(() => alert("🎉 Ты дошёл!"), 100);
+  }
+}
+</script>
+
+</body>
+</html>
