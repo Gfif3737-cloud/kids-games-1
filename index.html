@@ -2,22 +2,29 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Kids Games</title>
+    <title>Kids Games — Metro</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<div class="metro-bg"></div>
+
 <header>
     <h1>Kids Games — Metro</h1>
-    <p>Выбери линию:</p>
+    <p>Выбери линию</p>
 </header>
 
-<div class="metro-man">
-    <button class="line red" onclick="showPairs()">🔴 Линия памяти</button>
-    <button class="line blue" onclick="showMaze()">🔵 Линия лабиринта</button>
+<div class="metro-menu">
+    <button onclick="showPairs()">🔴 Линия памяти</button>
+    <button onclick="showMaze()">🔵 Линия лабиринта</button>
 </div>
 
 <div id="game"></div>
+
+<div class="logos">
+    <img src="mos-transport.png">
+    <img src="metro-logo.png">
+</div>
 
 <script src="./script.js"></script>
 </body>
