@@ -1,0 +1,55 @@
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #b71c1c;
+    color: white;
+    text-align: center;
+    min-height: 100vh;
+}
+
+header {
+    padding: 40px 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.metro-bg {
+    position: fixed;
+    inset: 0;
+    background: url("metro.jpg") center/cover no-repeat;
+    opacity: 0.25;
+    z-index: 0;
+}
+
+.metro-menu {
+    position: relative;
+    z-index: 2;
+    margin-top: 40px;
+}
+
+button {
+    font-size: 20px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 30px;
+    margin: 10px;
+    cursor: pointer;
+    background: white;
+    color: #b71c1c;
+    font-weight: bold;
+}
+
+.logos {
+    position: fixed;
+    bottom: 15px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    z-index: 2;
+}
+
+.logos img {
+    height: 55px;
+    opacity: 0.9;
+}
