@@ -1,24 +1,517 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Игры в метро</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Игры в метро</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: #b00020;
+      color: white;
+      text-align: center;
+    }
+
+    h1, h2 {
+      margin: 15px 0;
+    }
+
+    .screen {
+      display: none;
+      padding: 20px;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .btn {
+      display: block;
+      width: 80%;
+      max-width: 300px;
+      margin: 12px auto;
+      padding: 16px;
+      border-radius: 30px;
+      font-size: 18px;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    .red { background: #e53935; }
+    .blue { background: #1e88e5; }
+    .purple { background: #8e24aa; }
+    .gray { background: #555; }
+
+    /* ===== MEMORY ===== */
+    .memory-grid {
+      display: grid;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 15px;
+    }
+
+    .card {
+      width: 60px;
+      height: 60px;
+      background: #222;
+      border-radius: 12px;
+      font-size: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .card.open {
+      background: white;
+      color: black;
+    }
+
+    /* ===== LABYRINTH ===== */
+    .maze {
+      display: grid;
+      gap: 6px;
+      justify-content: center;
+      margin-top: 15px;
+    }
+
+    .cell {
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+
+    .wall { background: #111; }
+    .path { background: white; color: black; }
+    .player { background: #4caf50; }
+    .goal { background: #ffeb3b; color: black; }
+
+    .controls {
+      margin-top: 15px;
+    }
+
+    .ctrl-btn {
+      font-size: 22px;
+      padding: 10px 18px;
+      margin: 6px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* ===== MATCH 3 ===== */
+    .match-grid {
+      display: grid;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 15px;
+    }
+
+    .tile {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      font-size: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .station-list {
+      margin-top: 15px;
+      font-size: 16px;
+    }
+  </style>
 </head>
 <body>
 
-<h1 class="title">ИГРЫ В МЕТРО</h1>
-<p class="subtitle">Выбери линию</p>
-
-<div id="menu" class="menu">
-  <button type="button" class="line red" onclick="openMemory()">🔴 Линия памяти</button>
-  <button type="button" class="line blue" onclick="openMaze()">🔵 Линия лабиринта</button>
-  <button type="button" class="line purple" onclick="openMatch3()">🟣 Три в ряд</button>
+<!-- ===== MENU ===== -->
+<div id="menu" class="screen active">
+  <h1>ИГРЫ В МЕТРО</h1>
+  <p>Выбери линию</p>
+  <button class="btn red" onclick="openMemory()">🔴 Линия памяти</button>
+  <button class="btn blue" onclick="openMaze()">🔵 Линия лабиринта</button>
+  <button class="btn purple" onclick="openMatch3()">🟣 Три в ряд</button>
 </div>
 
-<div id="game"></div>
+<!-- ===== MEMORY ===== -->
+<div id="memoryScreen" class="screen">
+  <h2>🔴 Линия памяти</h2>
+  <p>Выбери сложность</p>
+  <button class="btn gray" onclick="startMemory(8)">8 карточек</button>
+  <button class="btn gray" onclick="startMemory(12)">12 карточек</button>
+  <button class="btn gray" onclick="startMemory(16)">16 карточек</button>
+  <button class="btn gray" onclick="startMemory(20)">20 карточек</button>
 
-<script src="script.js"></script>
+  <div id="memoryGrid" class="memory-grid"></div>
+
+  <button class="btn gray" onclick="goMenu()">⬅ Назад</button>
+</div>
+
+<!-- ===== MAZE ===== -->
+<div id="mazeScreen" class="screen">
+  <h2 id="mazeTitle">🔵 Линия лабиринта</h2>
+  <p id="mazeLevel">Уровень 1</p>
+
+  <div id="mazeGrid" class="maze"></div>
+
+  <div class="controls">
+    <button class="ctrl-btn" onclick="movePlayer(-1,0)">⬅</button>
+    <button class="ctrl-btn" onclick="movePlayer(0,-1)">⬆</button>
+    <button class="ctrl-btn" onclick="movePlayer(0,1)">⬇</button>
+    <button class="ctrl-btn" onclick="movePlayer(1,0)">➡</button>
+  </div>
+
+  <button class="btn gray" onclick="goMenu()">⬅ Назад</button>
+</div>
+
+<!-- ===== MATCH 3 ===== -->
+<div id="match3Screen" class="screen">
+  <h2>🟣 Три в ряд — Метро</h2>
+  <p>Соединяй 3 цвета — получай станции!</p>
+
+  <div id="matchGrid" class="match-grid"></div>
+
+  <div class="station-list">
+    <b>Собранные станции:</b>
+    <div id="stations"></div>
+  </div>
+
+  <button class="btn gray" onclick="goMenu()">⬅ Назад</button>
+</div>
+
+<script>
+/* ================= NAVIGATION ================= */
+
+function showScreen(id) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+function goMenu() {
+  showScreen("menu");
+}
+
+function openMemory() {
+  showScreen("memoryScreen");
+  document.getElementById("memoryGrid").innerHTML = "";
+}
+
+function openMaze() {
+  showScreen("mazeScreen");
+  mazeLevel = 1;
+  startMaze();
+}
+
+function openMatch3() {
+  showScreen("match3Screen");
+  initMatch3();
+}
+
+/* ================= MEMORY GAME ================= */
+
+const memoryCharacters = ["🐱", "🐶", "🐭", "🐰", "🐻", "🐼", "🐸", "🐧", "🐯", "🦊"];
+let firstCard = null;
+let lockBoard = false;
+
+function startMemory(totalCards) {
+  const grid = document.getElementById("memoryGrid");
+  grid.innerHTML = "";
+  firstCard = null;
+  lockBoard = false;
+
+  const pairs = totalCards / 2;
+  const symbols = memoryCharacters.slice(0, pairs);
+  const cards = [...symbols, ...symbols].sort(() => Math.random() - 0.5);
+
+  const cols = Math.sqrt(totalCards);
+  grid.style.gridTemplateColumns = `repeat(${Math.ceil(cols)}, 60px)`;
+
+  cards.forEach(symbol => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.dataset.symbol = symbol;
+    card.textContent = "❓";
+    card.onclick = () => flipCard(card);
+    grid.appendChild(card);
+  });
+}
+
+function flipCard(card) {
+  if (lockBoard || card.classList.contains("open")) return;
+
+  card.classList.add("open");
+  card.textContent = card.dataset.symbol;
+
+  if (!firstCard) {
+    firstCard = card;
+    return;
+  }
+
+  if (firstCard.dataset.symbol === card.dataset.symbol) {
+    firstCard = null;
+  } else {
+    lockBoard = true;
+    setTimeout(() => {
+      firstCard.classList.remove("open");
+      firstCard.textContent = "❓";
+      card.classList.remove("open");
+      card.textContent = "❓";
+      firstCard = null;
+      lockBoard = false;
+    }, 800);
+  }
+}
+
+/* ================= MAZE GAME ================= */
+
+const mazeSize = 9;
+let maze = [];
+let player = { x: 1, y: 1 };
+let goal = { x: mazeSize - 2, y: mazeSize - 2 };
+let mazeLevel = 1;
+
+const mazeCharacters = [
+  { hero: "🐱", goal: "🐭", title: "Матроскин идёт к мышке" },
+  { hero: "🐶", goal: "🦴", title: "Шарик идёт к косточке" },
+  { hero: "🐸", goal: "🪰", title: "Лягушка идёт к мухе" },
+  { hero: "🐼", goal: "🎋", title: "Панда идёт к бамбуку" }
+];
+
+function startMaze() {
+  generateMaze();
+  const theme = mazeCharacters[(mazeLevel - 1) % mazeCharacters.length];
+  document.getElementById("mazeTitle").textContent = "🔵 " + theme.title;
+  document.getElementById("mazeLevel").textContent = "Уровень " + mazeLevel;
+  drawMaze(theme);
+}
+
+function generateMaze() {
+  maze = Array.from({ length: mazeSize }, () => Array(mazeSize).fill(1));
+
+  function carve(x, y) {
+    const dirs = [
+      [1,0], [-1,0], [0,1], [0,-1]
+    ].sort(() => Math.random() - 0.5);
+
+    for (const [dx, dy] of dirs) {
+      const nx = x + dx * 2;
+      const ny = y + dy * 2;
+      if (nx > 0 && ny > 0 && nx < mazeSize-1 && ny < mazeSize-1 && maze[ny][nx] === 1) {
+        maze[ny][nx] = 0;
+        maze[y + dy][x + dx] = 0;
+        carve(nx, ny);
+      }
+    }
+  }
+
+  maze[1][1] = 0;
+  carve(1,1);
+
+  player = { x: 1, y: 1 };
+  goal = { x: mazeSize - 2, y: mazeSize - 2 };
+  maze[goal.y][goal.x] = 0;
+}
+
+function drawMaze(theme) {
+  const grid = document.getElementById("mazeGrid");
+  grid.innerHTML = "";
+  grid.style.gridTemplateColumns = `repeat(${mazeSize}, 42px)`;
+
+  for (let y = 0; y < mazeSize; y++) {
+    for (let x = 0; x < mazeSize; x++) {
+      const cell = document.createElement("div");
+      cell.className = "cell";
+
+      if (x === player.x && y === player.y) {
+        cell.classList.add("player");
+        cell.textContent = theme.hero;
+      } else if (x === goal.x && y === goal.y) {
+        cell.classList.add("goal");
+        cell.textContent = theme.goal;
+      } else if (maze[y][x] === 1) {
+        cell.classList.add("wall");
+      } else {
+        cell.classList.add("path");
+      }
+
+      grid.appendChild(cell);
+    }
+  }
+}
+
+function movePlayer(dx, dy) {
+  const nx = player.x + dx;
+  const ny = player.y + dy;
+  if (maze[ny][nx] === 0) {
+    player.x = nx;
+    player.y = ny;
+    const theme = mazeCharacters[(mazeLevel - 1) % mazeCharacters.length];
+    drawMaze(theme);
+
+    if (player.x === goal.x && player.y === goal.y) {
+      setTimeout(() => {
+        mazeLevel++;
+        startMaze();
+      }, 300);
+    }
+  }
+}
+
+/* ================= MATCH 3 ================= */
+
+const colors = ["🔴", "🔵", "🟢", "🟡", "🟣"];
+const stationByColor = {
+  "🔴": "Комсомольская",
+  "🔵": "Арбатская",
+  "🟢": "Парк культуры",
+  "🟡": "Киевская",
+  "🟣": "Таганская"
+};
+
+let matchGrid = [];
+let selected = null;
+let collectedStations = [];
+
+function initMatch3() {
+  const size = 6;
+  matchGrid = [];
+  collectedStations = [];
+  document.getElementById("stations").innerHTML = "";
+
+  for (let y = 0; y < size; y++) {
+    const row = [];
+    for (let x = 0; x < size; x++) {
+      row.push(randomColor());
+    }
+    matchGrid.push(row);
+  }
+
+  drawMatch3();
+}
+
+function randomColor() {
+  return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function drawMatch3() {
+  const grid = document.getElementById("matchGrid");
+  grid.innerHTML = "";
+  const size = matchGrid.length;
+  grid.style.gridTemplateColumns = `repeat(${size}, 50px)`;
+
+  for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size; x++) {
+      const tile = document.createElement("div");
+      tile.className = "tile";
+      tile.textContent = matchGrid[y][x];
+      tile.onclick = () => selectTile(x, y);
+      grid.appendChild(tile);
+    }
+  }
+}
+
+function selectTile(x, y) {
+  if (!selected) {
+    selected = { x, y };
+    return;
+  }
+
+  const dx = Math.abs(selected.x - x);
+  const dy = Math.abs(selected.y - y);
+
+  if (dx + dy === 1) {
+    swap(selected.x, selected.y, x, y);
+    if (!checkMatches()) {
+      swap(selected.x, selected.y, x, y);
+    } else {
+      while (checkMatches()) {
+        dropTiles();
+      }
+    }
+  }
+
+  selected = null;
+  drawMatch3();
+}
+
+function swap(x1, y1, x2, y2) {
+  const temp = matchGrid[y1][x1];
+  matchGrid[y1][x1] = matchGrid[y2][x2];
+  matchGrid[y2][x2] = temp;
+}
+
+function checkMatches() {
+  const size = matchGrid.length;
+  let found = false;
+
+  // Horizontal
+  for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size - 2; x++) {
+      const c = matchGrid[y][x];
+      if (c === matchGrid[y][x+1] && c === matchGrid[y][x+2]) {
+        markMatch(x,y,1,0,c);
+        found = true;
+      }
+    }
+  }
+
+  // Vertical
+  for (let x = 0; x < size; x++) {
+    for (let y = 0; y < size - 2; y++) {
+      const c = matchGrid[y][x];
+      if (c === matchGrid[y+1][x] && c === matchGrid[y+2][x]) {
+        markMatch(x,y,0,1,c);
+        found = true;
+      }
+    }
+  }
+
+  return found;
+}
+
+function markMatch(x,y,dx,dy,color) {
+  for (let i = 0; i < 3; i++) {
+    matchGrid[y + dy*i][x + dx*i] = null;
+  }
+  addStation(color);
+}
+
+function addStation(color) {
+  const station = stationByColor[color];
+  if (!collectedStations.includes(station)) {
+    collectedStations.push(station);
+    const div = document.getElementById("stations");
+    const p = document.createElement("div");
+    p.textContent = color + " " + station;
+    div.appendChild(p);
+  }
+}
+
+function dropTiles() {
+  const size = matchGrid.length;
+
+  for (let x = 0; x < size; x++) {
+    let col = [];
+    for (let y = 0; y < size; y++) {
+      if (matchGrid[y][x]) col.push(matchGrid[y][x]);
+    }
+    while (col.length < size) {
+      col.unshift(randomColor());
+    }
+    for (let y = 0; y < size; y++) {
+      matchGrid[y][x] = col[y];
+    }
+  }
+}
+</script>
+
 </body>
 </html>
