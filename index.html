@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Игры в метро</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1 class="title">ИГРЫ В МЕТРО</h1>
+<p class="subtitle">Выбери линию</p>
+
+<div id="menu" class="menu">
+  <button class="line red" onclick="openMemory()">🔴 Линия памяти</button>
+  <button class="line blue" onclick="openMaze()">🔵 Линия лабиринта</button>
+  <button class="line purple" onclick="openMatch3()">🟣 Три в ряд</button>
+</div>
+
+<div id="game"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
