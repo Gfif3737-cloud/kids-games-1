@@ -1,0 +1,144 @@
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#b0161a;
+  color:white;
+  text-align:center;
+}
+
+.title{
+  font-size:34px;
+  margin-top:20px;
+}
+
+.subtitle{
+  font-size:20px;
+  margin-bottom:20px;
+}
+
+.menu{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+}
+
+.line{
+  width:260px;
+  padding:14px;
+  font-size:18px;
+  border-radius:40px;
+  border:none;
+  color:white;
+  font-weight:bold;
+}
+
+.red{background:#e53935;}
+.blue{background:#1e88e5;}
+.purple{background:#8e24aa;}
+
+.back{
+  margin-top:20px;
+  padding:10px 20px;
+  font-size:16px;
+  border:none;
+  border-radius:20px;
+}
+
+/* ===== ПАМЯТЬ ===== */
+.grid{
+  display:grid;
+  gap:10px;
+  justify-content:center;
+  margin:20px auto;
+}
+
+.card{
+  width:70px;
+  height:70px;
+  background:#333;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+  cursor:pointer;
+}
+
+.card.open{
+  background:white;
+  color:black;
+}
+
+.card.matched{
+  background:#4caf50;
+  color:white;
+}
+
+/* ===== ЛАБИРИНТ ===== */
+#maze{
+  display:grid;
+  gap:6px;
+  justify-content:center;
+  margin:20px auto;
+}
+
+.cell{
+  width:40px;
+  height:40px;
+  border-radius:8px;
+  background:black;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+}
+
+.path{background:white;}
+.player{background:#4caf50;}
+.goal{background:gold;}
+
+.controls{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  margin-top:20px;
+}
+
+.controls button{
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  font-size:24px;
+  border:none;
+}
+
+/* ===== ТРИ В РЯД ===== */
+#matchGrid{
+  display:grid;
+  gap:8px;
+  justify-content:center;
+  margin:20px auto;
+}
+
+.matchCell{
+  width:60px;
+  height:60px;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  cursor:pointer;
+}
+
+/* 💥 ВОТ ЭТО РЕШАЕТ ПРОБЛЕМУ НА iPHONE */
+.matchCell.red{background:#e53935;}
+.matchCell.blue{background:#1e88e5;}
+.matchCell.green{background:#43a047;}
+.matchCell.yellow{background:#fdd835;}
+.matchCell.purple{background:#8e24aa;}
+
+.selected{
+  outline:4px solid white;
+}
