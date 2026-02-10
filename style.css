@@ -1,0 +1,138 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #111;
+  color: white;
+  text-align: center;
+}
+
+header {
+  background: #000;
+  border-bottom: 4px solid #e53935;
+  padding: 15px;
+}
+
+.title {
+  font-size: 36px;
+  margin: 5px 0;
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  font-size: 20px;
+  margin: 0;
+}
+
+.metro-map {
+  margin: 20px;
+}
+
+.line {
+  display: block;
+  width: 90%;
+  max-width: 320px;
+  margin: 12px auto;
+  padding: 16px;
+  font-size: 18px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+}
+
+.red {
+  background: #e53935;
+  box-shadow: 0 0 10px #e53935;
+}
+
+.blue {
+  background: #1e88e5;
+  box-shadow: 0 0 10px #1e88e5;
+}
+
+.purple {
+  background: #7b1fa2;
+  box-shadow: 0 0 10px #7b1fa2;
+}
+
+#game {
+  margin-top: 20px;
+}
+
+/* ===== КАРТОЧКИ (ПАМЯТЬ) ===== */
+.card {
+  width: 70px;
+  height: 70px;
+  background: #222;
+  border: 3px solid #555;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  margin: 6px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  border-color: #e53935;
+}
+
+/* ===== ЛАБИРИНТ ===== */
+#maze {
+  width: 240px;
+  margin: 15px auto;
+}
+
+.cell {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  border-radius: 6px;
+  margin: 2px;
+}
+
+.wall {
+  background: #000;
+  border: 2px solid #444;
+}
+
+.player {
+  background: #1e88e5;
+  box-shadow: 0 0 8px #1e88e5;
+}
+
+.finish {
+  background: #43a047;
+  box-shadow: 0 0 8px #43a047;
+}
+
+.control-btn {
+  background: #222;
+  color: white;
+  border: 2px solid #555;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 18px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+/* ===== ТРИ В РЯД ===== */
+.match3-cell {
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  border: 2px solid #333;
+  cursor: pointer;
+}
+
+.match3-cell.red { background: #d32f2f; }
+.match3-cell.blue { background: #1976d2; }
+.match3-cell.green { background: #388e3c; }
+.match3-cell.brown { background: #8d6e63; }
+.match3-cell.purple { background: #7b1fa2; }
+.match3-cell.empty { background: #111; }
