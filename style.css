@@ -1,0 +1,101 @@
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #b91c1c;
+  color: white;
+  text-align: center;
+}
+
+h1 {
+  margin: 20px 0;
+}
+
+.line {
+  display: block;
+  margin: 15px auto;
+  padding: 14px 24px;
+  border-radius: 999px;
+  border: none;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  width: 260px;
+  cursor: pointer;
+}
+
+.red { background: #dc2626; }
+.blue { background: #2563eb; }
+.purple { background: #7c3aed; }
+
+.grid {
+  display: grid;
+  gap: 8px;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+.cell {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  user-select: none;
+}
+
+.wall { background: #000; }
+.path { background: #eee; }
+.player { background: #22c55e; }
+.goal { background: #facc15; }
+
+.controls {
+  margin-top: 20px;
+}
+
+.controls button {
+  font-size: 22px;
+  margin: 6px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+}
+
+.hidden { background: #111; }
+.open { background: #fef3c7; }
+
+/* ===== ТРИ В РЯД + МАКЕТ МЕТРО ===== */
+
+.metro-map {
+  margin-top: 20px;
+  background: #111;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.metro-line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 6px 0;
+}
+
+.station {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #333;
+  margin: 4px;
+  border: 2px solid #555;
+}
+
+.station.filled {
+  background: white;
+}
+
+.line-label {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
