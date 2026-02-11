@@ -1,0 +1,62 @@
+* {
+  box-sizing: border-box;
+  font-family: system-ui, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(#ff9800, #f57c00);
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+h1 {
+  margin: 10px 0 14px;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.controls select,
+.controls button {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+}
+
+.memory-grid {
+  display: grid;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.memory-card {
+  background: #333;
+  border-radius: 12px;
+  padding: 14px 6px;
+  font-size: 16px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.memory-card.open {
+  background: white;
+  color: black;
+}
+
+.back {
+  display: inline-block;
+  margin-top: 14px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
