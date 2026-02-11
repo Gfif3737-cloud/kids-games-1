@@ -1,55 +1,63 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Игры в метро</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Метро-игры</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<div id="menu">
-  <h1>🚇 ИГРЫ В МЕТРО</h1>
-  <p>Выбери линию</p>
-  <button class="red" onclick="openMemory()">🔴 Линия памяти</button>
-  <button class="blue" onclick="openMaze()">🔵 Линия лабиринта</button>
-  <button class="purple" onclick="openMatch()">🟣 Три в ряд</button>
+<h1>🚇 Метро-игры</h1>
+
+<!-- ====== МЕНЮ ====== -->
+<div id="menu" class="screen">
+  <button id="btnMemory">🧠 Линия памяти</button>
+  <button id="btnMaze">🌀 Линия лабиринта</button>
+  <button id="btnMatch3">🔷 Три в ряд — метро</button>
 </div>
 
-<!-- 🔴 ПАМЯТЬ -->
-<div id="memoryScreen" class="screen hidden">
-  <h2>🔴 Линия памяти</h2>
-  <select id="memoryTheme" onchange="startMemory()">
-    <option value="smeshariki">Смешарики</option>
-    <option value="fixiki">Фиксики</option>
-    <option value="masha">Маша и Медведь</option>
-    <option value="winnie">Винни-Пух</option>
-    <option value="prostokvashino">Простоквашино</option>
-  </select>
-  <div id="memoryGrid"></div>
-  <button onclick="backToMenu()">⬅ Назад</button>
+<!-- ====== ПАМЯТЬ: НАСТРОЙКИ ====== -->
+<div id="memorySetup" class="screen">
+  <h2>🧠 Линия памяти</h2>
+  <p>Выбери размер:</p>
+  <div id="memorySizes" class="options"></div>
+
+  <p>Выбери персонажа:</p>
+  <div id="memoryCharacters" class="options"></div>
+
+  <button class="btnBack">⬅ Назад</button>
 </div>
 
-<!-- 🔵 ЛАБИРИНТ -->
-<div id="mazeScreen" class="screen hidden">
-  <h2 id="mazeTitle">🔵 Дойди до цели</h2>
-  <div id="mazeGrid"></div>
-  <p id="mazeLevel"></p>
-  <button onclick="backToMenu()">⬅ Назад</button>
+<!-- ====== ПАМЯТЬ: ИГРА ====== -->
+<div id="memory" class="screen">
+  <h2>🧠 Найди пары</h2>
+  <div id="memoryGrid" class="memoryGrid"></div>
+  <button class="btnBack">⬅ Назад</button>
 </div>
 
-<!-- 🟣 ТРИ В РЯД -->
-<div id="matchScreen" class="screen hidden">
-  <h2>🟣 Три в ряд — Метро</h2>
-  <p id="matchLevelText"></p>
+<!-- ====== ЛАБИРИНТ: НАСТРОЙКИ ====== -->
+<div id="mazeSetup" class="screen">
+  <h2>🌀 Лабиринт</h2>
+  <p>Выбери персонажа:</p>
+  <div id="mazeCharacters" class="options"></div>
+  <button onclick="startMaze()">▶ Играть</button>
+  <button class="btnBack">⬅ Назад</button>
+</div>
 
-  <div id="matchGridWrapper">
-    <div id="matchGrid"></div>
-  </div>
+<!-- ====== ЛАБИРИНТ: ИГРА ====== -->
+<div id="maze" class="screen">
+  <h2>🌀 Лабиринт</h2>
+  <p id="mazeLevelText"></p>
+  <div id="mazeGrid" class="mazeGrid"></div>
+  <button class="btnBack">⬅ Назад</button>
+</div>
 
-  <h3>🚉 Станции линии</h3>
-  <div id="stationsPanel"></div>
-
-  <button onclick="backToMenu()">⬅ Назад</button>
+<!-- ====== ТРИ В РЯД ====== -->
+<div id="match3" class="screen">
+  <h2>🔷 Три в ряд — Метро</h2>
+  <p id="match3LevelText"></p>
+  <div id="match3Grid" class="match3Grid"></div>
+  <button class="btnBack">⬅ Назад</button>
 </div>
 
 <script src="script.js"></script>
