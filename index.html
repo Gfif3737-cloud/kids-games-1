@@ -27,4 +27,68 @@
           <option value="masha">Маша и Медведь</option>
           <option value="winnie">Винни Пух</option>
         </select>
-     
+      </label>
+
+      <label>
+        Размер:
+        <select id="memorySize">
+          <option value="8">4 × 2</option>
+          <option value="12">4 × 3</option>
+          <option value="16">4 × 4</option>
+          <option value="20">4 × 5</option>
+        </select>
+      </label>
+
+      <button onclick="startMemory()">▶ Играть</button>
+    </div>
+
+    <div id="memoryBoard" class="memory-board"></div>
+
+    <button class="back" onclick="backToMenu()">⬅ Назад</button>
+  </div>
+
+  <!-- ===== ЛАБИРИНТ ===== -->
+  <div id="maze" class="screen hidden maze-bg">
+    <h2>🌀 Лабиринт</h2>
+
+    <div class="controls">
+      <label>
+        Персонаж:
+        <select id="mazeCharacter">
+          <option value="cheburashka">Чебурашка → 🍊</option>
+          <option value="pin">Пин → 🚗</option>
+          <option value="matroskin">Матроскин → 🐄</option>
+          <option value="masha">Маша → 🐻</option>
+        </select>
+      </label>
+    </div>
+
+    <div id="mazeLevel">Уровень 1</div>
+    <div id="mazeBoard" class="maze-board"></div>
+    <div class="hint">Управление: стрелки или свайпы</div>
+
+    <button class="back" onclick="backToMenu()">⬅ Назад</button>
+  </div>
+
+  <!-- ===== ТРИ В РЯД ===== -->
+  <div id="match3" class="screen hidden match3-bg">
+    <h2>💎 Три в ряд</h2>
+
+    <div class="controls">
+      <label>
+        Линия:
+        <select id="lineSelect" onchange="renderStations()"></select>
+      </label>
+    </div>
+
+    <div id="stationsList" class="stations-list"></div>
+
+    <h3>Уровень 1 — собери станции</h3>
+    <div id="match3Board" class="match3-board"></div>
+
+    <button class="back" onclick="backToMenu()">⬅ Назад</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
