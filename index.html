@@ -15,7 +15,7 @@
   <button class="purple" onclick="openMatch()">🟣 Три в ряд</button>
 </div>
 
-<!-- ===== ЛИНИЯ ПАМЯТИ ===== -->
+<!-- 🔴 ПАМЯТЬ -->
 <div id="memoryScreen" class="screen hidden">
   <h2>🔴 Линия памяти</h2>
   <select id="memoryTheme" onchange="startMemory()">
@@ -29,7 +29,7 @@
   <button onclick="backToMenu()">⬅ Назад</button>
 </div>
 
-<!-- ===== ЛИНИЯ ЛАБИРИНТА ===== -->
+<!-- 🔵 ЛАБИРИНТ -->
 <div id="mazeScreen" class="screen hidden">
   <h2 id="mazeTitle">🔵 Дойди до цели</h2>
   <div id="mazeGrid"></div>
@@ -37,11 +37,14 @@
   <button onclick="backToMenu()">⬅ Назад</button>
 </div>
 
-<!-- ===== ТРИ В РЯД ===== -->
+<!-- 🟣 ТРИ В РЯД -->
 <div id="matchScreen" class="screen hidden">
   <h2>🟣 Три в ряд — Метро</h2>
   <p id="matchLevelText"></p>
-  <div id="matchGrid"></div>
+
+  <div id="matchGridWrapper">
+    <div id="matchGrid"></div>
+  </div>
 
   <h3>🚉 Станции линии</h3>
   <div id="stationsPanel"></div>
