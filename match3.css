@@ -1,0 +1,61 @@
+body {
+    background: #8e44ad;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    text-align: center;
+}
+
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(8, 40px);
+    grid-gap: 5px;
+    margin: 20px auto;
+    justify-content: center;
+}
+
+.cell {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.cell:active {
+    transform: scale(1.1);
+}
+
+.level-selector {
+    margin-bottom: 15px;
+}
+
+#stations-list {
+    max-height: 100px;
+    overflow-y: auto;
+    text-align: left;
+    margin-top: 5px;
+}
+
+.station {
+    display: flex;
+    align-items: center;
+    margin: 2px 0;
+}
+
+.station span {
+    margin-left: 5px;
+}
+
+#restart {
+    margin-top: 15px;
+    padding: 5px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
