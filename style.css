@@ -1,0 +1,152 @@
+body {
+  font-family: system-ui, Arial, sans-serif;
+  background: #8b0000;
+  color: white;
+  text-align: center;
+  margin: 0;
+  padding: 16px;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+button {
+  border: none;
+  border-radius: 14px;
+  padding: 14px 18px;
+  font-size: 17px;
+  margin: 8px;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+.menu-btn {
+  display: block;
+  width: 90%;
+  max-width: 320px;
+  margin: 14px auto;
+  font-size: 20px;
+}
+
+.memory-btn { background: #1976d2; color: white; }
+.maze-btn   { background: #388e3c; color: white; }
+.match3-btn { background: #7b1fa2; color: white; }
+
+.back-btn {
+  background: #222;
+  color: white;
+  margin-top: 16px;
+}
+
+.screen {
+  display: none;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.options button {
+  background: #333;
+  color: white;
+  padding: 10px 14px;
+}
+
+.options button.active {
+  outline: 3px solid yellow;
+}
+
+/* ===== ПАМЯТЬ ===== */
+
+.memoryGrid {
+  display: grid;
+  gap: 10px;
+  max-width: 360px;
+  margin: 16px auto;
+}
+
+.card {
+  background: #222;
+  border-radius: 14px;
+  height: 70px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* ===== ЛАБИРИНТ ===== */
+
+.mazeGrid {
+  display: grid;
+  gap: 2px;
+  margin: 12px auto;
+  width: fit-content;
+}
+
+.mazeCell {
+  width: 28px;
+  height: 28px;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.wall {
+  background: #222;
+}
+
+.exit {
+  background: gold;
+}
+
+.player {
+  background: #ffeb3b;
+}
+
+.hint {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* ===== ТРИ В РЯД ===== */
+
+.match3Grid {
+  display: grid;
+  gap: 8px;
+  max-width: 320px;
+  margin: 14px auto;
+}
+
+.match3Cell {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.match3Cell.red { background: #e53935; }
+.match3Cell.blue { background: #1e88e5; }
+.match3Cell.green { background: #43a047; }
+.match3Cell.yellow { background: #fdd835; }
+.match3Cell.purple { background: #8e24aa; }
+
+#stationsBox {
+  background: rgba(0,0,0,0.3);
+  padding: 10px;
+  border-radius: 12px;
+  max-width: 320px;
+  margin: 10px auto;
+  font-size: 14px;
+}
