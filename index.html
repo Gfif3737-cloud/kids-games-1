@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Игры в метро</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<h1>🚇 ИГРЫ В МЕТРО</h1>
+
+<!-- ===== МЕНЮ ===== -->
+<div id="menu" class="screen active">
+  <button class="menu-btn memory-btn" id="btnMemory">🧠 Линия памяти</button>
+  <button class="menu-btn maze-btn" id="btnMaze">🌀 Лабиринт</button>
+  <button class="menu-btn match3-btn" id="btnMatch3">💎 Три в ряд</button>
+</div>
+
+<!-- ===== ПАМЯТЬ ===== -->
+<div id="memory" class="screen hidden">
+  <h2>🧠 Линия памяти</h2>
+
+  <div class="panel">
+    Размер:
+    <select id="memorySize">
+      <option value="4x2">4 × 2</option>
+      <option value="4x5">4 × 5</option>
+    </select>
+
+    Мультики:
+    <select id="memoryTheme">
+      <option value="cartoons">Смешарики, Фиксики, Маша, Винни</option>
+    </select>
+
+    <button id="startMemory">Старт</button>
+  </div>
+
+  <div id="memoryGrid" class="memory-grid"></div>
+
+  <button class="back-btn btnBack">⬅ Назад</button>
+</div>
+
+<!-- ===== ЛАБИРИНТ ===== -->
+<div id="maze" class="screen hidden">
+  <h2>🌀 Лабиринт</h2>
+  <div id="mazeLevel">Уровень 1</div>
+  <div id="mazeHint">Управление: стрелки или свайп</div>
+  <div id="mazeGrid" class="maze-grid"></div>
+  <button class="back-btn btnBack">⬅ Назад</button>
+</div>
+
+<!-- ===== ТРИ В РЯД ===== -->
+<div id="match3" class="screen hidden">
+  <h2>💎 Три в ряд</h2>
+
+  <div class="panel">
+    Линия:
+    <select id="lineSelect"></select>
+  </div>
+
+  <div id="stationList" class="station-list"></div>
+
+  <div id="match3Grid" class="match3-grid"></div>
+
+  <button class="back-btn btnBack">⬅ Назад</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
