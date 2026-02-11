@@ -2,46 +2,47 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>Метро-игры</title>
+  <title>Игры в метро</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<h1>🚇 Метро-игры</h1>
+<h1>🚇 ИГРЫ В МЕТРО</h1>
 
-<!-- ====== МЕНЮ ====== -->
+<!-- ====== ГЛАВНОЕ МЕНЮ ====== -->
 <div id="menu" class="screen">
-  <button id="btnMemory">🧠 Линия памяти</button>
-  <button id="btnMaze">🌀 Линия лабиринта</button>
-  <button id="btnMatch3">🔷 Три в ряд — метро</button>
+  <button class="menu-btn memory-btn" id="btnMemory">🧠 Линия памяти</button>
+  <button class="menu-btn maze-btn" id="btnMaze">🌀 Линия лабиринта</button>
+  <button class="menu-btn match3-btn" id="btnMatch3">🔷 Три в ряд</button>
 </div>
 
 <!-- ====== ПАМЯТЬ: НАСТРОЙКИ ====== -->
 <div id="memorySetup" class="screen">
   <h2>🧠 Линия памяти</h2>
-  <p>Выбери размер:</p>
+
+  <p>Выбери мультфильм:</p>
+  <div id="memoryThemes" class="options"></div>
+
+  <p>Выбери количество карточек:</p>
   <div id="memorySizes" class="options"></div>
 
-  <p>Выбери персонажа:</p>
-  <div id="memoryCharacters" class="options"></div>
-
-  <button class="btnBack">⬅ Назад</button>
+  <button class="back-btn">⬅ Назад</button>
 </div>
 
 <!-- ====== ПАМЯТЬ: ИГРА ====== -->
 <div id="memory" class="screen">
   <h2>🧠 Найди пары</h2>
   <div id="memoryGrid" class="memoryGrid"></div>
-  <button class="btnBack">⬅ Назад</button>
+  <button class="back-btn">⬅ Назад</button>
 </div>
 
-<!-- ====== ЛАБИРИНТ: НАСТРОЙКИ ====== -->
+<!-- ====== ЛАБИРИНТ: ВЫБОР ====== -->
 <div id="mazeSetup" class="screen">
-  <h2>🌀 Лабиринт</h2>
+  <h2>🌀 Линия лабиринта</h2>
   <p>Выбери персонажа:</p>
   <div id="mazeCharacters" class="options"></div>
-  <button onclick="startMaze()">▶ Играть</button>
-  <button class="btnBack">⬅ Назад</button>
+  <button id="startMazeBtn">▶ Играть</button>
+  <button class="back-btn">⬅ Назад</button>
 </div>
 
 <!-- ====== ЛАБИРИНТ: ИГРА ====== -->
@@ -49,15 +50,23 @@
   <h2>🌀 Лабиринт</h2>
   <p id="mazeLevelText"></p>
   <div id="mazeGrid" class="mazeGrid"></div>
-  <button class="btnBack">⬅ Назад</button>
+  <p class="hint">Управление: стрелки или свайп</p>
+  <button class="back-btn">⬅ Назад</button>
 </div>
 
 <!-- ====== ТРИ В РЯД ====== -->
 <div id="match3" class="screen">
-  <h2>🔷 Три в ряд — Метро</h2>
+  <h2>🔷 Три в ряд</h2>
+
+  <p>Выбери линию:</p>
+  <select id="lineSelect"></select>
+
+  <div id="stationsBox"></div>
+
   <p id="match3LevelText"></p>
   <div id="match3Grid" class="match3Grid"></div>
-  <button class="btnBack">⬅ Назад</button>
+
+  <button class="back-btn">⬅ Назад</button>
 </div>
 
 <script src="script.js"></script>
