@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Линия памяти</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="memory.css" />
+</head>
+<body>
+
+<h1>🧠 Линия памяти</h1>
+
+<div class="controls">
+  <label>
+    Мультики:
+    <select id="themeSelect">
+      <option value="smeshariki">Смешарики</option>
+      <option value="prostokvashino">Простоквашино</option>
+      <option value="fixiki">Фиксики</option>
+      <option value="vinni">Винни Пух</option>
+      <option value="masha">Маша и Медведь</option>
+    </select>
+  </label>
+
+  <label>
+    Размер:
+    <select id="sizeSelect">
+      <option value="4x2">4 × 2</option>
+      <option value="4x3">4 × 3</option>
+      <option value="4x4">4 × 4</option>
+      <option value="4x5">4 × 5</option>
+    </select>
+  </label>
+
+  <button id="startBtn">Старт</button>
+</div>
+
+<div id="memoryGrid" class="memory-grid"></div>
+
+<a href="index.html" class="back">⬅ Назад</a>
+
+<script src="memory.js"></script>
+</body>
+</html>
