@@ -1,0 +1,115 @@
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #b00000;
+  color: white;
+  text-align: center;
+}
+
+h1 {
+  margin-top: 40px;
+}
+
+button {
+  border: none;
+  border-radius: 25px;
+  padding: 14px 22px;
+  font-size: 18px;
+  margin: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.red { background: #e53935; }
+.blue { background: #1e88e5; }
+.purple { background: #8e24aa; }
+
+.screen {
+  padding: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ===== ПАМЯТЬ ===== */
+#memoryGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 70px);
+  gap: 12px;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+.memoryCard {
+  width: 70px;
+  height: 70px;
+  background: #333;
+  border-radius: 12px;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.memoryCard.open {
+  background: white;
+  color: black;
+}
+
+/* ===== ЛАБИРИНТ ===== */
+#mazeGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 48px);
+  gap: 8px;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+.mazeCell {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: #111;
+  border: 2px solid #444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.wall { background: #000; }
+.player { background: #1e88e5; }
+.goal { background: #ff9800; }
+
+/* ===== ТРИ В РЯД ===== */
+#matchGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 54px);
+  gap: 10px;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+.matchCell {
+  width: 54px;
+  height: 54px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+#stationsPanel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.stationBadge {
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: #333;
+  font-size: 14px;
+}
