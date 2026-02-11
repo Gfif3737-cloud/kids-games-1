@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Игры в метро</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>🚇 ИГРЫ В МЕТРО</h1>
+
+  <div id="menu" class="menu">
+    <button class="btn memory" onclick="showMemory()">🧠 Линия памяти</button>
+    <button class="btn maze" onclick="showMaze()">🌀 Лабиринт</button>
+    <button class="btn match3" onclick="showMatch3()">💎 Три в ряд</button>
+  </div>
+
+  <!-- ===== ЛИНИЯ ПАМЯТИ ===== -->
+  <div id="memory" class="screen hidden memory-bg">
+    <h2>🧠 Линия памяти</h2>
+
+    <div class="controls">
+      <label>
+        Мультик:
+        <select id="memoryTheme">
+          <option value="smeshariki">Смешарики</option>
+          <option value="fixiki">Фиксики</option>
+          <option value="masha">Маша и Медведь</option>
+          <option value="winnie">Винни Пух</option>
+        </select>
+     
