@@ -11,18 +11,19 @@ body {
     text-align: center;
 }
 
+/* Уменьшили размер клеток */
 #game-board {
     display: grid;
-    grid-template-columns: repeat(8, 40px);
-    grid-gap: 5px;
+    grid-template-columns: repeat(8, 30px); /* было 40px */
+    grid-gap: 4px; /* немного уменьшили отступ */
     margin: 20px auto;
     justify-content: center;
 }
 
 .cell {
-    width: 40px;
-    height: 40px;
-    border-radius: 6px;
+    width: 30px;   /* было 40px */
+    height: 30px;  /* было 40px */
+    border-radius: 5px;
     cursor: pointer;
     transition: transform 0.1s;
 }
