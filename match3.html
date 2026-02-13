@@ -1,26 +1,45 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Три в ряд</title>
-<link rel="stylesheet" href="match3.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚇 Три в ряд — Московское метро</title>
+    <link rel="stylesheet" href="match3.css">
 </head>
 <body>
-<div class="container">
-    <h1>💎 Три в ряд</h1>
+    <div class="game-container">
+        <h1>🚇 Три в ряд: Московское метро</h1>
 
-    <div class="level-selector">
-        <label for="line-select">Выберите линию:</label>
-        <select id="line-select"></select>
-        <div id="stations-list"></div>
+        <!-- Выпадающий список линий -->
+        <div class="metro-selector">
+            <label for="line-select">Выбери линию метро:</label>
+            <select id="line-select">
+                <option value="sokolnicheskaya">🚇 Сокольническая (красная)</option>
+                <option value="zamoskvoretskaya">🚇 Замоскворецкая (зелёная)</option>
+                <option value="arbatsko_pokrovskaya">🚇 Арбатско-Покровская (синяя)</option>
+                <option value="filyovskaya">🚇 Филёвская (голубая)</option>
+                <option value="koltsevaya">🚇 Кольцевая (коричневая)</option>
+            </select>
+        </div>
+
+        <!-- Игровое поле 5x5 -->
+        <div id="game-board" class="board"></div>
+
+        <!-- Счёт и кнопка рестарта -->
+        <div class="score-container">
+            <p>⭐ Очки: <span id="score">0</span></p>
+            <button id="restart">🔄 Новая игра</button>
+        </div>
+
+        <!-- Список станций выбранной линии с галочками -->
+        <div class="stations-collection">
+            <h3>📋 Собранные станции:</h3>
+            <div id="stations-list" class="stations-list">
+                <!-- Станции подгрузятся через JS -->
+            </div>
+        </div>
     </div>
 
-    <div id="game-board"></div>
-
-    <button id="restart">Начать заново</button>
-</div>
-
-<script src="match3.js"></script>
+    <script src="match3.js"></script>
 </body>
 </html>
