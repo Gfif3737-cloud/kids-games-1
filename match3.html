@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚇 Три в ряд — Московское метро</title>
+    <title>🚇 Три в ряд: Московское метро</title>
     <link rel="stylesheet" href="match3.css">
 </head>
 <body>
     <div class="game-container">
         <h1>🚇 Три в ряд: Московское метро</h1>
 
-        <!-- Выпадающий список линий -->
         <div class="metro-selector">
             <label for="line-select">Выбери линию метро:</label>
             <select id="line-select">
@@ -31,11 +30,11 @@
             <button id="restart">🔄 Новая игра</button>
         </div>
 
-        <!-- Список станций выбранной линии с галочками -->
+        <!-- Список станций выбранной линии -->
         <div class="stations-collection">
             <h3>📋 Собранные станции:</h3>
             <div id="stations-list" class="stations-list">
-                <!-- Станции подгрузятся через JS -->
+                <!-- Заполняется через JS -->
             </div>
         </div>
     </div>
