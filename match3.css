@@ -60,3 +60,7 @@ body {
     cursor: pointer;
     border-radius: 5px;
 }
+.cell {
+    background-color: transparent;
+    transition: background-color 0.1s ease;
+}
