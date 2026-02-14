@@ -3,39 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚇 Три в ряд: Московское метро</title>
+    <title>🚇 Метро-коллекция: Три в ряд</title>
     <link rel="stylesheet" href="match3.css">
 </head>
 <body>
     <div class="game-container">
-        <h1>🚇 Три в ряд: Московское метро</h1>
+        <h1>🚇 МЕТРО-КОЛЛЕКЦИЯ</h1>
+        
+        <!-- Выбор уровня -->
+        <div class="level-selector">
+            <label for="level-select">Выбери уровень:</label>
+            <select id="level-select">
+                <option value="level1">🌟 Уровень 1: Классическое метро</option>
+                <option value="level2">🌟 Уровень 2: Радиальные линии</option>
+                <option value="level3">🌟 Уровень 3: МЦД</option>
+            </select>
+        </div>
 
-        <div class="metro-selector">
+        <!-- Выбор линии внутри уровня -->
+        <div class="line-selector">
             <label for="line-select">Выбери линию метро:</label>
             <select id="line-select">
-                <option value="sokolnicheskaya">🚇 Сокольническая (красная)</option>
-                <option value="zamoskvoretskaya">🚇 Замоскворецкая (зелёная)</option>
-                <option value="arbatsko_pokrovskaya">🚇 Арбатско-Покровская (синяя)</option>
-                <option value="filyovskaya">🚇 Филёвская (голубая)</option>
-                <option value="koltsevaya">🚇 Кольцевая (коричневая)</option>
+                <!-- Заполняется из JS -->
             </select>
         </div>
 
         <!-- Игровое поле 5x5 -->
         <div id="game-board" class="board"></div>
 
-        <!-- Счёт и кнопка рестарта -->
+        <!-- Счёт -->
         <div class="score-container">
-            <p>⭐ Очки: <span id="score">0</span></p>
+            <p>⭐ Очки на линии: <span id="line-score">0</span></p>
+            <p>🏆 Прогресс уровня: <span id="level-progress">0/5 линий</span></p>
             <button id="restart">🔄 Новая игра</button>
         </div>
 
-        <!-- Список станций выбранной линии -->
+        <!-- Список станций текущей линии -->
         <div class="stations-collection">
-            <h3>📋 Собранные станции:</h3>
-            <div id="stations-list" class="stations-list">
-                <!-- Заполняется через JS -->
-            </div>
+            <h3>📋 Собранные станции линии:</h3>
+            <div id="stations-list" class="stations-list"></div>
+        </div>
+
+        <!-- Статус линий на уровне -->
+        <div class="lines-status">
+            <h3>📊 Линии уровня:</h3>
+            <div id="lines-status-list" class="lines-status-list"></div>
         </div>
     </div>
 
