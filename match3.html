@@ -12,41 +12,49 @@
         
         <!-- Выбор уровня -->
         <div class="level-selector">
-            <label for="level-select">Выбери уровень:</label>
+            <label for="level-select">🌟 Выбери уровень:</label>
             <select id="level-select">
-                <option value="level1">🌟 Уровень 1: Классическое метро</option>
-                <option value="level2">🌟 Уровень 2: Радиальные линии</option>
-                <option value="level3">🌟 Уровень 3: МЦД</option>
+                <option value="level1">Уровень 1: Классическое метро</option>
+                <option value="level2">Уровень 2: Радиальные линии</option>
+                <option value="level3">Уровень 3: МЦД</option>
             </select>
         </div>
 
         <!-- Выбор линии внутри уровня -->
         <div class="line-selector">
-            <label for="line-select">Выбери линию метро:</label>
-            <select id="line-select">
-                <!-- Заполняется из JS -->
-            </select>
+            <label for="line-select">🚇 Выбери линию:</label>
+            <select id="line-select"></select>
         </div>
 
         <!-- Игровое поле 5x5 -->
         <div id="game-board" class="board"></div>
 
-        <!-- Счёт -->
+        <!-- Счёт и прогресс -->
         <div class="score-container">
-            <p>⭐ Очки на линии: <span id="line-score">0</span></p>
-            <p>🏆 Прогресс уровня: <span id="level-progress">0/5 линий</span></p>
-            <button id="restart">🔄 Новая игра</button>
+            <div class="score-item">
+                <span class="score-label">⭐ Очки на линии:</span>
+                <span id="line-score" class="score-value">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">🏆 Всего очков:</span>
+                <span id="total-score" class="score-value">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">📊 Прогресс уровня:</span>
+                <span id="level-progress" class="score-value">0/5 линий</span>
+            </div>
+            <button id="restart" class="restart-btn">🔄 Новая игра</button>
         </div>
 
         <!-- Список станций текущей линии -->
         <div class="stations-collection">
-            <h3>📋 Собранные станции линии:</h3>
+            <h3>📋 Станции текущей линии:</h3>
             <div id="stations-list" class="stations-list"></div>
         </div>
 
-        <!-- Статус линий на уровне -->
+        <!-- Статус всех линий уровня -->
         <div class="lines-status">
-            <h3>📊 Линии уровня:</h3>
+            <h3>📊 Прогресс по линиям:</h3>
             <div id="lines-status-list" class="lines-status-list"></div>
         </div>
     </div>
