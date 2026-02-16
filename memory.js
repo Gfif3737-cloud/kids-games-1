@@ -4,61 +4,66 @@ document.addEventListener("DOMContentLoaded", () => {
   const sizeSelect = document.getElementById("sizeSelect");
   const themeSelect = document.getElementById("themeSelect");
 
-  // ==================== ДАННЫЕ ПЕРСОНАЖЕЙ ====================
+  // ==================== ДАННЫЕ ПЕРСОНАЖЕЙ (ЭМОДЗИ) ====================
   const themes = {
     smeshariki: {
       name: "Смешарики",
       chars: [
-        { name: "Крош", img: "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/krosh.png" },
-        { name: "Ёжик", img: "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/ezhik.png" },
-        { name: "Нюша", img: "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/nyusha.png" },
-        { name: "Бараш", img: "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/barash.png" },
-        { name: "Лосяш", img: "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/losyash.png" },
-        { name: "Копатыч", img: "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/kopatych.png" },
-        { name: "Совунья", img: "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/sovunya.png" },
-        { name: "Пин", img: "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/pin.png" }
+        { name: "Крош", emoji: "🐰", color: "#FF69B4" },
+        { name: "Ёжик", emoji: "🦔", color: "#8B4513" },
+        { name: "Нюша", emoji: "🐷", color: "#FFB6C1" },
+        { name: "Бараш", emoji: "🐑", color: "#87CEEB" },
+        { name: "Лосяш", emoji: "🦌", color: "#FFD700" },
+        { name: "Копатыч", emoji: "🐻", color: "#CD853F" },
+        { name: "Совунья", emoji: "🦉", color: "#9370DB" },
+        { name: "Пин", emoji: "🐧", color: "#4169E1" }
       ]
     },
     prostokvashino: {
       name: "Простоквашино",
       chars: [
-        { name: "Матроскин", img: "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/matroskin.png" },
-        { name: "Шарик", img: "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/sharik.png" },
-        { name: "Дядя Фёдор", img: "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/fedor.png" },
-        { name: "Печкин", img: "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/pechkin.png" }
+        { name: "Матроскин", emoji: "🐱", color: "#FFA500" },
+        { name: "Шарик", emoji: "🐶", color: "#DEB887" },
+        { name: "Дядя Фёдор", emoji: "👦", color: "#98FB98" },
+        { name: "Печкин", emoji: "📮", color: "#708090" }
       ]
     },
     fixiki: {
       name: "Фиксики",
       chars: [
-        { name: "Нолик", img: "https://via.placeholder.com/200/0000FF/FFFFFF?text=Нолик" },
-        { name: "Симка", img: "https://via.placeholder.com/200/0000FF/FFFFFF?text=Симка" },
-        { name: "Папус", img: "https://via.placeholder.com/200/0000FF/FFFFFF?text=Папус" },
-        { name: "Мася", img: "https://via.placeholder.com/200/0000FF/FFFFFF?text=Мася" }
+        { name: "Нолик", emoji: "0️⃣", color: "#00BFFF" },
+        { name: "Симка", emoji: "1️⃣", color: "#FF69B4" },
+        { name: "Папус", emoji: "👨", color: "#4169E1" },
+        { name: "Мася", emoji: "👩", color: "#FFA500" }
       ]
     },
     vinni: {
       name: "Винни Пух",
       chars: [
-        { name: "Винни", img: "https://via.placeholder.com/200/FFD700/000000?text=Винни" },
-        { name: "Пятачок", img: "https://via.placeholder.com/200/FFD700/000000?text=Пятачок" },
-        { name: "Кролик", img: "https://via.placeholder.com/200/FFD700/000000?text=Кролик" },
-        { name: "Иа", img: "https://via.placeholder.com/200/FFD700/000000?text=Иа" }
+        { name: "Винни", emoji: "🐻", color: "#CD853F" },
+        { name: "Пятачок", emoji: "🐖", color: "#FFB6C1" },
+        { name: "Кролик", emoji: "🐇", color: "#87CEEB" },
+        { name: "Иа", emoji: "🐴", color: "#708090" }
       ]
     },
     masha: {
       name: "Маша и Медведь",
       chars: [
-        { name: "Маша", img: "https://via.placeholder.com/200/FF69B4/FFFFFF?text=Маша" },
-        { name: "Медведь", img: "https://via.placeholder.com/200/FF69B4/FFFFFF?text=Медведь" },
-        { name: "Панда", img: "https://via.placeholder.com/200/FF69B4/FFFFFF?text=Панда" },
-        { name: "Зайка", img: "https://via.placeholder.com/200/FF69B4/FFFFFF?text=Зайка" }
+        { name: "Маша", emoji: "👧", color: "#FF69B4" },
+        { name: "Медведь", emoji: "🐻", color: "#8B4513" },
+        { name: "Панда", emoji: "🐼", color: "#000000" },
+        { name: "Зайка", emoji: "🐰", color: "#87CEEB" }
       ]
     }
   };
 
-  // Рубашка карточек
-  const cardBackImage = "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/back.jpg";
+  // Рубашка карточек (без фото)
+  const cardBackStyle = {
+    backgroundColor: "#2c3e50",
+    text: "❓",
+    color: "white",
+    fontSize: "24px"
+  };
 
   let firstCard = null;
   let lock = false;
@@ -151,13 +156,18 @@ document.addEventListener("DOMContentLoaded", () => {
       card.className = "memory-card";
       card.dataset.index = index;
       card.dataset.name = char.name;
-      card.dataset.img = char.img;
+      card.dataset.emoji = char.emoji;
+      card.dataset.color = char.color;
       
-      card.style.backgroundImage = `url('${cardBackImage}')`;
-      card.style.backgroundSize = "contain";
-      card.style.backgroundPosition = "center";
-      card.style.backgroundRepeat = "no-repeat";
-      card.style.backgroundColor = "#2c3e50";
+      // Рубашка
+      card.style.backgroundImage = "none";
+      card.style.backgroundColor = cardBackStyle.backgroundColor;
+      card.style.color = cardBackStyle.color;
+      card.style.fontSize = cardBackStyle.fontSize;
+      card.style.display = "flex";
+      card.style.alignItems = "center";
+      card.style.justifyContent = "center";
+      card.textContent = cardBackStyle.text;
       
       card.onclick = () => flip(card);
       grid.appendChild(card);
@@ -170,8 +180,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (lock || !canOpen) return;
     if (card.classList.contains("open") || card.classList.contains("matched")) return;
 
+    // Открываем карточку
     card.classList.add("open");
-    card.style.backgroundImage = `url('${card.dataset.img}')`;
+    card.style.backgroundColor = card.dataset.color;
+    card.style.color = "white";
+    card.style.fontSize = "32px";
+    card.textContent = card.dataset.emoji;
 
     if (!firstCard) {
       firstCard = card;
@@ -180,6 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateStats();
       
       if (firstCard.dataset.name === card.dataset.name) {
+        // Совпадение
         firstCard.classList.add("matched");
         card.classList.add("matched");
         firstCard = null;
@@ -192,13 +207,24 @@ document.addEventListener("DOMContentLoaded", () => {
           }, 300);
         }
       } else {
+        // Не совпали
         lock = true;
         
         setTimeout(() => {
           card.classList.remove("open");
           firstCard.classList.remove("open");
-          card.style.backgroundImage = `url('${cardBackImage}')`;
-          firstCard.style.backgroundImage = `url('${cardBackImage}')`;
+          
+          // Возвращаем рубашку
+          card.style.backgroundColor = cardBackStyle.backgroundColor;
+          card.style.color = cardBackStyle.color;
+          card.style.fontSize = cardBackStyle.fontSize;
+          card.textContent = cardBackStyle.text;
+          
+          firstCard.style.backgroundColor = cardBackStyle.backgroundColor;
+          firstCard.style.color = cardBackStyle.color;
+          firstCard.style.fontSize = cardBackStyle.fontSize;
+          firstCard.textContent = cardBackStyle.text;
+          
           firstCard = null;
           lock = false;
         }, 700);
