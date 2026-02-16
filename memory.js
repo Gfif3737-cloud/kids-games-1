@@ -4,58 +4,43 @@ document.addEventListener("DOMContentLoaded", () => {
   const sizeSelect = document.getElementById("sizeSelect");
   const themeSelect = document.getElementById("themeSelect");
 
-  // ==================== ДАННЫЕ ПЕРСОНАЖЕЙ (РАБОЧИЕ ССЫЛКИ) ====================
+  // ==================== ДАННЫЕ ПЕРСОНАЖЕЙ ====================
   const themes = {
     smeshariki: {
       name: "Смешарики",
       chars: [
-        { 
-          name: "Крош", 
-          img: "https://i.ibb.co/tpVqY0N/krosh.png" 
-        },
-        { 
-          name: "Ёжик", 
-          img: "https://i.ibb.co/Y3q0BpL/ezhik.png" 
-        },
-        { 
-          name: "Нюша", 
-          img: "https://i.ibb.co/QF0c6p7/nyusha.png" 
-        },
-        { 
-          name: "Бараш", 
-          img: "https://i.ibb.co/d4qXpZ7/barash.png" 
-        },
-        { 
-          name: "Лосяш", 
-          img: "https://i.ibb.co/SJvXrH2/losyash.png" 
-        },
-        { 
-          name: "Копатыч", 
-          img: "https://i.ibb.co/4T5vL8H/kopatych.png" 
-        },
-        { 
-          name: "Совунья", 
-          img: "https://i.ibb.co/xC3vF6V/sovunya.png" 
-        },
-        { 
-          name: "Пин", 
-          img: "https://i.ibb.co/WsFjQHm/pin.png" 
-        }
+        { name: "Крош", img: "https://i.postimg.cc/2yS0Qx0L/krosh.png" },
+        { name: "Ёжик", img: "https://i.postimg.cc/Hn7VQv5s/ezhik.png" },
+        { name: "Нюша", img: "https://i.postimg.cc/Kj9vW5Fh/nyusha.png" },
+        { name: "Бараш", img: "https://i.postimg.cc/6qQxV7jZ/barash.png" },
+        { name: "Лосяш", img: "https://i.postimg.cc/brVQq5cH/losyash.png" },
+        { name: "Копатыч", img: "https://i.postimg.cc/zGQq5cL7/kopatych.png" },
+        { name: "Совунья", img: "https://i.postimg.cc/YqQq5vqF/sovunya.png" },
+        { name: "Пин", img: "https://i.postimg.cc/G3Qq5vL8/pin.png" }
       ]
     },
     prostokvashino: {
       name: "Простоквашино",
       chars: [
-        { name: "Матроскин", img: "https://via.placeholder.com/200/F57C00/FFFFFF?text=Матроскин" },
-        { name: "Шарик", img: "https://via.placeholder.com/200/F57C00/FFFFFF?text=Шарик" },
-        { name: "Дядя Фёдор", img: "https://via.placeholder.com/200/F57C00/FFFFFF?text=Фёдор" },
-        { name: "Печкин", img: "https://via.placeholder.com/200/F57C00/FFFFFF?text=Печкин" }
+        { name: "Матроскин", img: "https://i.postimg.cc/F15Qq5vL/matroskin.png" },
+        { name: "Шарик", img: "https://i.postimg.cc/XYQq5vL9/sharik.png" },
+        { name: "Дядя Фёдор", img: "https://i.postimg.cc/rsQq5vL0/fedor.png" },
+        { name: "Печкин", img: "https://i.postimg.cc/KvQq5vL1/pechkin.png" }
+      ]
+    },
+    fixiki: {
+      name: "Фиксики",
+      chars: [
+        { name: "Нолик", img: "https://via.placeholder.com/200/0000FF/FFFFFF?text=Нолик" },
+        { name: "Симка", img: "https://via.placeholder.com/200/0000FF/FFFFFF?text=Симка" },
+        { name: "Папус", img: "https://via.placeholder.com/200/0000FF/FFFFFF?text=Папус" },
+        { name: "Мася", img: "https://via.placeholder.com/200/0000FF/FFFFFF?text=Мася" }
       ]
     }
   };
 
   // Рубашка карточек
-  const cardBackImage = "https://via.placeholder.com/200/2c3e50/FFFFFF?text=?";
+  const cardBackImage = "https://i.postimg.cc/2yS0Qx0L/back.jpg";
 
   let firstCard = null;
   let lock = false;
