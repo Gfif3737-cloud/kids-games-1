@@ -1,0 +1,261 @@
+* {
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(145deg, #0a1c2f, #0b2b3f);
+  color: white;
+  text-align: center;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-size: 32px;
+  margin: 5px 0 20px;
+  color: #ffd966;
+  text-shadow: 0 0 10px #ffb347;
+  letter-spacing: 1px;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 25px;
+  background: rgba(10, 30, 40, 0.8);
+  padding: 20px;
+  border-radius: 40px;
+  border: 2px solid #3e7a9e;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  width: 100%;
+  max-width: 600px;
+}
+
+.controls label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #b0e0ff;
+  font-size: 16px;
+  font-weight: 500;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.controls select,
+.controls button {
+  padding: 12px 20px;
+  border-radius: 40px;
+  border: 2px solid #4f9fff;
+  font-size: 16px;
+  background: #1e3a5f;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: all 0.2s ease;
+  min-width: 140px;
+}
+
+.controls select {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+.controls button {
+  background: #ff7b4f;
+  border-color: #a13d2a;
+  min-width: 120px;
+  font-size: 18px;
+  box-shadow: 0 5px 0 #a13d2a;
+}
+
+.controls button:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #a13d2a;
+}
+
+.memory-grid {
+  display: grid;
+  gap: 12px;
+  justify-content: center;
+  margin: 15px auto 20px;
+  max-width: 500px;
+  width: 100%;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 30px;
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+}
+
+.memory-card {
+  aspect-ratio: 1 / 1;
+  border-radius: 20px;
+  cursor: pointer;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-color: #2c3e50;
+  box-shadow: 0 6px 0 rgba(0,0,0,0.5), 0 0 15px rgba(0,200,255,0.3);
+  border: 3px solid transparent;
+  transition: all 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+  width: 100%;
+  height: 100%;
+}
+
+.memory-card:active {
+  transform: scale(0.92);
+  border-color: rgba(255,255,255,0.5);
+}
+
+.memory-card.open {
+  transform: scale(0.94);
+  box-shadow: 0 0 25px #ffd966;
+  border-color: #ffd966;
+}
+
+.memory-card.matched {
+  opacity: 0.6;
+  filter: brightness(0.9) sepia(0.3);
+  cursor: default;
+  pointer-events: none;
+  border-color: #4ade80;
+  box-shadow: 0 0 20px #4ade80;
+}
+
+#statsPanel {
+  margin: 10px auto 20px;
+  font-size: 22px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  background: #0a1e2c;
+  padding: 15px 30px;
+  border-radius: 50px;
+  color: #ffd966;
+  max-width: 350px;
+  width: 100%;
+  border: 2px solid #3e7a9e;
+  box-shadow: 0 5px 0 #0a1e2c;
+}
+
+.back {
+  display: inline-block;
+  margin-top: 25px;
+  color: #b0e0ff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 12px 30px;
+  border-radius: 40px;
+  background: #1e3a5f;
+  border: 2px solid #4f9fff;
+  transition: all 0.2s ease;
+  box-shadow: 0 5px 0 #0a1e2c;
+}
+
+.back:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #0a1e2c;
+  background: #2b4f73;
+}
+
+/* Адаптация для телефонов */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+  }
+  
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 18px;
+    gap: 12px;
+  }
+  
+  .controls label {
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .controls select {
+    width: 60%;
+  }
+  
+  .controls button {
+    width: 100%;
+    padding: 14px;
+    font-size: 20px;
+  }
+  
+  .memory-grid {
+    gap: 8px;
+    padding: 12px;
+  }
+  
+  .memory-card {
+    border-radius: 16px;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.5), 0 0 10px rgba(0,200,255,0.3);
+  }
+  
+  #statsPanel {
+    font-size: 18px;
+    padding: 12px 20px;
+    gap: 25px;
+    max-width: 280px;
+  }
+  
+  .back {
+    padding: 10px 25px;
+    font-size: 16px;
+  }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 380px) {
+  .memory-grid {
+    gap: 5px;
+    padding: 8px;
+  }
+  
+  .memory-card {
+    border-radius: 12px;
+  }
+  
+  #statsPanel {
+    font-size: 16px;
+    padding: 10px 15px;
+    gap: 20px;
+  }
+}
+
+/* Убираем hover на touch-устройствах */
+@media (hover: none) {
+  .memory-card:hover {
+    transform: none;
+  }
+  
+  .controls button:hover {
+    transform: none;
+  }
+  
+  .back:hover {
+    transform: none;
+  }
+}
