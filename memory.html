@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>Линия памяти</title>
+  <title>🧠 Линия памяти — Мульти-коллекция</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="memory.css" />
 </head>
@@ -12,7 +12,7 @@
 
 <div class="controls">
   <label>
-    Мультики:
+    🎬 Мультики:
     <select id="themeSelect">
       <option value="smeshariki">Смешарики</option>
       <option value="prostokvashino">Простоквашино</option>
@@ -23,21 +23,22 @@
   </label>
 
   <label>
-    Размер:
+    📐 Размер (ширина 4):
     <select id="sizeSelect">
-      <option value="4x2">4 × 2</option>
-      <option value="4x3">4 × 3</option>
-      <option value="4x4">4 × 4</option>
-      <option value="4x5">4 × 5</option>
+      <option value="4x2">4 × 2 (8 карт)</option>
+      <option value="4x3">4 × 3 (12 карт)</option>
+      <option value="4x4" selected>4 × 4 (16 карт)</option>
+      <option value="4x5">4 × 5 (20 карт)</option>
+      <option value="4x6">4 × 6 (24 карт)</option>
     </select>
   </label>
 
-  <button id="startBtn">Старт</button>
+  <button id="startBtn">🚀 Старт</button>
 </div>
 
 <div id="memoryGrid" class="memory-grid"></div>
 
-<a href="index.html" class="back">⬅ Назад</a>
+<a href="index.html" class="back">⬅ Назад в меню</a>
 
 <script src="memory.js"></script>
 </body>
