@@ -9,23 +9,23 @@ document.addEventListener("DOMContentLoaded", () => {
     smeshariki: {
       name: "Смешарики",
       chars: [
-        { name: "Крош", img: "https://i.postimg.cc/2yS0Qx0L/krosh.png" },
-        { name: "Ёжик", img: "https://i.postimg.cc/Hn7VQv5s/ezhik.png" },
-        { name: "Нюша", img: "https://i.postimg.cc/Kj9vW5Fh/nyusha.png" },
-        { name: "Бараш", img: "https://i.postimg.cc/6qQxV7jZ/barash.png" },
-        { name: "Лосяш", img: "https://i.postimg.cc/brVQq5cH/losyash.png" },
-        { name: "Копатыч", img: "https://i.postimg.cc/zGQq5cL7/kopatych.png" },
-        { name: "Совунья", img: "https://i.postimg.cc/YqQq5vqF/sovunya.png" },
-        { name: "Пин", img: "https://i.postimg.cc/G3Qq5vL8/pin.png" }
+        { name: "Крош", img: "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/krosh.png" },
+        { name: "Ёжик", img: "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/ezhik.png" },
+        { name: "Нюша", img: "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/nyusha.png" },
+        { name: "Бараш", img: "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/barash.png" },
+        { name: "Лосяш", img: "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/losyash.png" },
+        { name: "Копатыч", img: "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/kopatych.png" },
+        { name: "Совунья", img: "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/sovunya.png" },
+        { name: "Пин", img: "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/pin.png" }
       ]
     },
     prostokvashino: {
       name: "Простоквашино",
       chars: [
-        { name: "Матроскин", img: "https://i.postimg.cc/F15Qq5vL/matroskin.png" },
-        { name: "Шарик", img: "https://i.postimg.cc/XYQq5vL9/sharik.png" },
-        { name: "Дядя Фёдор", img: "https://i.postimg.cc/rsQq5vL0/fedor.png" },
-        { name: "Печкин", img: "https://i.postimg.cc/KvQq5vL1/pechkin.png" }
+        { name: "Матроскин", img: "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/matroskin.png" },
+        { name: "Шарик", img: "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/sharik.png" },
+        { name: "Дядя Фёдор", img: "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/fedor.png" },
+        { name: "Печкин", img: "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/pechkin.png" }
       ]
     },
     fixiki: {
@@ -36,11 +36,29 @@ document.addEventListener("DOMContentLoaded", () => {
         { name: "Папус", img: "https://via.placeholder.com/200/0000FF/FFFFFF?text=Папус" },
         { name: "Мася", img: "https://via.placeholder.com/200/0000FF/FFFFFF?text=Мася" }
       ]
+    },
+    vinni: {
+      name: "Винни Пух",
+      chars: [
+        { name: "Винни", img: "https://via.placeholder.com/200/FFD700/000000?text=Винни" },
+        { name: "Пятачок", img: "https://via.placeholder.com/200/FFD700/000000?text=Пятачок" },
+        { name: "Кролик", img: "https://via.placeholder.com/200/FFD700/000000?text=Кролик" },
+        { name: "Иа", img: "https://via.placeholder.com/200/FFD700/000000?text=Иа" }
+      ]
+    },
+    masha: {
+      name: "Маша и Медведь",
+      chars: [
+        { name: "Маша", img: "https://via.placeholder.com/200/FF69B4/FFFFFF?text=Маша" },
+        { name: "Медведь", img: "https://via.placeholder.com/200/FF69B4/FFFFFF?text=Медведь" },
+        { name: "Панда", img: "https://via.placeholder.com/200/FF69B4/FFFFFF?text=Панда" },
+        { name: "Зайка", img: "https://via.placeholder.com/200/FF69B4/FFFFFF?text=Зайка" }
+      ]
     }
   };
 
   // Рубашка карточек
-  const cardBackImage = "https://i.postimg.cc/2yS0Qx0L/back.jpg";
+  const cardBackImage = "https://raw.githubusercontent.com/gfif3737-cloud/kids-games-1/refs/heads/main/images/back.jpg";
 
   let firstCard = null;
   let lock = false;
