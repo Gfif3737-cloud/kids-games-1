@@ -3,21 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚇 Метро-коллекция: Три в ряд</title>
+    <title>🚇 Метро-коллекция</title>
     <link rel="stylesheet" href="match3.css">
 </head>
 <body>
-    <div class="game-container">
-        <h1>🚇 МЕТРО-КОЛЛЕКЦИЯ</h1>
+    <!-- Контейнер для авторизации -->
+    <div id="login-container" class="login-container">
+        <div class="login-box">
+            <h2>🚇 Вход в метро</h2>
+            <div class="input-group">
+                <label>Имя пользователя:</label>
+                <input type="text" id="username" placeholder="Введите имя">
+            </div>
+            <div class="input-group">
+                <label>Пароль:</label>
+                <input type="password" id="password" placeholder="Введите пароль">
+            </div>
+            <div class="button-group">
+                <button id="login-btn" class="login-btn">Войти</button>
+                <button id="register-btn" class="register-btn">Регистрация</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Контейнер для игры (скрыт пока не войдём) -->
+    <div id="game-container" class="game-container" style="display: none;">
+        <div class="header">
+            <h1>🚇 МЕТРО-КОЛЛЕКЦИЯ</h1>
+            <div class="user-info">
+                <span id="user-display"></span>
+                <button id="logout-btn" class="logout-btn">Выйти</button>
+            </div>
+        </div>
         
         <!-- Выбор уровня -->
         <div class="level-selector">
             <label for="level-select">🌟 Выбери уровень:</label>
             <select id="level-select">
                 <option value="level1">Уровень 1: Классическое метро</option>
-                <option value="level2">Уровень 2: Радиальные линии</option>
-                <option value="level3">Уровень 3: Новые линии</option>
-                <option value="level4">Уровень 4: МЦД</option>
+                <option value="level2" disabled>🔒 Уровень 2: Радиальные линии</option>
+                <option value="level3" disabled>🔒 Уровень 3: Новые линии</option>
+                <option value="level4" disabled>🔒 Уровень 4: МЦД</option>
             </select>
         </div>
 
