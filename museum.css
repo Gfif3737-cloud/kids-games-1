@@ -1,0 +1,295 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(145deg, #2b1a0f, #3b2a1f);
+  color: #f0e6d2;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" /><path d="M10 10 L90 10 M10 30 L90 30 M10 50 L90 50 M10 70 L90 70 M10 90 L90 90 M10 10 L10 90 M30 10 L30 90 M50 10 L50 90 M70 10 L70 90 M90 10 L90 90" stroke="%234a3a2a" stroke-width="1" opacity="0.2"/></svg>');
+}
+
+h1 {
+  font-size: 48px;
+  margin: 20px 0 20px;
+  color: #ffd966;
+  text-shadow: 3px 3px 0 #8b5a2b, 5px 5px 0 #4a2c00;
+  font-family: 'Times New Roman', serif;
+  letter-spacing: 3px;
+  border-bottom: 3px solid #b8860b;
+  padding-bottom: 15px;
+  width: 100%;
+  text-align: center;
+}
+
+.museum-stats {
+  background: rgba(0, 0, 0, 0.6);
+  border: 3px solid #b8860b;
+  border-radius: 60px;
+  padding: 15px 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 0 #4a2c00;
+  width: fit-content;
+}
+
+.stat-item {
+  font-size: 24px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.stat-label {
+  color: #ffd966;
+  font-weight: bold;
+}
+
+.stat-value {
+  font-size: 36px;
+  font-weight: bold;
+  color: #ffaa33;
+  text-shadow: 0 0 10px #ffaa33;
+}
+
+.museum-categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+  max-width: 900px;
+}
+
+.category-btn {
+  padding: 12px 24px;
+  border-radius: 40px;
+  border: 2px solid #b8860b;
+  background: #3b2a1f;
+  color: #f0e6d2;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 4px 0 #4a2c00;
+}
+
+.category-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #4a2c00;
+  background: #5a3a2a;
+}
+
+.category-btn.active {
+  background: #b8860b;
+  color: #2b1a0f;
+  border-color: #ffd966;
+  box-shadow: 0 4px 0 #8b5a2b;
+}
+
+.artifacts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  max-width: 1100px;
+  width: 100%;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 40px;
+  border: 3px solid #b8860b;
+  margin-bottom: 30px;
+  min-height: 400px;
+}
+
+.artifact-card {
+  background: #3b2a1f;
+  border: 3px solid #b8860b;
+  border-radius: 20px;
+  padding: 15px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 6px 0 #4a2c00;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.artifact-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 0 #4a2c00;
+  border-color: #ffd966;
+}
+
+.artifact-card.locked {
+  opacity: 0.5;
+  filter: grayscale(0.8);
+  background: #2b1a0f;
+  border-color: #5a4a3a;
+  box-shadow: 0 4px 0 #3a2a1a;
+  cursor: default;
+}
+
+.artifact-card.locked:hover {
+  transform: none;
+  box-shadow: 0 4px 0 #3a2a1a;
+}
+
+.artifact-icon {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.artifact-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffd966;
+}
+
+.artifact-year {
+  font-size: 14px;
+  color: #b8860b;
+  margin-top: 5px;
+}
+
+/* Модальное окно */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  background: #3b2a1f;
+  border: 5px solid #b8860b;
+  border-radius: 40px;
+  margin: 10% auto;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 20px 0 #4a2c00;
+  position: relative;
+  color: #f0e6d2;
+}
+
+.close-btn {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  font-size: 40px;
+  cursor: pointer;
+  color: #ffd966;
+}
+
+.close-btn:hover {
+  color: #ffaa33;
+}
+
+#modal-title {
+  font-size: 32px;
+  color: #ffd966;
+  margin-bottom: 15px;
+  padding-right: 30px;
+}
+
+#modal-year {
+  font-size: 20px;
+  color: #b8860b;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+#modal-desc {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 25px;
+}
+
+.artifact-status {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 30px;
+  text-align: center;
+  background: #4a2c00;
+  color: #ffd966;
+  border: 2px solid #ffd966;
+}
+
+.back-button {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.back-btn {
+  display: inline-block;
+  padding: 15px 40px;
+  background: #1e3a5f;
+  color: white;
+  text-decoration: none;
+  border-radius: 40px;
+  font-weight: bold;
+  font-size: 18px;
+  border: 2px solid #4f9fff;
+  box-shadow: 0 5px 0 #0a1e2c;
+  transition: 0.2s;
+}
+
+.back-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 0 #0a1e2c;
+  background: #2b4f73;
+}
+
+.back-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #0a1e2c;
+}
+
+/* Исправленный медиа-запрос */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 36px;
+  }
+  
+  .stat-item {
+    font-size: 18px;
+  }
+  
+  .stat-value {
+    font-size: 28px;
+  }
+  
+  .category-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+  
+  .artifacts-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
+  
+  .artifact-icon {
+    font-size: 36px;
+  }
+  
+  .artifact-name {
+    font-size: 14px;
+  }
+}
