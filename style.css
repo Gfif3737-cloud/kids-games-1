@@ -54,3 +54,25 @@ h1 {
 .btn.match3 {
   background: #9c27b0;
 }
+/* Стили для кнопки музея */
+.museum {
+  background: #4a2c00;
+  border: 2px solid #ffd966;
+}
+
+/* Подсказка под меню */
+.hint {
+  text-align: center;
+  color: #ffd966;
+  font-size: 16px;
+  margin-top: 20px;
+  background: rgba(0,0,0,0.3);
+  padding: 10px;
+  border-radius: 30px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Если у тебя уже есть стили для .menu и .btn, 
+   эти строки просто дополнят их */
