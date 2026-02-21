@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>🏛️ Музей метро</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="museum.css" />
+</head>
+<body>
+
+  <h1>🏛️ МУЗЕЙ МЕТРО</h1>
+  
+  <div class="museum-stats">
+    <div class="stat-item">
+      <span class="stat-label">Собрано артефактов:</span>
+      <span id="total-collected" class="stat-value">0</span>
+      <span class="stat-label">/70</span>
+    </div>
+  </div>
+
+  <div class="museum-categories">
+    <button class="category-btn active" data-category="wagons">🚃 Вагоны</button>
+    <button class="category-btn" data-category="stations">🏢 Станции</button>
+    <button class="category-btn" data-category="tickets">🎫 Билеты</button>
+    <button class="category-btn" data-category="interiors">🕰️ Интерьеры</button>
+    <button class="category-btn" data-category="uniforms">👕 Форма</button>
+    <button class="category-btn" data-category="equipment">🔧 Оборудование</button>
+    <button class="category-btn" data-category="construction">🚧 Стройка</button>
+    <button class="category-btn" data-category="bonus">🎁 Бонус</button>
+  </div>
+
+  <div id="artifacts-container" class="artifacts-grid">
+    <!-- Сюда будут загружаться артефакты -->
+  </div>
+
+  <!-- Модальное окно с подробной информацией -->
+  <div id="artifact-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2 id="modal-title">Название</h2>
+      <p id="modal-year">Год: </p>
+      <p id="modal-desc">Описание</p>
+      <p id="modal-status" class="artifact-status">Получено</p>
+    </div>
+  </div>
+
+  <div class="back-button">
+    <a href="index.html" class="back-btn">⬅ На главную</a>
+  </div>
+
+  <script src="museum.js"></script>
+</body>
+</html>
