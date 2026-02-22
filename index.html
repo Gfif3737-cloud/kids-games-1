@@ -10,15 +10,39 @@
 
   <h1>🚇 ИГРЫ В МЕТРО</h1>
 
-  <div class="menu">
+  <!-- Форма авторизации -->
+  <div id="login-container" class="login-container">
+    <div class="login-box">
+      <h2>🚪 Вход в метро</h2>
+      <div class="input-group">
+        <label>Имя:</label>
+        <input type="text" id="username" placeholder="Введите имя">
+      </div>
+      <div class="input-group">
+        <label>Пароль:</label>
+        <input type="password" id="password" placeholder="Введите пароль">
+      </div>
+      <div class="button-group">
+        <button id="login-btn" class="login-btn">Войти</button>
+        <button id="register-btn" class="register-btn">Регистрация</button>
+      </div>
+      <button id="logout-btn" class="logout-btn" style="display: none;">Выйти</button>
+    </div>
+  </div>
+
+  <!-- Меню игр (скрыто, пока не вошли) -->
+  <div id="game-menu" class="menu" style="display: none;">
+    <div class="user-info">
+      <span id="user-display"></span>
+    </div>
     <a href="memory.html" class="btn memory">🧠 Линия памяти</a>
     <a href="maze.html" class="btn maze">🌀 Лабиринт</a>
     <a href="match3.html" class="btn match3">💎 Три в ряд</a>
     <a href="museum.html" class="btn museum">🏛️ Музей метро</a>
   </div>
 
-  <!-- Подсказка о музее -->
-  <p class="hint">🏆 Собирай артефакты в играх и открывай историю метро!</p>
+  <p class="hint" id="hint" style="display: none;">🏆 Собирай артефакты в играх и открывай историю метро!</p>
 
+  <script src="auth.js"></script>
 </body>
 </html>
