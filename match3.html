@@ -1,89 +1,62 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚇 Метро-коллекция</title>
-    <link rel="stylesheet" href="match3.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>💎 Три в ряд</title>
+    <link rel="stylesheet" href="match3.css" />
 </head>
 <body>
-    <!-- Контейнер для авторизации -->
-    <div id="login-container" class="login-container">
-        <div class="login-box">
-            <h2>🚇 Вход в метро</h2>
-            <div class="input-group">
-                <label>Имя пользователя:</label>
-                <input type="text" id="username" placeholder="Введите имя">
-            </div>
-            <div class="input-group">
-                <label>Пароль:</label>
-                <input type="password" id="password" placeholder="Введите пароль">
-            </div>
-            <div class="button-group">
-                <button id="login-btn" class="login-btn">Войти</button>
-                <button id="register-btn" class="register-btn">Регистрация</button>
-            </div>
-        </div>
-    </div>
+    <div class="game-container">
+        <h1>💎 ТРИ В РЯД</h1>
 
-    <!-- Контейнер для игры (скрыт пока не войдём) -->
-    <div id="game-container" class="game-container" style="display: none;">
-        <div class="header">
-            <h1>🚇 МЕТРО-КОЛЛЕКЦИЯ</h1>
-            <div class="user-info">
-                <span id="user-display"></span>
-                <button id="logout-btn" class="logout-btn">Выйти</button>
-            </div>
-        </div>
-        
         <!-- Выбор уровня -->
         <div class="level-selector">
-            <label for="level-select">🌟 Выбери уровень:</label>
+            <label for="level-select">🌟 Уровень:</label>
             <select id="level-select">
                 <option value="level1">Уровень 1: Классическое метро</option>
-                <option value="level2" disabled>🔒 Уровень 2: Радиальные линии</option>
-                <option value="level3" disabled>🔒 Уровень 3: Новые линии</option>
-                <option value="level4" disabled>🔒 Уровень 4: МЦД</option>
+                <option value="level2">Уровень 2: Радиальные линии</option>
+                <option value="level3">Уровень 3: Новые линии</option>
+                <option value="level4">Уровень 4: МЦД</option>
             </select>
         </div>
 
-        <!-- Выбор линии внутри уровня -->
+        <!-- Выбор линии -->
         <div class="line-selector">
-            <label for="line-select">🚇 Выбери линию:</label>
+            <label for="line-select">🚇 Линия:</label>
             <select id="line-select"></select>
         </div>
 
-        <!-- Игровое поле 5x5 -->
+        <!-- Игровое поле -->
         <div id="game-board" class="board"></div>
 
-        <!-- Счёт и прогресс -->
+        <!-- Счёт -->
         <div class="score-container">
             <div class="score-item">
-                <span class="score-label">⭐ Очки на линии:</span>
+                <span class="score-label">⭐ Очки:</span>
                 <span id="line-score" class="score-value">0</span>
             </div>
             <div class="score-item">
-                <span class="score-label">🏆 Всего очков:</span>
-                <span id="total-score" class="score-value">0</span>
+                <span class="score-label">📊 Прогресс:</span>
+                <span id="level-progress" class="score-value">0/5</span>
             </div>
-            <div class="score-item">
-                <span class="score-label">📊 Прогресс уровня:</span>
-                <span id="level-progress" class="score-value">0/5 линий</span>
-            </div>
-            <button id="restart" class="restart-btn">🔄 Новая игра</button>
+            <button id="restart" class="restart-btn">🔄 Заново</button>
         </div>
 
-        <!-- Список станций текущей линии -->
+        <!-- Список станций -->
         <div class="stations-collection">
-            <h3>📋 Станции текущей линии:</h3>
+            <h3>📋 Станции:</h3>
             <div id="stations-list" class="stations-list"></div>
         </div>
 
-        <!-- Статус всех линий уровня -->
+        <!-- Статус линий -->
         <div class="lines-status">
-            <h3>📊 Прогресс по линиям:</h3>
+            <h3>📊 Прогресс линий:</h3>
             <div id="lines-status-list" class="lines-status-list"></div>
         </div>
+
+        <!-- Кнопка назад -->
+        <a href="index.html" class="back-btn">⬅ На главную</a>
     </div>
 
     <script src="match3.js"></script>
