@@ -339,3 +339,48 @@ h1 {
         grid-template-columns: 1fr;
     }
 }
+/* Магазин бонусов */
+.shop-panel {
+    background: #0e2a3b;
+    padding: 15px;
+    border-radius: 30px;
+    border: 2px solid #3e7a9e;
+    margin: 15px 0;
+}
+
+.shop-panel h3 {
+    color: #ffd966;
+    margin-bottom: 12px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.bonus-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.bonus-btn {
+    padding: 8px 16px;
+    border-radius: 30px;
+    border: 2px solid #ffaa33;
+    background: #1e3a5f;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+    min-width: 120px;
+}
+
+.bonus-btn:hover {
+    background: #2b4f73;
+    transform: translateY(-2px);
+    border-color: #ffd966;
+}
+
+.bonus-btn:active {
+    transform: translateY(2px);
+}
