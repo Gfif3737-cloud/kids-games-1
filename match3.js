@@ -1,19 +1,314 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // ==================== КОНФИГУРАЦИЯ ====================
     const BOARD_WIDTH = 5;
     const BOARD_SIZE = BOARD_WIDTH * BOARD_WIDTH;
+    const POINTS_PER_MATCH = 10;
+    const BONUS_BOMB_COST = 150;
+    const BONUS_ROCKET_COST = 200;
+
+    // ==================== ПОЛНЫЕ ДАННЫЕ УРОВНЕЙ ====================
+    const LEVELS = {
+        level1: {
+            name: 'Классическое метро',
+            lines: [
+                { id: 'sokolnicheskaya', name: 'Сокольническая', color: '#e74c3c', stations: [
+                    'Бульвар Рокоссовского', 'Черкизовская', 'Преображенская площадь', 'Сокольники', 'Красносельская',
+                    'Комсомольская', 'Красные Ворота', 'Чистые пруды', 'Лубянка', 'Охотный Ряд',
+                    'Библиотека им. Ленина', 'Кропоткинская', 'Парк культуры', 'Фрунзенская', 'Спортивная',
+                    'Воробьёвы горы', 'Университет', 'Проспект Вернадского', 'Юго-Западная', 'Тропарёво',
+                    'Румянцево', 'Саларьево', 'Филатов Луг', 'Прокшино', 'Ольховая', 'Коммунарка'
+                ]},
+                { id: 'zamoskvoretskaya', name: 'Замоскворецкая', color: '#2ecc71', stations: [
+                    'Ховрино', 'Беломорская', 'Речной вокзал', 'Водный стадион', 'Войковская',
+                    'Сокол', 'Аэропорт', 'Динамо', 'Белорусская', 'Маяковская',
+                    'Тверская', 'Театральная', 'Новокузнецкая', 'Павелецкая', 'Автозаводская',
+                    'Технопарк', 'Коломенская', 'Каширская', 'Кантемировская', 'Царицыно',
+                    'Орехово', 'Домодедовская', 'Красногвардейская', 'Алма-Атинская'
+                ]},
+                { id: 'arbatsko_pokrovskaya', name: 'Арбатско-Покровская', color: '#00008B', stations: [
+                    'Щёлковская', 'Первомайская', 'Измайловская', 'Партизанская', 'Семёновская',
+                    'Электрозаводская', 'Бауманская', 'Курская', 'Площадь Революции', 'Арбатская',
+                    'Смоленская', 'Киевская', 'Парк Победы', 'Славянский бульвар', 'Кунцевская',
+                    'Молодёжная', 'Крылатское', 'Строгино', 'Мякинино', 'Волоколамская',
+                    'Митино', 'Пятницкое шоссе'
+                ]},
+                { id: 'filyovskaya', name: 'Филёвская', color: '#87CEEB', stations: [
+                    'Александровский сад', 'Арбатская', 'Смоленская', 'Киевская', 'Студенческая',
+                    'Кутузовская', 'Фили', 'Багратионовская', 'Филевский парк', 'Пионерская',
+                    'Кунцевская', 'Выставочная', 'Международная'
+                ]},
+                { id: 'koltsevaya', name: 'Кольцевая', color: '#8B4513', stations: [
+                    'Киевская', 'Краснопресненская', 'Белорусская', 'Новослободская', 'Проспект Мира',
+                    'Комсомольская', 'Курская', 'Таганская', 'Павелецкая', 'Добрынинская',
+                    'Октябрьская', 'Парк культуры'
+                ]}
+            ]
+        },
+        level2: {
+            name: 'Радиальные линии',
+            lines: [
+                { id: 'kaluzhsko_rizhskaya', name: 'Калужско-Рижская', color: '#FFD700', stations: [
+                    'Медведково', 'Бабушкинская', 'Свиблово', 'Ботанический сад', 'ВДНХ',
+                    'Алексеевская', 'Рижская', 'Проспект Мира', 'Сухаревская', 'Тургеневская',
+                    'Китай-город', 'Третьяковская', 'Октябрьская', 'Шаболовская', 'Ленинский проспект',
+                    'Академическая', 'Профсоюзная', 'Новые Черёмушки', 'Калужская', 'Беляево',
+                    'Коньково', 'Тёплый Стан', 'Ясенево', 'Новоясеневская'
+                ]},
+                { id: 'tagansko_krasnopresnenskaya', name: 'Таганско-Краснопресненская', color: '#9b59b6', stations: [
+                    'Планерная', 'Сходненская', 'Тушинская', 'Спартак', 'Щукинская',
+                    'Октябрьское поле', 'Полежаевская', 'Беговая', 'Улица 1905 года', 'Баррикадная',
+                    'Пушкинская', 'Кузнецкий мост', 'Китай-город', 'Таганская', 'Пролетарская',
+                    'Волгоградский проспект', 'Текстильщики', 'Кузьминки', 'Рязанский проспект', 'Выхино',
+                    'Лермонтовский проспект', 'Жулебино', 'Котельники'
+                ]},
+                { id: 'kalinskaya', name: 'Калининская', color: '#f1c40f', stations: [
+                    'Новогиреево', 'Перово', 'Шоссе Энтузиастов', 'Авиамоторная', 'Площадь Ильича',
+                    'Марксистская', 'Третьяковская'
+                ]},
+                { id: 'solntsevskaya', name: 'Солнцевская', color: '#ffaa00', stations: [
+                    'Деловой центр', 'Парк Победы', 'Минская', 'Ломоносовский проспект', 'Раменки',
+                    'Мичуринский проспект', 'Озёрная', 'Говорово', 'Солнцево', 'Боровское шоссе',
+                    'Новопеределкино', 'Рассказовка', 'Пыхтино', 'Аэропорт Внуково'
+                ]},
+                { id: 'serpukhovsko_timiryazevskaya', name: 'Серпуховско-Тимирязевская', color: '#95a5a6', stations: [
+                    'Алтуфьево', 'Бибирево', 'Отрадное', 'Владыкино', 'Петровско-Разумовская',
+                    'Тимирязевская', 'Дмитровская', 'Савёловская', 'Менделеевская', 'Цветной бульвар',
+                    'Чеховская', 'Боровицкая', 'Полянка', 'Серпуховская', 'Тульская',
+                    'Нагатинская', 'Нагорная', 'Нахимовский проспект', 'Севастопольская', 'Чертановская',
+                    'Южная', 'Пражская', 'Улица Академика Янгеля', 'Аннино', 'Бульвар Дмитрия Донского'
+                ]}
+            ]
+        },
+        level3: {
+            name: 'Новые линии',
+            lines: [
+                { id: 'lublinsko_dmitrovskaya', name: 'Люблинско-Дмитровская', color: '#00CED1', stations: [
+                    'Физтех', 'Лианозово', 'Яхромская', 'Селигерская', 'Верхние Лихоборы',
+                    'Окружная', 'Петровско-Разумовская', 'Фонвизинская', 'Бутырская', 'Марьина Роща',
+                    'Достоевская', 'Трубная', 'Сретенский бульвар', 'Чкаловская', 'Римская',
+                    'Крестьянская застава', 'Дубровка', 'Кожуховская', 'Печатники', 'Волжская',
+                    'Люблино', 'Братиславская', 'Марьино', 'Борисово', 'Шипиловская',
+                    'Зябликово'
+                ]},
+                { id: 'bolshaya_koltsevaya', name: 'Большая кольцевая', color: '#FF1493', stations: [
+                    'Деловой центр', 'Шелепиха', 'Хорошёвская', 'ЦСКА', 'Петровский парк',
+                    'Савёловская', 'Марьина Роща', 'Рижская', 'Сокольники', 'Электрозаводская',
+                    'Лефортово', 'Авиамоторная', 'Нижегородская', 'Текстильщики', 'Печатники',
+                    'Нагатинский Затон', 'Кленовый бульвар', 'Каширская', 'Варшавская', 'Каховская',
+                    'Зюзино', 'Воронцовская', 'Новаторская', 'Проспект Вернадского', 'Мичуринский проспект',
+                    'Аминьевская', 'Давыдково', 'Можайская'
+                ]},
+                { id: 'butovskaya', name: 'Бутовская', color: '#B0C4DE', stations: [
+                    'Битцевский парк', 'Лесопарковая', 'Улица Старокачаловская', 'Улица Скобелевская', 'Бульвар Адмирала Ушакова',
+                    'Улица Горчакова', 'Бунинская аллея'
+                ]},
+                { id: 'troitskaya', name: 'Троицкая', color: '#DA70D6', stations: [
+                    'ЗИЛ', 'Крымская', 'Академическая', 'Вавиловская', 'Новаторская',
+                    'Университет Дружбы Народов', 'Генерала Тюленева', 'Тютчевская', 'Корниловская', 'Коммунарка',
+                    'Новомосковская', 'Сосенки', 'Летово', 'Десна', 'Кедровая',
+                    'Ватутинки', 'Троицк'
+                ]},
+                { id: 'mck', name: 'МЦК', color: '#FF6347', stations: [
+                    'Окружная', 'Лихоборы', 'Коптево', 'Балтийская', 'Стрешнево',
+                    'Панфиловская', 'Зорге', 'Хорошёво', 'Шелепиха', 'Деловой центр',
+                    'Кутузовская', 'Лужники', 'Площадь Гагарина', 'Крымская', 'Верхние Котлы',
+                    'ЗИЛ', 'Автозаводская', 'Дубровка', 'Угрешская', 'Новохохловская',
+                    'Нижегородская', 'Андроновка', 'Шоссе Энтузиастов', 'Соколиная Гора', 'Измайлово',
+                    'Локомотив', 'Бульвар Рокоссовского', 'Белокаменная', 'Ростокино', 'Ботанический сад',
+                    'Владыкино'
+                ]}
+            ]
+        },
+        level4: {
+            name: 'МЦД',
+            lines: [
+                { id: 'mcd1', name: 'МЦД-1', color: '#e67e22', stations: [
+                    'Одинцово', 'Баковка', 'Сколково', 'Немчиновка', 'Сетунь',
+                    'Рабочий Посёлок', 'Кунцевская', 'Фили', 'Тестовская', 'Беговая',
+                    'Белорусская', 'Савёловская', 'Тимирязевская', 'Окружная', 'Дегунино',
+                    'Бескудниково', 'Лианозово', 'Марк', 'Новодачная', 'Долгопрудная',
+                    'Водники', 'Хлебниково', 'Шереметьевская', 'Лобня'
+                ]},
+                { id: 'mcd2', name: 'МЦД-2', color: '#FF69B4', stations: [
+                    'Нахабино', 'Аникеевка', 'Опалиха', 'Красногорская', 'Павшино',
+                    'Пенягино', 'Волоколамская', 'Трикотажная', 'Тушинская', 'Щукинская',
+                    'Стрешнево', 'Красный Балтиец', 'Гражданская', 'Дмитровская', 'Марьина Роща',
+                    'Рижская', 'Каланчёвская', 'Курская', 'Москва-Товарная', 'Калитники',
+                    'Текстильщики', 'Люблино', 'Перерва', 'Курьяново', 'Москворечье',
+                    'Царицыно', 'Покровское', 'Красный Строитель', 'Битца', 'Бутово',
+                    'Щербинка', 'Остафьево', 'Силикатная', 'Подольск'
+                ]},
+                { id: 'mcd3', name: 'МЦД-3', color: '#4169E1', stations: [
+                    'Крюково', 'Малино', 'Фирсановка', 'Сходня', 'Подрезково',
+                    'Новоподрезково', 'Молжаниново', 'Химки', 'Левобережная', 'Ховрино',
+                    'Грачёвская', 'Моссельмаш', 'Лихоборы', 'Петровско-Разумовская', 'Останкино',
+                    'Рижская', 'Митьково', 'Электрозаводская', 'Сортировочная', 'Авиамоторная',
+                    'Андроновка', 'Перово', 'Плющево', 'Вешняки', 'Выхино',
+                    'Косино', 'Ухтомская', 'Люберцы', 'Панки', 'Томилино',
+                    'Красково', 'Малаховка', 'Удельная', 'Быково', 'Ильинская',
+                    'Отдых', 'Кратово', 'Есенинская', 'Фабричная', 'Раменское'
+                ]},
+                { id: 'mcd4', name: 'МЦД-4', color: '#32CD32', stations: [
+                    'Апрелевка', 'Реутово', 'Победа', 'Крёкшино', 'Санино',
+                    'Кокошкино', 'Толстопальцево', 'Лесной Городок', 'Внуково', 'Мичуринец',
+                    'Переделкино', 'Мещерская', 'Солнечная', 'Новопеределкино', 'Очаково',
+                    'Аминьевская', 'Матвеевская', 'Минская', 'Поклонная', 'Кутузовская',
+                    'Москва-Сити', 'Ермакова Роща', 'Марьина Роща', 'Савёловская', 'Станколит',
+                    'Нижегородская', 'Новохохловская', 'Калитники', 'Текстильщики', 'Перово',
+                    'Чухлинка', 'Кусково', 'Новогиреево', 'Реутово', 'Никольское',
+                    'Салтыковская', 'Кучино', 'Железнодорожная'
+                ]}
+            ]
+        }
+    };
+
+    // ==================== ЭЛЕМЕНТЫ ====================
     const boardElement = document.getElementById('game-board');
-    
+    const restartBtn = document.getElementById('restart');
+    const lineScoreElement = document.getElementById('line-score');
+    const totalScoreElement = document.getElementById('total-score');
+    const levelProgressElement = document.getElementById('level-progress');
+    const levelSelect = document.getElementById('level-select');
+    const lineSelect = document.getElementById('line-select');
+    const stationsListDiv = document.getElementById('stations-list');
+    const linesStatusDiv = document.getElementById('lines-status-list');
+
+    // ==================== ПЕРЕМЕННЫЕ ====================
     let board = [];
     let selectedCell = null;
-    
-    // Цвета
-    const colors = ['#e74c3c', '#2ecc71', '#3498db', '#f1c40f', '#9b59b6'];
-    
-    // Создание доски
+    let currentLevel = 'level1';
+    let currentLineId = 'sokolnicheskaya';
+    let lineScore = 0;
+    let totalScore = 0;
+    let isProcessing = false;
+    let bonusMode = null;
+
+    // Прогресс
+    let userProgress = JSON.parse(localStorage.getItem('match3_progress')) || {
+        level1: { unlocked: true, completed: false },
+        level2: { unlocked: false, completed: false },
+        level3: { unlocked: false, completed: false },
+        level4: { unlocked: false, completed: false }
+    };
+
+    let collectedStations = JSON.parse(localStorage.getItem('match3_collected')) || {};
+
+    // Артефакты
+    let artifacts = JSON.parse(localStorage.getItem('metro_artifacts')) || {
+        wagons: new Array(10).fill(false)
+    };
+
+    // ==================== ФУНКЦИИ ====================
+    function getLevelColors() {
+        return LEVELS[currentLevel].lines.map(line => line.color);
+    }
+
+    function getCurrentLine() {
+        return LEVELS[currentLevel].lines.find(line => line.id === currentLineId);
+    }
+
+    function updateLevelsUI() {
+        Array.from(levelSelect.options).forEach(option => {
+            if (userProgress[option.value]?.unlocked) {
+                option.disabled = false;
+                option.textContent = LEVELS[option.value].name;
+                if (userProgress[option.value]?.completed) option.textContent += ' ✓';
+            } else {
+                option.disabled = true;
+                option.textContent = '🔒 ' + LEVELS[option.value].name;
+            }
+        });
+    }
+
+    function updateLinesUI() {
+        lineSelect.innerHTML = '';
+        LEVELS[currentLevel].lines.forEach(line => {
+            const option = document.createElement('option');
+            option.value = line.id;
+            option.textContent = `🚇 ${line.name}`;
+            lineSelect.appendChild(option);
+        });
+        currentLineId = LEVELS[currentLevel].lines[0].id;
+        lineSelect.value = currentLineId;
+    }
+
+    function updateStationsUI() {
+        const line = getCurrentLine();
+        if (!line) return;
+
+        stationsListDiv.innerHTML = '';
+        line.stations.forEach(station => {
+            const isChecked = collectedStations[currentLevel]?.[currentLineId]?.[station] || false;
+            const item = document.createElement('div');
+            item.className = `station-item ${isChecked ? 'checked' : ''}`;
+            item.innerHTML = `
+                <input type="checkbox" ${isChecked ? 'checked' : ''} readonly>
+                <span>${station}</span>
+            `;
+            stationsListDiv.appendChild(item);
+        });
+    }
+
+    function updateLinesStatusUI() {
+        linesStatusDiv.innerHTML = '';
+        const level = LEVELS[currentLevel];
+        let completedLinesCount = 0;
+
+        level.lines.forEach(line => {
+            const stations = line.stations;
+            const collected = collectedStations[currentLevel]?.[line.id] || {};
+            const collectedCount = stations.filter(s => collected[s]).length;
+            const isCompleted = collectedCount === stations.length;
+            if (isCompleted) completedLinesCount++;
+
+            const item = document.createElement('div');
+            item.className = `line-status-item ${isCompleted ? 'completed' : ''}`;
+            item.innerHTML = `
+                <span class="line-color" style="background-color: ${line.color};"></span>
+                <span class="line-name">${line.name}</span>
+                <span class="line-progress">${collectedCount}/${stations.length}</span>
+            `;
+            linesStatusDiv.appendChild(item);
+        });
+
+        levelProgressElement.textContent = `${completedLinesCount}/${level.lines.length}`;
+    }
+
+    function saveCollectedStations() {
+        localStorage.setItem('match3_collected', JSON.stringify(collectedStations));
+    }
+
+    function markStation(color) {
+        const line = LEVELS[currentLevel].lines.find(l => l.color === color);
+        if (!line) return;
+
+        const available = line.stations.filter(s => !collectedStations[currentLevel]?.[line.id]?.[s]);
+        if (available.length === 0) return;
+
+        const randomStation = available[Math.floor(Math.random() * available.length)];
+        if (!collectedStations[currentLevel]) collectedStations[currentLevel] = {};
+        if (!collectedStations[currentLevel][line.id]) collectedStations[currentLevel][line.id] = {};
+        collectedStations[currentLevel][line.id][randomStation] = true;
+
+        if (line.id === currentLineId) updateStationsUI();
+        updateLinesStatusUI();
+        saveCollectedStations();
+    }
+
+    function giveArtifact(levelIndex) {
+        if (!artifacts.wagons[levelIndex]) {
+            artifacts.wagons[levelIndex] = true;
+            localStorage.setItem('metro_artifacts', JSON.stringify(artifacts));
+            alert(`🏛️ Артефакт: ${['Вагон А', 'Вагон Б', 'Вагон Г', 'Вагон Д'][levelIndex]}`);
+        }
+    }
+
+    // ==================== ИГРОВАЯ МЕХАНИКА ====================
     function initBoard() {
         boardElement.innerHTML = '';
         board = [];
-        
+        const colors = getLevelColors();
+
         for (let i = 0; i < BOARD_SIZE; i++) {
             const cell = document.createElement('div');
             cell.className = 'cell';
@@ -30,13 +325,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 color: color
             });
         }
+        
+        // Убираем начальные тройки
+        setTimeout(() => {
+            while (findMatches().length > 0) {
+                removeMatches(false);
+            }
+        }, 10);
     }
-    
-    // Поиск троек
+
     function findMatches() {
         const matches = new Set();
-        
-        // Горизонтальные
+
         for (let row = 0; row < BOARD_WIDTH; row++) {
             for (let col = 0; col < BOARD_WIDTH - 2; col++) {
                 const idx1 = row * BOARD_WIDTH + col;
@@ -52,8 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
-        
-        // Вертикальные
+
         for (let col = 0; col < BOARD_WIDTH; col++) {
             for (let row = 0; row < BOARD_WIDTH - 2; row++) {
                 const idx1 = row * BOARD_WIDTH + col;
@@ -69,29 +368,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
-        
+
         return Array.from(matches);
     }
-    
-    // Удаление троек и падение
-    function removeMatches() {
+
+    function removeMatches(shouldScore = true) {
         const matches = findMatches();
         if (matches.length === 0) return false;
-        
-        // Удаляем
+
+        if (shouldScore) {
+            const colors = new Set(matches.map(i => board[i].color));
+            colors.forEach(color => {
+                if (color) {
+                    markStation(color);
+                    lineScore += POINTS_PER_MATCH;
+                    totalScore += POINTS_PER_MATCH;
+                }
+            });
+            lineScoreElement.textContent = lineScore;
+            totalScoreElement.textContent = totalScore;
+        }
+
         matches.forEach(index => {
             board[index].color = '';
             board[index].element.style.backgroundColor = '';
         });
-        
-        // Падение
+
+        dropCells();
+        return true;
+    }
+
+    function dropCells() {
         for (let col = 0; col < BOARD_WIDTH; col++) {
             const columnIndices = [];
             for (let row = 0; row < BOARD_WIDTH; row++) {
                 columnIndices.push(row * BOARD_WIDTH + col);
             }
-            
-            // Собираем цвета
+
             const columnColors = [];
             for (let i = BOARD_WIDTH - 1; i >= 0; i--) {
                 const idx = columnIndices[i];
@@ -99,59 +412,180 @@ document.addEventListener('DOMContentLoaded', () => {
                     columnColors.push(board[idx].color);
                 }
             }
-            
-            // Дополняем новыми
-            while (columnColors.length < BOARD_WIDTH) {
-                columnColors.push(colors[Math.floor(Math.random() * colors.length)]);
+
+            const colorsNeeded = BOARD_WIDTH - columnColors.length;
+            const levelColors = getLevelColors();
+            for (let i = 0; i < colorsNeeded; i++) {
+                columnColors.push(levelColors[Math.floor(Math.random() * levelColors.length)]);
             }
-            
-            // Записываем обратно
+
             for (let i = 0; i < BOARD_WIDTH; i++) {
                 const idx = columnIndices[BOARD_WIDTH - 1 - i];
                 board[idx].color = columnColors[i];
                 board[idx].element.style.backgroundColor = columnColors[i];
             }
         }
-        
-        return true;
     }
-    
-    // Обработка клика
+
     function handleClick(index) {
+        if (isProcessing) return;
+
+        if (bonusMode === 'bomb') {
+            useBomb(index);
+            bonusMode = null;
+            return;
+        }
+
+        if (bonusMode === 'rocket') {
+            useRocket(index);
+            bonusMode = null;
+            return;
+        }
+
         if (selectedCell === null) {
             selectedCell = index;
             board[index].element.style.border = '3px solid white';
+            board[index].element.style.boxShadow = '0 0 20px white';
         } else {
             board[selectedCell].element.style.border = '';
-            
+            board[selectedCell].element.style.boxShadow = '';
+
             if (index !== selectedCell) {
-                // Меняем цвета
+                isProcessing = true;
+                
                 const tempColor = board[selectedCell].color;
                 board[selectedCell].color = board[index].color;
                 board[index].color = tempColor;
                 
                 board[selectedCell].element.style.backgroundColor = board[selectedCell].color;
                 board[index].element.style.backgroundColor = board[index].color;
-                
-                // Проверяем тройки
+
                 if (findMatches().length > 0) {
-                    // Есть тройка - удаляем
-                    while (removeMatches()) {}
+                    while (removeMatches(true)) {}
                 } else {
-                    // Нет тройки - меняем обратно
-                    const tempBack = board[selectedCell].color;
+                    const backTemp = board[selectedCell].color;
                     board[selectedCell].color = board[index].color;
-                    board[index].color = tempBack;
+                    board[index].color = backTemp;
                     
                     board[selectedCell].element.style.backgroundColor = board[selectedCell].color;
                     board[index].element.style.backgroundColor = board[index].color;
                 }
+                
+                isProcessing = false;
             }
             
             selectedCell = null;
         }
     }
-    
-    // Запуск
+
+    // ==================== БОНУСЫ ====================
+    function activateBonusBomb() {
+        if (totalScore < BONUS_BOMB_COST) {
+            alert(`❌ Нужно ${BONUS_BOMB_COST} очков!`);
+            return;
+        }
+        totalScore -= BONUS_BOMB_COST;
+        totalScoreElement.textContent = totalScore;
+        bonusMode = 'bomb';
+        alert('💣 Выбери клетку для бомбы');
+    }
+
+    function activateBonusRocket() {
+        if (totalScore < BONUS_ROCKET_COST) {
+            alert(`❌ Нужно ${BONUS_ROCKET_COST} очков!`);
+            return;
+        }
+        totalScore -= BONUS_ROCKET_COST;
+        totalScoreElement.textContent = totalScore;
+        bonusMode = 'rocket';
+        alert('✨ Выбери ряд для ракеты');
+    }
+
+    function useBomb(centerIndex) {
+        const centerX = centerIndex % BOARD_WIDTH;
+        const centerY = Math.floor(centerIndex / BOARD_WIDTH);
+        
+        for (let dy = -1; dy <= 1; dy++) {
+            for (let dx = -1; dx <= 1; dx++) {
+                const x = centerX + dx;
+                const y = centerY + dy;
+                if (x >= 0 && x < BOARD_WIDTH && y >= 0 && y < BOARD_WIDTH) {
+                    const idx = y * BOARD_WIDTH + x;
+                    board[idx].color = '';
+                    board[idx].element.style.backgroundColor = '';
+                }
+            }
+        }
+        
+        dropCells();
+        while (removeMatches(true)) {}
+    }
+
+    function useRocket(index) {
+        const y = Math.floor(index / BOARD_WIDTH);
+        
+        for (let x = 0; x < BOARD_WIDTH; x++) {
+            const idx = y * BOARD_WIDTH + x;
+            board[idx].color = '';
+            board[idx].element.style.backgroundColor = '';
+        }
+        
+        dropCells();
+        while (removeMatches(true)) {}
+    }
+
+    // ==================== ИНИЦИАЛИЗАЦИЯ ====================
+    levelSelect.addEventListener('change', () => {
+        currentLevel = levelSelect.value;
+        currentLineId = LEVELS[currentLevel].lines[0].id;
+        updateLinesUI();
+        updateStationsUI();
+        updateLinesStatusUI();
+        initBoard();
+        lineScore = 0;
+        lineScoreElement.textContent = lineScore;
+    });
+
+    lineSelect.addEventListener('change', () => {
+        currentLineId = lineSelect.value;
+        updateStationsUI();
+    });
+
+    restartBtn.addEventListener('click', () => {
+        initBoard();
+        lineScore = 0;
+        lineScoreElement.textContent = lineScore;
+    });
+
+    // Бонусы
+    const shopPanel = document.querySelector('.shop-panel');
+    if (shopPanel) {
+        shopPanel.querySelectorAll('.bonus-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const bonus = e.target.dataset.bonus;
+                if (bonus === 'bomb') activateBonusBomb();
+                if (bonus === 'rocket') activateBonusRocket();
+            });
+        });
+    }
+
+    function initCollectedStations() {
+        if (!collectedStations[currentLevel]) {
+            collectedStations[currentLevel] = {};
+            LEVELS[currentLevel].lines.forEach(line => {
+                collectedStations[currentLevel][line.id] = {};
+                line.stations.forEach(station => {
+                    collectedStations[currentLevel][line.id][station] = false;
+                });
+            });
+        }
+    }
+
+    // ==================== ЗАПУСК ====================
+    updateLevelsUI();
+    updateLinesUI();
+    initCollectedStations();
+    updateStationsUI();
+    updateLinesStatusUI();
     initBoard();
 });
