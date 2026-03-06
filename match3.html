@@ -27,10 +27,10 @@
             <select id="line-select"></select>
         </div>
 
-        <!-- Игровое поле -->
+        <!-- Игровое поле 5x5 -->
         <div id="game-board" class="board"></div>
 
-        <!-- Счёт -->
+        <!-- Счёт и прогресс -->
         <div class="score-container">
             <div class="score-item">
                 <span class="score-label">⭐ Очки:</span>
@@ -41,6 +41,15 @@
                 <span id="level-progress" class="score-value">0/5</span>
             </div>
             <button id="restart" class="restart-btn">🔄 Заново</button>
+        </div>
+
+        <!-- Бонусы -->
+        <div class="shop-panel" id="shop-panel">
+            <h3>🛒 БОНУСЫ</h3>
+            <div class="bonus-buttons">
+                <button class="bonus-btn" data-bonus="bomb">💣 Бомба 3×3 (150)</button>
+                <button class="bonus-btn" data-bonus="rocket">✨ Ракета (200)</button>
+            </div>
         </div>
 
         <!-- Список станций -->
