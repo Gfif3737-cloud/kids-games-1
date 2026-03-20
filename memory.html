@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>🧠 Линия памяти</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="memory.css" />
+</head>
+<body>
+
+<h1>🧠 Линия памяти</h1>
+
+<div class="controls">
+  <label>
+    🎬 Мультики:
+    <select id="themeSelect">
+      <option value="smeshariki">Смешарики</option>
+      <option value="prostokvashino">Простоквашино</option>
+      <option value="fixiki">Фиксики</option>
+      <option value="vinni">Винни Пух</option>
+      <option value="masha">Маша и Медведь</option>
+    </select>
+  </label>
+
+  <label>
+    🌟 Уровень:
+    <select id="levelSelect">
+      <!-- Уровни будут заполняться из JS -->
+    </select>
+  </label>
+
+  <button id="startBtn">🚀 Старт</button>
+</div>
+
+<div id="memoryGrid" class="memory-grid"></div>
+
+<a href="index.html" class="back">⬅ Назад в меню</a>
+
+<script src="memory.js"></script>
+</body>
+</html>
