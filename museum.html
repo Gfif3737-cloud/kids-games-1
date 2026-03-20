@@ -19,21 +19,20 @@
     </div>
 
     <div class="museum-categories">
-        <button class="category-btn" data-category="wagons">🚃 Вагоны</button>
-        <button class="category-btn active" data-category="memoryRewards">🎁 Награды памяти</button>
+        <button class="category-btn" data-category="wagons">🚃 Вагоны (4)</button>
+        <button class="category-btn active" data-category="memoryRewards">🎁 Награды памяти (25)</button>
     </div>
 
-    <div id="artifacts-container" class="artifacts-grid">
-        <!-- Артефакты загружаются из JS -->
-    </div>
+    <div id="artifacts-container" class="artifacts-grid"></div>
 
     <!-- Модальное окно с подробной информацией -->
     <div id="artifact-modal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
+            <div class="modal-icon" id="modal-icon">🏆</div>
             <h2 id="modal-title">Название</h2>
-            <p id="modal-year">Год: </p>
-            <p id="modal-desc">Описание</p>
+            <p id="modal-howto" class="howto-text"></p>
+            <p id="modal-desc" class="desc-text"></p>
             <p id="modal-status" class="artifact-status">Получено</p>
         </div>
     </div>
