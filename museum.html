@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🏛️ Музей метро</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(145deg, #f5f0e0, #e8e0d0);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .museum-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: rgba(255, 248, 225, 0.95);
+      border-radius: 40px;
+      padding: 25px;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+      border: 1px solid #d4b87a;
+    }
+    
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #b8860b;
+      text-shadow: 2px 2px 0 #f0e0b0;
+      font-family: 'Times New Roman', serif;
+    }
+    
+    .stats {
+      background: #fff8e7;
+      border: 3px solid #d4a017;
+      border-radius: 50px;
+      padding: 12px 25px;
+      width: fit-content;
+      margin: 0 auto 25px;
+      text-align: center;
+      box-shadow: 0 5px 0 #b8860b;
+    }
+    
+    .stats span {
+      color: #b8860b;
+      font-weight: bold;
+      font-size: 28px;
+    }
+    
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+    
+    .tab-btn {
+      background: #f0e0c0;
+      border: 2px solid #d4a017;
+      padding: 10px 25px;
+      border-radius: 40px;
+      color: #8b5a2b;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 3px 0 #b8860b;
+    }
+    
+    .tab-btn.active {
+      background: #d4a017;
+      color: white;
+      box-shadow: 0 2px 0 #8b5a2b;
+      transform: translateY(1px);
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 15px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .card {
+      background: #fffaf0;
+      border: 3px solid #d4a017;
+      border-radius: 20px;
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 5px 0 #b8860b;
+    }
+    
+    .card.locked {
+      opacity: 0.7;
+      filter: grayscale(0.2);
+      background: #f5e8d0;
+    }
+    
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 0 #b8860b;
+      border-color: #f0b82e;
+    }
+    
+    .icon {
+      font-size: 48px;
+      margin-bottom: 8px;
+    }
+    
+    .name {
+      font-size: 13px;
+      font-weight: bold;
+      color: #8b5a2b;
+      margin-bottom: 5px;
+    }
+    
+    .howto-icon {
+      font-size: 11px;
+      color: #b8860b;
+      background: #fff0e0;
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 20px;
+      margin-top: 6px;
+    }
+    
+    .status {
+      font-size: 11px;
+      color: #b8860b;
+      margin-top: 6px;
+    }
+    
+    .empty-message {
+      text-align: center;
+      padding: 60px 20px;
+      color: #b8860b;
+      font-size: 18px;
+      font-style: italic;
+      background: #fff8e7;
+      border-radius: 30px;
+      border: 2px dashed #d4a017;
+      grid-column: 1 / -1;
+    }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    
+    .modal-content {
+      background: #fffaf0;
+      border: 4px solid #d4a017;
+      border-radius: 40px;
+      padding: 25px;
+      max-width: 320px;
+      width: 85%;
+      text-align: center;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.3);
+    }
+    
+    .close {
+      float: right;
+      font-size: 28px;
+      cursor: pointer;
+      color: #b8860b;
+    }
+    
+    .modal-icon {
+      font-size: 60px;
+      margin: 10px 0;
+    }
+    
+    .modal-title {
+      font-size: 20px;
+      margin: 10px 0;
+      color: #b8860b;
+      font-weight: bold;
+    }
+    
+    .modal-howto {
+      background: #fff0e0;
+      padding: 12px;
+      border-radius: 20px;
+      margin: 15px 0;
+      font-size: 14px;
+      text-align: left;
+      border: 1px solid #e8c890;
+    }
+    
+    .modal-desc {
+      font-size: 13px;
+      margin: 10px 0;
+      color: #5a3a1a;
+    }
+    
+    .modal-status {
+      margin-top: 15px;
+      padding: 8px;
+      border-radius: 30px;
+      background: #d4a017;
+      color: white;
+      font-weight: bold;
+    }
+    
+    .back {
+      display: block;
+      width: fit-content;
+      margin: 30px auto 0;
+      background: #d4a017;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 40px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      text-align: center;
+      box-shadow: 0 5px 0 #8b5a2b;
+      transition: 0.1s;
+    }
+    
+    .back:active {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 #8b5a2b;
+    }
+    
+    @media (max-width: 550px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      .icon {
+        font-size: 36px;
+      }
+      .name {
+        font-size: 11px;
+      }
+      .tab-btn {
+        padding: 6px 15px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="museum-container">
+  <h1>🏛️ МУЗЕЙ МЕТРО</h1>
+
+  <div class="stats">
+    Собрано артефактов: <span id="totalCount">0</span> / <span id="maxCount">0</span>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="rewards">🎁 НАГРАДЫ</button>
+    <button class="tab-btn" data-tab="achievements">🏆 ДОСТИЖЕНИЯ</button>
+  </div>
+
+  <div id="rewardsGrid" class="grid"></div>
+  <div id="achievementsGrid" class="grid" style="display: none;"></div>
+
+  <a href="index.html" class="back">⬅ На главную</a>
+</div>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeModal">&times;</span>
+    <div class="modal-icon" id="modalIcon">🏆</div>
+    <div class="modal-title" id="modalTitle">Название</div>
+    <div class="modal-howto" id="modalHowto">Как получить: ...</div>
+    <div class="modal-desc" id="modalDesc">Описание</div>
+    <div class="modal-status" id="modalStatus">🔒 Не получено</div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // ==================== ВСЕ НАГРАДЫ ====================
+    const REWARDS = [];
+    
+    // 1. Вагоны (три в ряд) - 4 шт
+    const wagons = [
+      { name: 'Вагон типа А (1935)', icon: '🚃', howto: 'Пройди УРОВЕНЬ 1 в игре «Три в ряд»', desc: 'Первый серийный вагон. Деревянные скамьи, кожаные ремни.' },
+      { name: 'Вагон типа Б (1937)', icon: '🚋', howto: 'Пройди УРОВЕНЬ 2 в игре «Три в ряд»', desc: 'Модернизированная версия. Появились мягкие диваны.' },
+      { name: 'Вагон типа Г (1940)', icon: '🚞', howto: 'Пройди УРОВЕНЬ 3 в игре «Три в ряд»', desc: 'Цельнометаллический. Прозвали «широколобым».' },
+      { name: 'Вагон типа Д (1955)', icon: '🚆', howto: 'Пройди УРОВЕНЬ 4 в игре «Три в ряд»', desc: 'Тот самый «синий вагон» из песни.' }
+    ];
+    
+    // 2. Награды памяти (фигурки) - 25 шт
+    const memoryThemes = [
+      { name: 'Смешарики', icon: '🐰', rewards: ['Крош', 'Ёжик', 'Нюша', 'Бараш', 'Лосяш'] },
+      { name: 'Простоквашино', icon: '🐱', rewards: ['Матроскин', 'Шарик', 'Дядя Фёдор', 'Печкин', 'Галчонок'] },
+      { name: 'Фиксики', icon: '🔧', rewards: ['Нолик', 'Симка', 'Папус', 'Мася', 'Дедус'] },
+      { name: 'Винни Пух', icon: '🐻', rewards: ['Винни', 'Пятачок', 'Кролик', 'Иа', 'Сова'] },
+      { name: 'Маша и Медведь', icon: '👧', rewards: ['Маша', 'Медведь', 'Панда', 'Розочка', 'Зайка'] }
+    ];
+    
+    const levelNames = ['Лёгкий (4×2)', 'Средний (4×3)', 'Сложный (4×4)', 'Эксперт (4×5)', 'Мастер (4×6)'];
+    
+    // 3. Награды лабиринта - 10 шт
+    const mazeRewards = [
+      { level: 3, name: '🏆 Первый километр', howto: 'Пройди 3 уровня в лабиринте', desc: 'Первая награда в лабиринте!' },
+      { level: 6, name: '🏆 Подземный ходок', howto: 'Пройди 6 уровней в лабиринте', desc: 'Ты уже опытный ходок!' },
+      { level: 9, name: '🏆 Станция «Туннель»', howto: 'Пройди 9 уровней в лабиринте', desc: 'Настоящий исследователь!' },
+      { level: 12, name: '🏆 Машинист 3-го класса', howto: 'Пройди 12 уровней в лабиринте', desc: 'Почти профессионал!' },
+      { level: 15, name: '🏆 Машинист 2-го класса', howto: 'Пройди 15 уровней в лабиринте', desc: 'Серьёзный опыт!' },
+      { level: 18, name: '🏆 Машинист 1-го класса', howto: 'Пройди 18 уровней в лабиринте', desc: 'Мастер своего дела!' },
+      { level: 21, name: '🏆 Начальник депо', howto: 'Пройди 21 уровень в лабиринте', desc: 'Ответственный работник!' },
+      { level: 24, name: '🏆 Начальник линии', howto: 'Пройди 24 уровня в лабиринте', desc: 'Лидер!' },
+      { level: 27, name: '🏆 Начальник метро', howto: 'Пройди 27 уровней в лабиринте', desc: 'Вершина карьеры!' },
+      { level: 30, name: '🏆 Легенда метро', howto: 'Пройди 30 уровней в лабиринте', desc: 'Ты легенда!' }
+    ];
+    
+    // Собираем все награды
+    for (let w of wagons) REWARDS.push({ ...w, type: 'wagon' });
+    
+    for (let t of memoryThemes) {
+      for (let i = 0; i < t.rewards.length; i++) {
+        REWARDS.push({
+          name: `${t.rewards[i]} (${t.name})`,
+          icon: t.icon,
+          howto: `🎮 Пройди уровень «${levelNames[i]}» в игре «Линия памяти» для мультфильма «${t.name}»`,
+          desc: `Фигурка ${t.rewards[i]} из мультфильма "${t.name}".`,
+          theme: t.name,
+          level: i,
+          type: 'memory'
+        });
+      }
+    }
+    
+    for (let r of mazeRewards) {
+      REWARDS.push({
+        name: r.name,
+        icon: '🏆',
+        howto: r.howto,
+        desc: r.desc,
+        level: r.level,
+        type: 'maze'
+      });
+    }
+    
+    // ==================== ЗАГРУЗКА ПРОГРЕССА ====================
+    function loadProgress() {
+      const artifacts = JSON.parse(localStorage.getItem('metro_artifacts')) || {};
+      
+      // Вагоны
+      const wagonsProgress = artifacts.wagons || [false, false, false, false];
+      let wagonIdx = 0;
+      
+      // Награды памяти
+      const memoryRewards = artifacts.memoryRewards || {};
+      
+      // Награды лабиринта
+      const mazeRewardsProgress = artifacts.mazeRewards || {};
+      
+      REWARDS.forEach(item => {
+        if (item.type === 'wagon') {
+          item.obtained = wagonsProgress[wagonIdx] || false;
+          wagonIdx++;
+        } else if (item.type === 'memory') {
+          const themeProgress = memoryRewards[item.theme] || [];
+          item.obtained = themeProgress[item.level] === true;
+        } else if (item.type === 'maze') {
+          item.obtained = mazeRewardsProgress[item.level] === true;
+        }
+      });
+    }
+    
+    // ==================== ПОДСЧЁТ ====================
+    function countTotal() {
+      return REWARDS.filter(r => r.obtained).length;
+    }
+    
+    // ==================== ОТРИСОВКА НАГРАД ====================
+    function renderRewards() {
+      const grid = document.getElementById('rewardsGrid');
+      grid.innerHTML = '';
+      
+      REWARDS.forEach(item => {
+        const card = document.createElement('div');
+        card.className = `card ${item.obtained ? '' : 'locked'}`;
+        
+        // Показываем эмодзи способа получения
+        let howtoEmoji = '';
+        if (item.type === 'wagon') howtoEmoji = '🚇 Три в ряд';
+        else if (item.type === 'memory') howtoEmoji = '🧠 Линия памяти';
+        else if (item.type === 'maze') howtoEmoji = '🌀 Лабиринт';
+        
+        card.innerHTML = `
+          <div class="icon">${item.icon}</div>
+          <div class="name">${item.name}</div>
+          <div class="howto-icon">${howtoEmoji}</div>
+          <div class="status">${item.obtained ? '✓ Получено' : '🔒 Не получено'}</div>
+        `;
+        card.onclick = () => showModal(item);
+        grid.appendChild(card);
+      });
+      
+      document.getElementById('totalCount').textContent = countTotal();
+      document.getElementById('maxCount').textContent = REWARDS.length;
+    }
+    
+    // ==================== ОТРИСОВКА ДОСТИЖЕНИЙ (СКРЫТЫЕ) ====================
+    function renderAchievements() {
+      const grid = document.getElementById('achievementsGrid');
+      grid.innerHTML = '';
+      
+      const emptyDiv = document.createElement('div');
+      emptyDiv.className = 'empty-message';
+      emptyDiv.innerHTML = '🏅 СКРЫТЫЕ ДОСТИЖЕНИЯ 🏅<br><br>✨ Пройди все игры до конца, чтобы открыть их! ✨';
+      grid.appendChild(emptyDiv);
+    }
+    
+    // ==================== МОДАЛЬНОЕ ОКНО ====================
+    function showModal(item) {
+      document.getElementById('modalIcon').textContent = item.icon;
+      document.getElementById('modalTitle').textContent = item.name;
+      document.getElementById('modalHowto').innerHTML = `📜 <strong>Как получить:</strong><br>${item.howto}`;
+      document.getElementById('modalDesc').innerHTML = `📖 <strong>Описание:</strong><br>${item.desc}`;
+      const statusDiv = document.getElementById('modalStatus');
+      statusDiv.textContent = item.obtained ? '✅ ПОЛУЧЕНО' : '🔒 ЕЩЁ НЕ ПОЛУЧЕНО';
+      statusDiv.style.background = item.obtained ? '#b8860b' : '#a87c3a';
+      document.getElementById('modal').style.display = 'flex';
+    }
+    
+    // ==================== ВКЛАДКИ ====================
+    function switchTab(tab) {
+      const rewardsGrid = document.getElementById('rewardsGrid');
+      const achievementsGrid = document.getElementById('achievementsGrid');
+      const tabs = document.querySelectorAll('.tab-btn');
+      
+      tabs.forEach(btn => {
+        if (btn.dataset.tab === tab) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+      
+      if (tab === 'rewards') {
+        rewardsGrid.style.display = 'grid';
+        achievementsGrid.style.display = 'none';
+      } else {
+        rewardsGrid.style.display = 'none';
+        achievementsGrid.style.display = 'grid';
+        renderAchievements();
+      }
+    }
+    
+    // ==================== СОБЫТИЯ ====================
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        switchTab(btn.dataset.tab);
+      });
+    });
+    
+    document.getElementById('closeModal').onclick = () => {
+      document.getElementById('modal').style.display = 'none';
+    };
+    
+    window.onclick = (e) => {
+      if (e.target === document.getElementById('modal')) {
+        document.getElementById('modal').style.display = 'none';
+      }
+    };
+    
+    // ==================== ЗАПУСК ====================
+    loadProgress();
+    renderRewards();
+    switchTab('rewards');
+  })();
+</script>
+</body>
+</html>
