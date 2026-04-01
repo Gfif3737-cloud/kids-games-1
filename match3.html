@@ -1,61 +1,264 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>💎 Три в ряд</title>
-  <link rel="stylesheet" href="match3.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; -webkit-tap-highlight-color: transparent; }
+    body {
+      background: linear-gradient(145deg, #0a1c2f, #0b2b3f);
+      color: white;
+      font-family: system-ui, 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
+    .game-container {
+      max-width: 450px;
+      width: 100%;
+      background: rgba(10, 25, 40, 0.7);
+      backdrop-filter: blur(8px);
+      border-radius: 48px;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #ffd966;
+    }
+    .board {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      aspect-ratio: 1 / 1;
+      margin: 20px auto;
+      background: rgba(0,0,0,0.3);
+      padding: 12px;
+      border-radius: 24px;
+    }
+    .cell {
+      background-color: #2c3e50;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.1s;
+      box-shadow: 0 4px 0 #0f1a24;
+    }
+    .cell:active { transform: scale(0.95); }
+    .score {
+      background: #0a1e2c;
+      border-radius: 40px;
+      padding: 10px 20px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #ffd966;
+      margin: 15px 0;
+    }
+    .back {
+      display: inline-block;
+      margin-top: 15px;
+      color: #b0e0ff;
+      text-decoration: none;
+      font-weight: bold;
+      background: #1e3a5f;
+      padding: 8px 20px;
+      border-radius: 40px;
+      border: 2px solid #4f9fff;
+    }
+    button {
+      background: #ff7b4f;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 30px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
-  <div class="game-container">
-    <h1>💎 ТРИ В РЯД</h1>
-
-    <div class="level-selector">
-      <label for="level-select">🌟 Уровень:</label>
-      <select id="level-select">
-        <option value="level1">Уровень 1: Классическое метро</option>
-        <option value="level2">Уровень 2: Радиальные линии</option>
-        <option value="level3">Уровень 3: Новые линии</option>
-        <option value="level4">Уровень 4: МЦД</option>
-      </select>
-    </div>
-
-    <div class="line-selector">
-      <label for="line-select">🚇 Линия:</label>
-      <select id="line-select"></select>
-    </div>
-
-    <div id="game-board" class="board"></div>
-
-    <div class="score-container">
-      <div class="score-item">
-        <span class="score-label">⭐ Очки:</span>
-        <span id="line-score" class="score-value">0</span>
-      </div>
-      <div class="score-item">
-        <span class="score-label">🏆 Всего:</span>
-        <span id="total-score" class="score-value">0</span>
-      </div>
-      <div class="score-item">
-        <span class="score-label">📊 Прогресс:</span>
-        <span id="level-progress" class="score-value">0/5</span>
-      </div>
-      <button id="restart" class="restart-btn">🔄 Заново</button>
-    </div>
-
-    <div class="stations-collection">
-      <h3>📋 Станции:</h3>
-      <div id="stations-list" class="stations-list"></div>
-    </div>
-
-    <div class="lines-status">
-      <h3>📊 Прогресс линий:</h3>
-      <div id="lines-status-list" class="lines-status-list"></div>
-    </div>
-
-    <a href="index.html" class="back-btn">⬅ На главную</a>
-  </div>
-
-  <script src="match3.js"></script>
+<div class="game-container">
+  <h1>💎 Три в ряд</h1>
+  <div id="board" class="board"></div>
+  <div id="score" class="score">Очки: 0</div>
+  <button id="restartBtn">🔄 Заново</button>
+  <a href="index.html" class="back">⬅ На главную</a>
+</div>
+<script>
+  (function(){
+    const boardDiv = document.getElementById('board');
+    const scoreDiv = document.getElementById('score');
+    const restartBtn = document.getElementById('restartBtn');
+    
+    const SIZE = 5;
+    const COLORS = ['#e74c3c', '#2ecc71', '#3498db', '#f1c40f', '#9b59b6'];
+    let board = [];
+    let selectedCell = null;
+    let score = 0;
+    let isProcessing = false;
+    
+    function updateScore() {
+      scoreDiv.textContent = `Очки: ${score}`;
+    }
+    
+    function shuffleArray(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+    
+    function getRandomColor() {
+      return COLORS[Math.floor(Math.random() * COLORS.length)];
+    }
+    
+    function initBoard() {
+      board = [];
+      for (let i = 0; i < SIZE * SIZE; i++) {
+        board.push(getRandomColor());
+      }
+      // Убираем начальные тройки
+      while (findMatches().length > 0) {
+        removeMatches(false);
+      }
+      drawBoard();
+    }
+    
+    function drawBoard() {
+      boardDiv.innerHTML = '';
+      for (let i = 0; i < board.length; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        cell.style.backgroundColor = board[i];
+        cell.dataset.index = i;
+        cell.onclick = () => onCellClick(i);
+        boardDiv.appendChild(cell);
+      }
+    }
+    
+    function findMatches() {
+      const matches = new Set();
+      // горизонтальные
+      for (let row = 0; row < SIZE; row++) {
+        for (let col = 0; col < SIZE - 2; col++) {
+          const idx1 = row * SIZE + col;
+          const idx2 = idx1 + 1;
+          const idx3 = idx1 + 2;
+          if (board[idx1] && board[idx1] === board[idx2] && board[idx1] === board[idx3]) {
+            matches.add(idx1); matches.add(idx2); matches.add(idx3);
+          }
+        }
+      }
+      // вертикальные
+      for (let col = 0; col < SIZE; col++) {
+        for (let row = 0; row < SIZE - 2; row++) {
+          const idx1 = row * SIZE + col;
+          const idx2 = idx1 + SIZE;
+          const idx3 = idx2 + SIZE;
+          if (board[idx1] && board[idx1] === board[idx2] && board[idx1] === board[idx3]) {
+            matches.add(idx1); matches.add(idx2); matches.add(idx3);
+          }
+        }
+      }
+      return Array.from(matches);
+    }
+    
+    function removeMatches(shouldScore = true) {
+      const matches = findMatches();
+      if (matches.length === 0) return false;
+      
+      if (shouldScore) {
+        score += matches.length * 10;
+        updateScore();
+      }
+      
+      matches.forEach(idx => { board[idx] = ''; });
+      dropCells();
+      return true;
+    }
+    
+    function dropCells() {
+      for (let col = 0; col < SIZE; col++) {
+        const column = [];
+        for (let row = SIZE - 1; row >= 0; row--) {
+          const idx = row * SIZE + col;
+          if (board[idx]) column.push(board[idx]);
+        }
+        while (column.length < SIZE) column.push(getRandomColor());
+        for (let row = SIZE - 1; row >= 0; row--) {
+          const idx = row * SIZE + col;
+          board[idx] = column[SIZE - 1 - row];
+        }
+      }
+      drawBoard();
+    }
+    
+    function onCellClick(index) {
+      if (isProcessing) return;
+      
+      if (selectedCell === null) {
+        selectedCell = index;
+        const cell = boardDiv.children[index];
+        cell.style.border = '3px solid white';
+        cell.style.boxShadow = '0 0 15px white';
+        return;
+      }
+      
+      const prevCell = boardDiv.children[selectedCell];
+      prevCell.style.border = '';
+      prevCell.style.boxShadow = '';
+      
+      if (index === selectedCell) {
+        selectedCell = null;
+        return;
+      }
+      
+      // проверка соседства
+      const x1 = selectedCell % SIZE;
+      const y1 = Math.floor(selectedCell / SIZE);
+      const x2 = index % SIZE;
+      const y2 = Math.floor(index / SIZE);
+      const isAdjacent = (Math.abs(x1 - x2) + Math.abs(y1 - y2)) === 1;
+      
+      if (!isAdjacent) {
+        selectedCell = null;
+        return;
+      }
+      
+      // меняем
+      const temp = board[selectedCell];
+      board[selectedCell] = board[index];
+      board[index] = temp;
+      drawBoard();
+      
+      if (findMatches().length > 0) {
+        isProcessing = true;
+        while (removeMatches(true)) {}
+        isProcessing = false;
+      } else {
+        // меняем обратно
+        const tempBack = board[selectedCell];
+        board[selectedCell] = board[index];
+        board[index] = tempBack;
+        drawBoard();
+      }
+      
+      selectedCell = null;
+    }
+    
+    restartBtn.onclick = () => {
+      score = 0;
+      updateScore();
+      initBoard();
+    };
+    
+    initBoard();
+  })();
+</script>
 </body>
 </html>
