@@ -1,0 +1,197 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: linear-gradient(145deg, #0a1c2f, #0b2b3f);
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 32px;
+  margin: 20px 0;
+  color: #ffd966;
+  text-shadow: 0 0 10px #ffb347;
+}
+
+.museum-stats {
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid #ffaa33;
+  border-radius: 40px;
+  padding: 12px 25px;
+  margin-bottom: 20px;
+}
+
+.stat-item {
+  font-size: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.stat-label {
+  color: #ffd966;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffaa33;
+}
+
+.museum-categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.category-btn {
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: 2px solid #ffaa33;
+  background: #1e3a5f;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.category-btn.active {
+  background: #ff7b4f;
+}
+
+.artifacts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 15px;
+  max-width: 800px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.artifact-card {
+  background: #1b3a4b;
+  border: 2px solid #ffaa33;
+  border-radius: 20px;
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.artifact-card.locked {
+  opacity: 0.5;
+  filter: grayscale(0.5);
+}
+
+.artifact-card:hover {
+  transform: translateY(-3px);
+  border-color: #ffd966;
+}
+
+.artifact-icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.artifact-name {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffd966;
+  margin-bottom: 5px;
+}
+
+.artifact-year {
+  font-size: 12px;
+  color: #a8e6ff;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+  background: #1b3a4b;
+  border: 3px solid #ffaa33;
+  border-radius: 30px;
+  margin: 20% auto;
+  padding: 25px;
+  max-width: 350px;
+  width: 90%;
+  text-align: center;
+}
+
+.close-btn {
+  float: right;
+  font-size: 28px;
+  cursor: pointer;
+  color: #ffd966;
+}
+
+.modal-icon {
+  font-size: 50px;
+  margin: 10px 0;
+}
+
+#modal-title {
+  font-size: 20px;
+  margin: 10px 0;
+  color: #ffd966;
+}
+
+.howto-text, .desc-text {
+  font-size: 14px;
+  margin: 10px 0;
+  text-align: left;
+}
+
+.artifact-status {
+  margin-top: 15px;
+  padding: 8px;
+  border-radius: 20px;
+  background: #4a2c00;
+  color: #ffd966;
+  font-weight: bold;
+}
+
+.back-btn {
+  display: inline-block;
+  padding: 10px 25px;
+  border-radius: 30px;
+  background: #1e3a5f;
+  color: white;
+  text-decoration: none;
+  border: 2px solid #4f9fff;
+  margin-top: 20px;
+}
+
+@media (max-width: 500px) {
+  .artifacts-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .artifact-icon {
+    font-size: 30px;
+  }
+  
+  .modal-content {
+    margin: 30% auto;
+  }
+}
