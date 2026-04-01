@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: linear-gradient(145deg, #0a1c2f, #0b2b3f);
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 32px;
+  margin: 20px 0;
+  color: #ffd966;
+  text-shadow: 0 0 10px #ffb347;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 25px;
+  background: rgba(10, 30, 40, 0.7);
+  padding: 20px;
+  border-radius: 40px;
+  border: 1px solid #3e7a9e;
+}
+
+.controls label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #b0e0ff;
+  font-weight: 500;
+}
+
+.controls select, .controls button {
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: 2px solid #4f9fff;
+  font-size: 15px;
+  background: #1e3a5f;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.controls button {
+  background: #ff7b4f;
+  border-color: #ffaa33;
+}
+
+.memory-grid {
+  display: grid;
+  gap: 12px;
+  justify-content: center;
+  margin: 20px auto;
+  max-width: 500px;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 30px;
+}
+
+.memory-card {
+  aspect-ratio: 1 / 1;
+  border-radius: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  transition: 0.1s;
+  box-shadow: 0 5px 0 rgba(0,0,0,0.5);
+}
+
+.memory-card:hover {
+  transform: scale(0.95);
+}
+
+#statsPanel {
+  margin: 15px auto;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  background: #0a1e2c;
+  padding: 12px 25px;
+  border-radius: 40px;
+  color: #ffd966;
+  max-width: 300px;
+  border: 2px solid #3e7a9e;
+}
+
+.back {
+  display: inline-block;
+  margin-top: 25px;
+  color: #b0e0ff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 10px 25px;
+  border-radius: 40px;
+  background: #1e3a5f;
+  border: 2px solid #4f9fff;
+}
+
+@media (max-width: 500px) {
+  h1 {
+    font-size: 28px;
+  }
+  
+  .controls {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .memory-grid {
+    gap: 8px;
+  }
+  
+  .memory-card {
+    font-size: 24px;
+  }
+  
+  #statsPanel {
+    font-size: 16px;
+    padding: 10px 20px;
+    gap: 20px;
+  }
+}
