@@ -3,31 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <title>🌀 Линия лабиринта</title>
-  <link rel="stylesheet" href="maze.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: linear-gradient(145deg, #0a1c2f, #0b2b3f); color: white; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+    h1 { font-size: 32px; margin: 20px 0; color: #ffd966; }
+    .controls { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-bottom: 25px; background: rgba(10,30,40,0.7); padding: 20px; border-radius: 40px; }
+    .controls select, .controls button { padding: 10px 20px; border-radius: 30px; border: 2px solid #4f9fff; background: #1e3a5f; color: white; font-weight: bold; cursor: pointer; }
+    .controls button { background: #ff7b4f; border-color: #ffaa33; }
+    #game { display: inline-grid; gap: 2px; margin: 20px auto; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 20px; }
+    .cell { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 20px; border-radius: 5px; background-color: #1f2f3f; }
+    .wall { background-color: #0f1a24; color: #4a6a7a; }
+    .path { background-color: #1f2f3f; color: #6a8a9a; }
+    .player { background-color: #ff9f4b; border-radius: 50%; }
+    .goal { background-color: #4caf50; border-radius: 50%; }
+    #statsPanel { margin: 15px auto; font-size: 18px; font-weight: bold; display: flex; justify-content: center; gap: 20px; background: #0a1e2c; padding: 10px 20px; border-radius: 40px; color: #ffd966; }
+    .level-display { font-size: 20px; margin: 10px 0; text-align: center; color: #ffd966; }
+    .next-btn { background: #4caf50; padding: 8px 20px; border-radius: 30px; border: none; color: white; font-weight: bold; cursor: pointer; margin: 10px auto; display: block; }
+    .back-btn { display: inline-block; margin-top: 20px; color: #b0e0ff; text-decoration: none; font-weight: bold; padding: 8px 20px; border-radius: 30px; background: #1e3a5f; border: 2px solid #4f9fff; }
+    .hint { margin: 10px 0; font-size: 14px; color: #a8e6ff; text-align: center; }
+    @media (max-width: 500px) { .cell { width: 28px; height: 28px; font-size: 16px; } }
+  </style>
 </head>
 <body>
-
   <h1>🌀 Линия лабиринта</h1>
-
   <div class="controls">
-    <label>Выбери персонажа:</label>
     <select id="characterSelect">
       <option value="cheburashka">Чебурашка → 🐵🍊</option>
       <option value="pin">Пин → 🐧🚗</option>
       <option value="matroskin">Матроскин → 🐱🐄</option>
       <option value="masha">Маша → 👧🐻</option>
     </select>
-
-    <button onclick="startGame()">🚀 Начать</button>
+    <button id="startBtn">🚀 Начать</button>
   </div>
-
   <div id="game"></div>
-
+  <div id="statsPanel"></div>
+  <div id="levelDisplay" class="level-display">Уровень: 1</div>
+  <button id="nextLevelBtn" class="next-btn" style="display: none;">➡️ Дальше</button>
   <p class="hint">Управление: стрелки или свайп</p>
-
-  <button onclick="location.href='index.html'" class="back-btn">⬅ Назад</button>
-
+  <a href="index.html" class="back-btn">⬅ Назад</a>
   <script src="maze.js"></script>
 </body>
 </html>
