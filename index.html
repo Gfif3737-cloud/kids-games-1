@@ -4,20 +4,38 @@
   <meta charset="UTF-8" />
   <title>Игры в метро</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body {
+      background: linear-gradient(145deg, #0a1c2f, #0b2b3f);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    h1 { font-size: 36px; margin: 20px 0; color: #ffd966; text-align: center; }
+    .menu { display: flex; flex-direction: column; gap: 15px; max-width: 300px; margin: 30px auto; width: 100%; }
+    .btn { display: block; padding: 15px 20px; text-decoration: none; color: white; font-weight: bold; font-size: 18px; border-radius: 40px; text-align: center; box-shadow: 0 5px 0 rgba(0,0,0,0.3); transition: 0.2s; }
+    .btn:active { transform: translateY(3px); box-shadow: 0 2px 0 rgba(0,0,0,0.3); }
+    .memory { background: #ff7b4f; border: 2px solid #ffaa33; }
+    .maze { background: #8b0000; border: 2px solid #ffaa33; }
+    .match3 { background: #1e3a5f; border: 2px solid #4f9fff; }
+    .museum { background: #4a2c00; border: 2px solid #ffd966; }
+    .hint { text-align: center; color: #ffd966; font-size: 16px; margin-top: 20px; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 30px; }
+    @media (max-width: 500px) { h1 { font-size: 28px; } .menu { max-width: 250px; } .btn { font-size: 16px; padding: 12px 15px; } }
+  </style>
 </head>
 <body>
-
   <h1>🚇 ИГРЫ В МЕТРО</h1>
-
   <div class="menu">
     <a href="memory.html" class="btn memory">🧠 Линия памяти</a>
     <a href="maze.html" class="btn maze">🌀 Лабиринт</a>
     <a href="match3.html" class="btn match3">💎 Три в ряд</a>
     <a href="museum.html" class="btn museum">🏛️ Музей метро</a>
   </div>
-
   <p class="hint">🏆 Собирай артефакты в играх! Прогресс сохраняется на телефоне.</p>
-
 </body>
 </html>
