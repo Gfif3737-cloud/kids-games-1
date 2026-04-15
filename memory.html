@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🧠 Линия памяти</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, 'Segoe UI', sans-serif; }
+    body {
+      background: linear-gradient(145deg, #0a1c2f, #0b2b3f);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
+    .game-container {
+      max-width: 550px;
+      width: 100%;
+      background: rgba(10, 25, 40, 0.7);
+      backdrop-filter: blur(8px);
+      border-radius: 48px;
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    h1 { text-align: center; font-size: 28px; margin-bottom: 20px; color: #ffd966; }
+    .controls { display: flex; gap: 12px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
+    button {
+      background: #1e3a5f;
+      border: 2px solid #4f9fff;
+      padding: 10px 18px;
+      border-radius: 40px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button { background: #ff7b4f; border-color: #ffaa33; }
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      justify-content: center;
+      margin: 20px 0;
+      background: rgba(0,0,0,0.3);
+      padding: 16px;
+      border-radius: 32px;
+    }
+    .card {
+      aspect-ratio: 1 / 1;
+      background-color: #2c3e50;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      cursor: pointer;
+      transition: 0.1s;
+      box-shadow: 0 6px 0 #0f1a24;
+    }
+    .card.matched { opacity: 0.5; filter: grayscale(0.3); pointer-events: none; }
+    .stats { background: #0a1e2c; border-radius: 40px; padding: 12px; display: flex; justify-content: center; gap: 30px; font-size: 18px; font-weight: bold; color: #ffd966; margin: 15px 0; }
+    .reward-info { text-align: center; margin-top: 10px; font-size: 14px; color: #a8e6ff; }
+    .back { display: block; text-align: center; margin-top: 20px; color: #b0e0ff; text-decoration: none; font-weight: bold; background: #1e3a5f; padding: 10px; border-radius: 40px; border: 2px solid #4f9fff; }
+    @media (max-width: 480px) { .card { font-size: 24px; } .stats { font-size: 14px; gap: 15px; } }
+  </style>
+</head>
+<body>
+<div class="game-container">
+  <h1>🧠 Линия памяти</h1>
+  <div class="controls">
+    <button id="startBtn">🎮 Новая игра</button>
+  </div>
+  <div id="grid" class="memory-grid"></div>
+  <div id="stats" class="stats">Ходы: 0 | Время: 0с</div>
+  <div id="rewardInfo" class="reward-info">🎁 За победу получишь случайную фигурку!</div>
+  <a href="index.html" class="back">⬅ На главную</a>
+</div>
+
+<script>
+// ==================== ПЕРСОНАЖИ СМЕШАРИКОВ ====================
+const CHARACTERS = [
+  { name: 'Крош', emoji: '🐰', color: '#FF69B4', reward: 'Крош (фигурка)' },
+  { name: 'Ёжик', emoji: '🦔', color: '#8B4513', reward: 'Ёжик (фигурка)' },
+  { name: 'Нюша', emoji: '🐷', color: '#FFB6C1', reward: 'Нюша (фигурка)' },
+  { name: 'Бараш', emoji: '🐑', color: '#87CEEB', reward: 'Бараш (фигурка)' },
+  { name: 'Лосяш', emoji: '🦌', color: '#FFD700', reward: 'Лосяш (фигурка)' },
+  { name: 'Копатыч', emoji: '🐻', color: '#CD853F', reward: 'Копатыч (фигурка)' },
+  { name: 'Совунья', emoji: '🦉', color: '#9370DB', reward: 'Совунья (фигурка)' },
+  { name: 'Пин', emoji: '🐧', color: '#4169E1', reward: 'Пин (фигурка)' }
+];
+
+// ==================== НАГРАДЫ ====================
+function giveRandomReward() {
+  let artifacts = JSON.parse(localStorage.getItem('metro_artifacts')) || {};
+  if (!artifacts.memoryRewards) artifacts.memoryRewards = {};
+  if (!artifacts.memoryRewards['Смешарики']) artifacts.memoryRewards['Смешарики'] = [];
+  
+  // Находим ещё не полученные награды
+  const obtained = artifacts.memoryRewards['Смешарики'];
+  const available = [];
+  for (let i = 0; i < CHARACTERS.length; i++) {
+    if (!obtained[i]) {
+      available.push(i);
+    }
+  }
+  
+  // Если все награды получены
+  if (available.length === 0) {
+    setTimeout(() => {
+      alert(`🏆 ПОЗДРАВЛЯЕМ! Ты собрал ВСЕХ Смешариков! 🎉`);
+    }, 300);
+    return;
+  }
+  
+  // Выдаём случайную награду
+  const randomIndex = available[Math.floor(Math.random() * available.length)];
+  const reward = CHARACTERS[randomIndex].reward;
+  artifacts.memoryRewards['Смешарики'][randomIndex] = true;
+  localStorage.setItem('metro_artifacts', JSON.stringify(artifacts));
+  
+  setTimeout(() => {
+    alert(`🎁 ПОЛУЧЕНА НАГРАДА!\n\n${reward}\n\nЗагляни в Музей метро!`);
+  }, 300);
+}
+
+// ==================== ИГРОВАЯ МЕХАНИКА ====================
+const gridDiv = document.getElementById('grid');
+const startBtn = document.getElementById('startBtn');
+const statsDiv = document.getElementById('stats');
+
+let cards = [];
+let lockBoard = false;
+let firstIndex = null;
+let secondIndex = null;
+let moves = 0;
+let seconds = 0;
+let timerInterval = null;
+let totalPairs = 8; // 4×4 = 16 карточек = 8 пар
+let matchedCount = 0;
+
+function updateStatsUI() {
+  statsDiv.innerHTML = `Ходы: ${moves} | Время: ${seconds}с`;
+}
+
+function stopTimer() {
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = null;
+}
+
+function startTimer() {
+  if (timerInterval) stopTimer();
+  seconds = 0;
+  updateStatsUI();
+  timerInterval = setInterval(() => { seconds++; updateStatsUI(); }, 1000);
+}
+
+function shuffleArray(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function winGame() {
+  stopTimer();
+  giveRandomReward(); // Выдаём награду за победу
+  setTimeout(() => {
+    alert(`🎉 Победа! Ходов: ${moves}, время: ${seconds} сек`);
+  }, 100);
+}
+
+function onCardClick(idx) {
+  if (lockBoard) return;
+  const card = cards[idx];
+  if (card.matched) return;
+  if (card.flipped) return;
+  
+  card.flipped = true;
+  card.element.textContent = card.emoji;
+  card.element.style.backgroundColor = card.color;
+  
+  if (firstIndex === null) {
+    firstIndex = idx;
+    return;
+  }
+  
+  if (secondIndex === null && firstIndex !== idx) {
+    secondIndex = idx;
+    moves++;
+    updateStatsUI();
+    
+    const card1 = cards[firstIndex];
+    const card2 = cards[secondIndex];
+    
+    if (card1.name === card2.name) {
+      card1.matched = true;
+      card2.matched = true;
+      card1.flipped = false;
+      card2.flipped = false;
+      card1.element.classList.add('matched');
+      card2.element.classList.add('matched');
+      matchedCount++;
+      
+      firstIndex = null;
+      secondIndex = null;
+      
+      if (matchedCount === totalPairs) {
+        winGame();
+      }
+    } else {
+      lockBoard = true;
+      setTimeout(() => {
+        card1.flipped = false;
+        card2.flipped = false;
+        card1.element.textContent = '❓';
+        card2.element.textContent = '❓';
+        card1.element.style.backgroundColor = '#2c3e50';
+        card2.element.style.backgroundColor = '#2c3e50';
+        firstIndex = null;
+        secondIndex = null;
+        lockBoard = false;
+      }, 700);
+    }
+  }
+}
+
+function initGame() {
+  // Берём 8 персонажей (по 2 карточки каждого)
+  let pool = [];
+  for (let i = 0; i < CHARACTERS.length; i++) {
+    pool.push({ ...CHARACTERS[i] });
+    pool.push({ ...CHARACTERS[i] });
+  }
+  pool = shuffleArray(pool);
+  
+  gridDiv.innerHTML = '';
+  gridDiv.style.gridTemplateColumns = `repeat(4, 1fr)`;
+  
+  cards = [];
+  matchedCount = 0;
+  firstIndex = null;
+  secondIndex = null;
+  lockBoard = false;
+  moves = 0;
+  updateStatsUI();
+  stopTimer();
+  startTimer();
+  
+  for (let i = 0; i < pool.length; i++) {
+    const cardDiv = document.createElement('div');
+    cardDiv.className = 'card';
+    cardDiv.textContent = '❓';
+    cardDiv.style.backgroundColor = '#2c3e50';
+    cardDiv.style.fontSize = window.innerWidth < 450 ? '24px' : '32px';
+    cardDiv.onclick = (function(idx) { return function() { onCardClick(idx); }; })(i);
+    gridDiv.appendChild(cardDiv);
+    
+    cards.push({
+      name: pool[i].name,
+      emoji: pool[i].emoji,
+      color: pool[i].color,
+      matched: false,
+      flipped: false,
+      element: cardDiv
+    });
+  }
+}
+
+startBtn.addEventListener('click', () => initGame());
+
+initGame();
+</script>
+</body>
+</html>
