@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Игры в метро</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     body {
@@ -11,31 +11,108 @@
       color: white;
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       padding: 20px;
     }
-    h1 { font-size: 36px; margin: 20px 0; color: #ffd966; text-align: center; }
-    .menu { display: flex; flex-direction: column; gap: 15px; max-width: 300px; margin: 30px auto; width: 100%; }
-    .btn { display: block; padding: 15px 20px; text-decoration: none; color: white; font-weight: bold; font-size: 18px; border-radius: 40px; text-align: center; box-shadow: 0 5px 0 rgba(0,0,0,0.3); transition: 0.2s; }
+    .container {
+      max-width: 350px;
+      width: 100%;
+      background: rgba(10, 25, 40, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 48px;
+      padding: 30px 25px;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.2);
+      text-align: center;
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #ffd966;
+      text-shadow: 0 0 10px #ffb347;
+    }
+    .coins-display {
+      background: #0a1e2c;
+      border-radius: 40px;
+      padding: 10px 20px;
+      margin-bottom: 25px;
+      display: inline-block;
+      font-size: 20px;
+      font-weight: bold;
+      color: #ffd966;
+      border: 2px solid #ffaa33;
+    }
+    .coins-display span {
+      font-size: 28px;
+      color: #ffaa33;
+    }
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .btn {
+      display: block;
+      padding: 15px 20px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      border-radius: 40px;
+      transition: 0.3s;
+      text-align: center;
+      box-shadow: 0 5px 0 rgba(0,0,0,0.3);
+    }
     .btn:active { transform: translateY(3px); box-shadow: 0 2px 0 rgba(0,0,0,0.3); }
     .memory { background: #ff7b4f; border: 2px solid #ffaa33; }
     .maze { background: #8b0000; border: 2px solid #ffaa33; }
     .match3 { background: #1e3a5f; border: 2px solid #4f9fff; }
     .museum { background: #4a2c00; border: 2px solid #ffd966; }
-    .hint { text-align: center; color: #ffd966; font-size: 16px; margin-top: 20px; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 30px; }
-    @media (max-width: 500px) { h1 { font-size: 28px; } .menu { max-width: 250px; } .btn { font-size: 16px; padding: 12px 15px; } }
+    .hint {
+      text-align: center;
+      color: #ffd966;
+      font-size: 14px;
+      margin-top: 20px;
+      background: rgba(0,0,0,0.3);
+      padding: 10px;
+      border-radius: 30px;
+    }
+    @media (max-width: 500px) {
+      h1 { font-size: 24px; }
+      .btn { font-size: 16px; padding: 12px 15px; }
+      .coins-display { font-size: 16px; }
+      .coins-display span { font-size: 24px; }
+    }
   </style>
 </head>
 <body>
+<div class="container">
   <h1>🚇 ИГРЫ В МЕТРО</h1>
+  
+  <div class="coins-display">
+    🪙 Монеток: <span id="globalCoins">0</span>
+  </div>
+  
   <div class="menu">
     <a href="memory.html" class="btn memory">🧠 Линия памяти</a>
     <a href="maze.html" class="btn maze">🌀 Лабиринт</a>
     <a href="match3.html" class="btn match3">💎 Три в ряд</a>
     <a href="museum.html" class="btn museum">🏛️ Музей метро</a>
   </div>
-  <p class="hint">🏆 Собирай артефакты в играх! Прогресс сохраняется на телефоне.</p>
+  
+  <p class="hint">🏆 Собирай персонажей, получай монетки и открывай историю метро!</p>
+</div>
+
+<script>
+  function updateCoins() {
+    const coins = localStorage.getItem('memory_coins') || 0;
+    const coinsSpan = document.getElementById('globalCoins');
+    if (coinsSpan) coinsSpan.textContent = coins;
+  }
+  updateCoins();
+  setInterval(updateCoins, 1000);
+</script>
 </body>
 </html>
