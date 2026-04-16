@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌀 Лабиринт метро</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, 'Segoe UI', sans-serif; }
+    body {
+      background: linear-gradient(145deg, #0a1c2f, #0b2b3f);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
+    .game-container {
+      max-width: 700px;
+      width: 100%;
+      background: rgba(10, 25, 40, 0.7);
+      backdrop-filter: blur(8px);
+      border-radius: 48px;
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    h1 { text-align: center; font-size: 28px; margin-bottom: 15px; color: #ffd966; }
+    .stats {
+      background: #0a1e2c;
+      border-radius: 40px;
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #ffd966;
+      margin: 15px 0;
+      flex-wrap: wrap;
+    }
+    .character-selector {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .char-btn {
+      background: #1e3a5f;
+      border: 2px solid #4f9fff;
+      padding: 10px 15px;
+      border-radius: 40px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
+      text-align: center;
+      min-width: 100px;
+    }
+    .char-btn.active { background: #ff7b4f; border-color: #ffaa33; }
+    .char-progress { font-size: 12px; margin-top: 5px; color: #a8e6ff; }
+    .controls { display: flex; gap: 12px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
+    button {
+      background: #ff7b4f;
+      border: 2px solid #ffaa33;
+      padding: 10px 18px;
+      border-radius: 40px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #game { display: inline-grid; gap: 2px; margin: 20px auto; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 20px; justify-content: center; }
+    .cell { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 18px; border-radius: 5px; background-color: #1f2f3f; }
+    .wall { background-color: #0f1a24; color: #4a6a7a; }
+    .player { background-color: #ff9f4b; border-radius: 50%; }
+    .goal { background-color: #4caf50; border-radius: 50%; }
+    .level-info { text-align: center; font-size: 16px; margin: 10px 0; color: #ffd966; }
+    .next-btn { background: #4caf50; padding: 10px 20px; border-radius: 30px; border: none; color: white; font-weight: bold; cursor: pointer; margin: 10px auto; display: block; }
+    .back { display: block; text-align: center; margin-top: 20px; color: #b0e0ff; text-decoration: none; font-weight: bold; background: #1e3a5f; padding: 10px; border-radius: 40px; border: 2px solid #4f9fff; }
+    .hint { text-align: center; font-size: 12px; margin: 10px 0; color: #a8e6ff; }
+    @media (max-width: 600px) { .cell { width: 28px; height: 28px; font-size: 14px; } }
+  </style>
+</head>
+<body>
+<div class="game-container">
+  <h1>🌀 Лабиринт метро</h1>
+  
+  <div class="character-selector" id="characterSelector"></div>
+  
+  <div class="stats">
+    <span>🎮 Персонаж: <span id="currentCharName">—</span></span>
+    <span>📊 Уровень: <span id="currentLevel">1</span>/25</span>
+    <span>🏆 Всего уровней: <span id="totalLevels">0</span>/100</span>
+    <span>🪙 Монет: <span id="coinsDisplay">0</span></span>
+  </div>
+  
+  <div id="game"></div>
+  <div class="level-info" id="levelInfo"></div>
+  <button id="nextLevelBtn" class="next-btn" style="display: none;">➡️ Следующий уровень</button>
+  <p class="hint">Управление: стрелки или свайп</p>
+  <a href="index.html" class="back">⬅ На главную</a>
+</div>
+
+<script>
+// ==================== ПЕРСОНАЖИ ====================
+const CHARACTERS = {
+  cheburashka: { name: 'Чебурашка', player: '🐵', goal: '🍊', icon: '🐵' },
+  pin: { name: 'Пин', player: '🐧', goal: '🚗', icon: '🐧' },
+  matroskin: { name: 'Матроскин', player: '🐱', goal: '🐄', icon: '🐱' },
+  masha: { name: 'Маша', player: '👧', goal: '🐻', icon: '👧' }
+};
+
+// ==================== ПРОФЕССИИ (33 штуки) ====================
+const MAZE_PROFESSIONS = {
+  3: '🧹 Уборщик тоннелей',
+  6: '🔧 Слесарь депо',
+  9: '🚇 Дежурный по станции',
+  12: '📢 Диспетчер',
+  15: '🚆 Машинист 3-го класса',
+  18: '🚆 Машинист 2-го класса',
+  21: '🚆 Машинист 1-го класса',
+  24: '🏭 Начальник депо',
+  27: '📊 Начальник службы движения',
+  30: '👔 Начальник линии',
+  33: '📈 Начальник управления',
+  36: '🏛️ Зам. начальника метро',
+  39: '👑 Начальник метрополитена',
+  42: '⭐ Заслуженный работник',
+  45: '🏅 Почётный ветеран',
+  48: '📜 Хранитель традиций',
+  51: '🚇 Легенда подземки',
+  54: '🔮 Проводник времени',
+  57: '⚡ Повелитель тоннелей',
+  60: '🌟 Звезда метро',
+  63: '💎 Алмазный машинист',
+  66: '🏆 Мастер подземелий',
+  69: '🎖️ Герой метро',
+  72: '👑 Король эскалаторов',
+  75: '📖 Летописец линий',
+  78: '⚙️ Хранитель механизмов',
+  81: '🚀 Первопроходец',
+  84: '🌌 Повелитель поездов',
+  87: '💫 Абсолют метро',
+  90: '🏛️ Легендарный начальник',
+  93: '👑 Император подземки',
+  96: '⭐ Великий машинист',
+  99: '🏆 Легенда №1'
+};
+
+// ==================== ХРАНЕНИЕ ПРОГРЕССА ====================
+let currentCharId = 'cheburashka';
+let maze = [];
+let player = { x: 0, y: 0 };
+let goal = { x: 0, y: 0 };
+const SIZE = 15; // Фиксированный размер 15x15
+let steps = 0;
+let gameActive = true;
+let currentLevel = 1;
+
+let characterProgress = JSON.parse(localStorage.getItem('maze_character_progress')) || {
+  cheburashka: { levelsCompleted: 0, totalSteps: 0 },
+  pin: { levelsCompleted: 0, totalSteps: 0 },
+  matroskin: { levelsCompleted: 0, totalSteps: 0 },
+  masha: { levelsCompleted: 0, totalSteps: 0 }
+};
+
+let artifacts = JSON.parse(localStorage.getItem('metro_artifacts')) || { mazeRewards: {} };
+let coins = parseInt(localStorage.getItem('memory_coins') || '0');
+
+function saveProgress() {
+  localStorage.setItem('maze_character_progress', JSON.stringify(characterProgress));
+  localStorage.setItem('metro_artifacts', JSON.stringify(artifacts));
+  localStorage.setItem('memory_coins', coins);
+}
+
+function updateUI() {
+  document.getElementById('coinsDisplay').textContent = coins;
+  document.getElementById('currentCharName').textContent = CHARACTERS[currentCharId].name;
+  document.getElementById('currentLevel').textContent = currentLevel;
+  
+  let totalLevels = 0;
+  for (let char in characterProgress) {
+    totalLevels += characterProgress[char].levelsCompleted;
+  }
+  document.getElementById('totalLevels').textContent = totalLevels;
+  
+  document.querySelectorAll('.char-btn').forEach(btn => {
+    const charId = btn.dataset.char;
+    const progress = characterProgress[charId].levelsCompleted;
+    btn.classList.toggle('active', charId === currentCharId);
+    btn.querySelector('.char-progress').textContent = `${progress}/25 уровней`;
+  });
+}
+
+function giveCoin() {
+  coins++;
+  saveProgress();
+  updateUI();
+}
+
+function giveReward(levelNum) {
+  const rewardName = MAZE_PROFESSIONS[levelNum];
+  if (!rewardName) return;
+  if (!artifacts.mazeRewards[levelNum]) {
+    artifacts.mazeRewards[levelNum] = true;
+    saveProgress();
+    setTimeout(() => alert(`🏆 ПОЛУЧЕНА ПРОФЕССИЯ!\n\n${rewardName}`), 300);
+  }
+}
+
+function checkLevelComplete() {
+  if (player.x === goal.x && player.y === goal.y) {
+    gameActive = false;
+    
+    giveCoin();
+    
+    const totalCompleted = characterProgress[currentCharId].levelsCompleted + 1;
+    if (totalCompleted % 3 === 0) {
+      giveReward(totalCompleted);
+    }
+    
+    characterProgress[currentCharId].levelsCompleted = totalCompleted;
+    characterProgress[currentCharId].totalSteps += steps;
+    saveProgress();
+    updateUI();
+    
+    if (currentLevel >= 25) {
+      setTimeout(() => {
+        alert(`🎉 ПОЗДРАВЛЯЮ!\n\nВы прошли все 25 уровней за ${CHARACTERS[currentCharId].name}!\n\n+10 монет за достижение!`);
+        for (let i = 0; i < 10; i++) giveCoin();
+      }, 100);
+      document.getElementById('nextLevelBtn').style.display = 'none';
+      return;
+    }
+    
+    document.getElementById('nextLevelBtn').style.display = 'block';
+    setTimeout(() => {
+      alert(`🎉 Уровень ${currentLevel} пройден!\nШагов: ${steps}`);
+    }, 100);
+  }
+}
+
+// ==================== ГЕНЕРАЦИЯ ЛАБИРИНТА С РАЗНОЙ СЛОЖНОСТЬЮ ====================
+function generateMaze() {
+  // Сложность зависит от уровня: от 0.3 до 0.7 (процент дополнительных стен)
+  const complexity = 0.3 + (currentLevel - 1) / 70; // 0.3 → 0.64
+  
+  // Создаём пустой лабиринт из стен
+  maze = Array(SIZE).fill().map(() => Array(SIZE).fill(1));
+  
+  // Рекурсивный бэктрекинг для создания основного пути
+  function carve(x, y) {
+    const dirs = [[0, -2], [2, 0], [0, 2], [-2, 0]];
+    for (let i = dirs.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [dirs[i], dirs[j]] = [dirs[j], dirs[i]];
+    }
+    
+    maze[y][x] = 0;
+    
+    for (const [dx, dy] of dirs) {
+      const nx = x + dx;
+      const ny = y + dy;
+      if (nx >= 0 && ny >= 0 && nx < SIZE && ny < SIZE && maze[ny][nx] === 1) {
+        maze[y + dy/2][x + dx/2] = 0;
+        carve(nx, ny);
+      }
+    }
+  }
+  
+  carve(0, 0);
+  
+  // Добавляем дополнительные стены для сложности (но не блокируем путь)
+  const extraWalls = Math.floor(SIZE * SIZE * complexity);
+  for (let i = 0; i < extraWalls; i++) {
+    const x = Math.floor(Math.random() * SIZE);
+    const y = Math.floor(Math.random() * SIZE);
+    // Не трогаем старт, цель и основные проходы
+    if (maze[y][x] === 0 && (x !== 0 || y !== 0) && (x !== SIZE-1 || y !== SIZE-1)) {
+      // Проверяем, не заблокирует ли эта стена все пути
+      let neighbors = 0;
+      if (x > 0 && maze[y][x-1] === 0) neighbors++;
+      if (x < SIZE-1 && maze[y][x+1] === 0) neighbors++;
+      if (y > 0 && maze[y-1][x] === 0) neighbors++;
+      if (y < SIZE-1 && maze[y+1][x] === 0) neighbors++;
+      // Если у клетки 2 или больше соседей, можно сделать стеной
+      if (neighbors >= 2 && Math.random() > 0.5) {
+        maze[y][x] = 1;
+      }
+    }
+  }
+  
+  goal = { x: SIZE - 1, y: SIZE - 1 };
+  maze[goal.y][goal.x] = 0;
+  player = { x: 0, y: 0 };
+  steps = 0;
+  gameActive = true;
+  document.getElementById('nextLevelBtn').style.display = 'none';
+  const complexityPercent = Math.round(complexity * 100);
+  document.getElementById('levelInfo').textContent = `Уровень ${currentLevel} | Размер ${SIZE}x${SIZE} | Сложность: ${complexityPercent}%`;
+}
+
+function draw() {
+  const gameDiv = document.getElementById('game');
+  gameDiv.innerHTML = "";
+  const cellSize = Math.min(35, Math.floor(window.innerWidth / SIZE) - 2);
+  gameDiv.style.gridTemplateColumns = `repeat(${SIZE}, ${cellSize}px)`;
+  
+  for (let y = 0; y < SIZE; y++) {
+    for (let x = 0; x < SIZE; x++) {
+      const cell = document.createElement("div");
+      cell.classList.add("cell");
+      if (x === player.x && y === player.y) {
+        cell.classList.add("player");
+        cell.textContent = CHARACTERS[currentCharId].player;
+      } else if (x === goal.x && y === goal.y) {
+        cell.classList.add("goal");
+        cell.textContent = CHARACTERS[currentCharId].goal;
+      } else if (maze[y][x] === 1) {
+        cell.classList.add("wall");
+        cell.textContent = "█";
+      } else {
+        cell.textContent = "·";
+      }
+      gameDiv.appendChild(cell);
+    }
+  }
+}
+
+function move(dx, dy) {
+  if (!gameActive) return;
+  const nx = player.x + dx;
+  const ny = player.y + dy;
+  if (nx >= 0 && ny >= 0 && nx < SIZE && ny < SIZE && maze[ny][nx] === 0) {
+    player.x = nx;
+    player.y = ny;
+    steps++;
+    draw();
+    checkLevelComplete();
+  }
+}
+
+function nextLevel() {
+  if (currentLevel < 25) {
+    currentLevel++;
+    generateMaze();
+    draw();
+    updateUI();
+  }
+}
+
+function switchCharacter(charId) {
+  currentCharId = charId;
+  currentLevel = characterProgress[charId].levelsCompleted + 1;
+  if (currentLevel > 25) currentLevel = 25;
+  generateMaze();
+  draw();
+  updateUI();
+}
+
+function initCharacterSelector() {
+  const container = document.getElementById('characterSelector');
+  container.innerHTML = '';
+  for (const [id, data] of Object.entries(CHARACTERS)) {
+    const btn = document.createElement('div');
+    btn.className = 'char-btn';
+    btn.dataset.char = id;
+    btn.innerHTML = `${data.icon} ${data.name}<div class="char-progress">${characterProgress[id].levelsCompleted}/25 уровней</div>`;
+    btn.onclick = () => switchCharacter(id);
+    container.appendChild(btn);
+  }
+}
+
+// ==================== УПРАВЛЕНИЕ ====================
+document.addEventListener("keydown", (e) => {
+  if (!gameActive) return;
+  switch(e.key) {
+    case "ArrowUp": e.preventDefault(); move(0, -1); break;
+    case "ArrowDown": e.preventDefault(); move(0, 1); break;
+    case "ArrowLeft": e.preventDefault(); move(-1, 0); break;
+    case "ArrowRight": e.preventDefault(); move(1, 0); break;
+  }
+});
+
+let touchStartX = 0, touchStartY = 0;
+const gameDiv = document.getElementById('game');
+gameDiv.addEventListener("touchstart", (e) => {
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+  e.preventDefault();
+});
+gameDiv.addEventListener("touchend", (e) => {
+  if (!gameActive) return;
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  const dy = e.changedTouches[0].clientY - touchStartY;
+  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 20) {
+    if (dx > 0) move(1, 0);
+    else move(-1, 0);
+  } else if (Math.abs(dy) > 20) {
+    if (dy > 0) move(0, 1);
+    else move(0, -1);
+  }
+  e.preventDefault();
+});
+
+document.getElementById('nextLevelBtn').onclick = () => nextLevel();
+
+// ==================== ЗАПУСК ====================
+initCharacterSelector();
+generateMaze();
+draw();
+updateUI();
+</script>
+</body>
+</html>
