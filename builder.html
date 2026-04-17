@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>🚇 Строй метро</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, 'Segoe UI', sans-serif; }
+    body {
+      background: #0a0f18;
+      color: #e8e8e8;
+      min-height: 100vh;
+      padding: 12px;
+    }
+    .app-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #0f1a24;
+      border-radius: 32px;
+      border: 1px solid #ffb34730;
+      overflow: hidden;
+    }
+    .header {
+      padding: 16px 20px;
+      background: #0a121c;
+      border-bottom: 2px solid #ffb347;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .balance {
+      background: #1a2a3a;
+      padding: 8px 20px;
+      border-radius: 40px;
+      border: 1px solid #ffb347;
+    }
+    .balance span:first-child { font-size: 18px; }
+    .balance span:last-child { font-size: 26px; font-weight: bold; color: #ffd966; }
+    .stats-row { display: flex; gap: 12px; }
+    .stat { text-align: center; background: #1a2a3a; padding: 6px 12px; border-radius: 30px; }
+    .stat-label { font-size: 10px; color: #a8e6ff; }
+    .stat-value { font-size: 16px; font-weight: bold; color: #ffd966; }
+
+    .map-container { padding: 16px; overflow-x: auto; max-height: 55vh; }
+    .line-card {
+      background: #0a1118;
+      border-radius: 20px;
+      padding: 12px;
+      margin-bottom: 16px;
+    }
+    .line-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #ffb34730;
+    }
+    .line-color { width: 20px; height: 20px; border-radius: 50%; }
+    .line-name { font-size: 14px; font-weight: bold; }
+    .line-status { font-size: 11px; color: #ffd966; margin-left: auto; cursor: pointer; }
+    .stations-scroll {
+      overflow-x: auto;
+      white-space: nowrap;
+      padding-bottom: 8px;
+    }
+    .stations-row {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .station-item {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      min-width: 60px;
+    }
+    .station-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      background: #1e2a3a;
+      border: 2px solid;
+      transition: 0.2s;
+      position: relative;
+    }
+    .station-circle.owned { background: #2d6a4f; box-shadow: 0 0 6px #ffd966; }
+    .station-circle.locked { opacity: 0.4; cursor: not-allowed; }
+    .station-circle.has-train { animation: pulse 0.5s; }
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 #ffaa44; }
+      50% { transform: scale(1.05); box-shadow: 0 0 0 6px #ffaa44; }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 #ffaa44; }
+    }
+    .station-name { font-size: 8px; margin-top: 4px; text-align: center; max-width: 60px; }
+    .station-price { font-size: 7px; color: #ffd966; }
+
+    .wagons-section { padding: 16px; border-top: 1px solid #ffb34720; border-bottom: 1px solid #ffb34720; }
+    .section-title { font-size: 14px; margin-bottom: 12px; color: #ffd966; display: flex; justify-content: space-between; }
+    .wagons-grid { display: flex; gap: 8px; flex-wrap: wrap; }
+    .wagon-card {
+      background: #1e2a3a;
+      border-radius: 20px;
+      padding: 8px 10px;
+      flex: 1;
+      min-width: 80px;
+      text-align: center;
+      cursor: pointer;
+      border: 1px solid #3a5a6a;
+    }
+    .wagon-card.owned { background: #2d6a4f; border-color: #ffd966; }
+    .wagon-card.disabled { opacity: 0.4; cursor: not-allowed; }
+    .wagon-name { font-size: 11px; font-weight: bold; }
+    .wagon-specs { font-size: 8px; color: #a8e6ff; }
+    .wagon-price { font-size: 9px; color: #ffd966; }
+
+    .trains-section { padding: 16px; }
+    .train-card {
+      background: #1a2a3a;
+      border-radius: 20px;
+      padding: 10px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .train-info { font-size: 10px; }
+    .train-route select { background: #0a121c; color: white; border: 1px solid #ffb347; padding: 4px 6px; border-radius: 20px; font-size: 9px; }
+    .delete-train { background: #c0392b; border: none; padding: 4px 10px; border-radius: 20px; color: white; cursor: pointer; font-size: 10px; }
+    .buy-train-btn { background: #ff7b4f; border: none; padding: 10px; border-radius: 40px; color: white; font-weight: bold; width: 100%; margin-top: 12px; cursor: pointer; }
+    .back { display: block; text-align: center; margin: 16px; color: #b0e0ff; text-decoration: none; background: #1e3a5f; padding: 10px; border-radius: 40px; }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: #1a2a3f;
+      border-radius: 32px;
+      padding: 24px;
+      max-width: 280px;
+      width: 85%;
+      text-align: center;
+      border: 2px solid #ffb347;
+    }
+    .modal-buttons { display: flex; gap: 12px; margin-top: 20px; }
+    .modal-buttons button { flex: 1; padding: 10px; border-radius: 40px; border: none; font-weight: bold; cursor: pointer; }
+    .confirm-btn { background: #ff7b4f; color: white; }
+    .cancel-btn { background: #4a5a6a; color: white; }
+
+    .floating-income {
+      position: fixed;
+      background: #ffd966;
+      color: #000;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      pointer-events: none;
+      z-index: 100;
+      animation: floatUp 1s ease-out forwards;
+    }
+    @keyframes floatUp {
+      0% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-50px); }
+    }
+  </style>
+</head>
+<body>
+<div class="app-container">
+  <div class="header">
+    <div class="balance"><span>🪙</span><span id="coinsDisplay">0</span></div>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-label">🚉 Станций</div><div class="stat-value" id="stationsCount">0</div></div>
+      <div class="stat"><div class="stat-label">🚆 Поездов</div><div class="stat-value" id="trainsCount">0</div></div>
+      <div class="stat"><div class="stat-label">🔄 Пересадок</div><div class="stat-value" id="transfersCount">0</div></div>
+    </div>
+  </div>
+
+  <div class="map-container" id="mapContainer"></div>
+
+  <div class="wagons-section">
+    <div class="section-title">🚆 Вагоны (скорость → чаще доход)</div>
+    <div class="wagons-grid" id="wagonsGrid"></div>
+  </div>
+
+  <div class="trains-section">
+    <div class="section-title">🚆 Поезда (макс. <span id="maxTrains">0</span>)</div>
+    <div id="trainsList"></div>
+    <button class="buy-train-btn" id="buyTrainBtn">🚆 Купить поезд (50 🪙)</button>
+  </div>
+
+  <a href="index.html" class="back">⬅ На главную</a>
+</div>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h3 id="modalTitle">Покупка</h3>
+    <p id="modalDesc"></p>
+    <div class="modal-buttons">
+      <button class="confirm-btn" id="modalConfirmBtn">✅ Купить</button>
+      <button class="cancel-btn" id="modalCancelBtn">❌ Отмена</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ==================== ВСЕ СТАНЦИИ МЕТРО (ПОЛНЫЕ ЛИНИИ) ====================
+  const ALL_LINES = [
+    {
+      id: 'red',
+      name: 'Красная линия',
+      color: '#e74c3c',
+      unlocked: true,
+      stations: [
+        'Бульвар Рокоссовского', 'Черкизовская', 'Преображенская площадь', 'Сокольники', 'Красносельская',
+        'Комсомольская', 'Красные Ворота', 'Чистые пруды', 'Лубянка', 'Охотный Ряд',
+        'Библиотека им. Ленина', 'Кропоткинская', 'Парк Культуры', 'Фрунзенская', 'Спортивная',
+        'Воробьёвы горы', 'Университет', 'Проспект Вернадского', 'Юго-Западная', 'Тропарёво',
+        'Румянцево', 'Саларьево', 'Филатов Луг', 'Прокшино', 'Ольховая', 'Коммунарка'
+      ]
+    },
+    {
+      id: 'blue',
+      name: 'Синяя линия',
+      color: '#3498db',
+      unlocked: true,
+      stations: [
+        'Щёлковская', 'Первомайская', 'Измайловская', 'Партизанская', 'Семёновская',
+        'Электрозаводская', 'Бауманская', 'Курская', 'Площадь Революции', 'Арбатская',
+        'Смоленская', 'Киевская', 'Парк Победы', 'Славянский бульвар', 'Кунцевская',
+        'Молодёжная', 'Крылатское', 'Строгино', 'Мякинино', 'Волоколамская', 'Митино', 'Пятницкое шоссе'
+      ]
+    },
+    {
+      id: 'green',
+      name: 'Зелёная линия',
+      color: '#2ecc71',
+      unlocked: true,
+      stations: [
+        'Ховрино', 'Беломорская', 'Речной вокзал', 'Водный стадион', 'Войковская',
+        'Сокол', 'Аэропорт', 'Динамо', 'Белорусская', 'Маяковская',
+        'Тверская', 'Театральная', 'Новокузнецкая', 'Павелецкая', 'Автозаводская',
+        'Технопарк', 'Коломенская', 'Каширская', 'Кантемировская', 'Царицыно',
+        'Орехово', 'Домодедовская', 'Красногвардейская', 'Алма-Атинская'
+      ]
+    }
+  ];
+
+  const WAGONS = [
+    { id: 'old', name: 'Старый', icon: '🚋', speed: 20, price: 50, owned: true },
+    { id: 'standard', name: 'Стандартный', icon: '🚆', speed: 40, price: 100, owned: false },
+    { id: 'modern', name: 'Современный', icon: '🚄', speed: 60, price: 200, owned: false },
+    { id: 'express', name: 'Экспресс', icon: '🚅', speed: 100, price: 500, owned: false }
+  ];
+
+  // ==================== СОСТОЯНИЕ ====================
+  let coins = parseInt(localStorage.getItem('memory_coins') || '200');
+  let lines = JSON.parse(localStorage.getItem('builder_lines')) || ALL_LINES;
+  let wagons = JSON.parse(localStorage.getItem('builder_wagons')) || WAGONS;
+  
+  let ownedStations = JSON.parse(localStorage.getItem('builder_owned')) || {};
+  let trains = JSON.parse(localStorage.getItem('builder_trains')) || [];
+  let nextTrainId = parseInt(localStorage.getItem('builder_nextTrainId') || '1');
+  
+  let lastUpdateTime = Date.now();
+
+  function initOwned() {
+    for (const line of lines) {
+      if (!ownedStations[line.id]) {
+        ownedStations[line.id] = new Array(line.stations.length).fill(false);
+      }
+    }
+    // Первая станция красной линии уже куплена
+    if (lines[0] && !ownedStations['red'][0]) {
+      ownedStations['red'][0] = true;
+    }
+    saveToLocalStorage();
+  }
+
+  function getOwnedStationsCount() {
+    let count = 0;
+    for (const line of lines) {
+      for (const owned of ownedStations[line.id] || []) {
+        if (owned) count++;
+      }
+    }
+    return count;
+  }
+
+  function getMaxTrains() {
+    return Math.max(1, Math.floor(getOwnedStationsCount() * 1.5));
+  }
+
+  function getTransferCount() {
+    const stationLineMap = new Map();
+    for (const line of lines) {
+      for (let i = 0; i < line.stations.length; i++) {
+        if (ownedStations[line.id]?.[i]) {
+          const name = line.stations[i];
+          if (!stationLineMap.has(name)) stationLineMap.set(name, []);
+          stationLineMap.get(name).push(line.id);
+        }
+      }
+    }
+    let transfers = 0;
+    for (const [name, lineIds] of stationLineMap) {
+      if (lineIds.length >= 2) transfers++;
+    }
+    return transfers;
+  }
+
+  function getTrainSpeed(train) {
+    const wagon = wagons.find(w => w.id === train.wagonId);
+    return wagon ? wagon.speed : 20;
+  }
+
+  function buyStation(lineId, stationIndex) {
+    const line = lines.find(l => l.id === lineId);
+    if (!line) return false;
+    if (ownedStations[lineId][stationIndex]) return false;
+    if (coins < 20) {
+      alert(`❌ Нужно 20 🪙`);
+      return false;
+    }
+    
+    let canBuy = false;
+    if (stationIndex > 0 && ownedStations[lineId][stationIndex - 1]) canBuy = true;
+    if (stationIndex < line.stations.length - 1 && ownedStations[lineId][stationIndex + 1]) canBuy = true;
+    if (getOwnedStationsCount() === 0) canBuy = true;
+    
+    if (!canBuy) {
+      alert(`🚫 Сначала купи соседнюю станцию!`);
+      return false;
+    }
+    
+    coins -= 20;
+    ownedStations[lineId][stationIndex] = true;
+    saveToLocalStorage();
+    updateAllUI();
+    return true;
+  }
+
+  function buyWagon(wagonId) {
+    const wagon = wagons.find(w => w.id === wagonId);
+    if (!wagon || wagon.owned) return false;
+    if (coins < wagon.price) {
+      alert(`❌ Нужно ${wagon.price} 🪙`);
+      return false;
+    }
+    coins -= wagon.price;
+    wagon.owned = true;
+    saveToLocalStorage();
+    updateAllUI();
+    return true;
+  }
+
+  function buyTrain() {
+    if (trains.length >= getMaxTrains()) {
+      alert(`❌ Максимум поездов: ${getMaxTrains()}`);
+      return false;
+    }
+    if (coins < 50) {
+      alert(`❌ Нужно 50 🪙`);
+      return false;
+    }
+    
+    const ownedWagons = wagons.filter(w => w.owned);
+    if (ownedWagons.length === 0) {
+      alert(`❌ Сначала купи вагон!`);
+      return false;
+    }
+    
+    const stations = [];
+    for (const line of lines) {
+      for (let i = 0; i < line.stations.length; i++) {
+        if (ownedStations[line.id]?.[i]) {
+          stations.push({ lineId: line.id, stationIndex: i, stationName: line.stations[i] });
+        }
+      }
+    }
+    if (stations.length < 2) {
+      alert(`❌ Нужно минимум 2 станции`);
+      return false;
+    }
+    
+    coins -= 50;
+    const newTrain = {
+      id: nextTrainId++,
+      lineId: stations[0].lineId,
+      fromIndex: stations[0].stationIndex,
+      toIndex: stations[1].stationIndex,
+      currentIndex: stations[0].stationIndex,
+      direction: 'forward',
+      timeLeft: 3,
+      wagonId: ownedWagons[0].id
+    };
+    trains.push(newTrain);
+    saveToLocalStorage();
+    updateAllUI();
+    return true;
+  }
+
+  function deleteTrain(trainId) {
+    trains = trains.filter(t => t.id !== trainId);
+    saveToLocalStorage();
+    updateAllUI();
+  }
+
+  function updateTrainRoute(trainId, lineId, toIndex) {
+    const train = trains.find(t => t.id === trainId);
+    if (!train) return;
+    if (!ownedStations[lineId]?.[toIndex]) return;
+    
+    train.lineId = lineId;
+    train.toIndex = toIndex;
+    train.currentIndex = toIndex;
+    train.direction = 'forward';
+    const distance = Math.abs(train.toIndex - train.fromIndex);
+    const speed = getTrainSpeed(train);
+    train.timeLeft = Math.max(2, distance * 30 / speed);
+    saveToLocalStorage();
+    updateAllUI();
+  }
+
+  function updateTrains(deltaSec) {
+    let earned = 0;
+    for (let i = 0; i < trains.length; i++) {
+      const train = trains[i];
+      train.timeLeft -= deltaSec;
+      
+      if (train.timeLeft <= 0) {
+        const line = lines.find(l => l.id === train.lineId);
+        if (line && ownedStations[train.lineId]?.[train.toIndex]) {
+          let earnings = 2;
+          const speed = getTrainSpeed(train);
+          earnings += Math.floor(speed / 20);
+          
+          const stationName = line.stations[train.toIndex];
+          let isTransfer = false;
+          for (const otherLine of lines) {
+            if (otherLine.id !== train.lineId) {
+              const idx = otherLine.stations.indexOf(stationName);
+              if (idx !== -1 && ownedStations[otherLine.id]?.[idx]) {
+                isTransfer = true;
+                break;
+              }
+            }
+          }
+          if (isTransfer) earnings += 3;
+          
+          coins += earnings;
+          earned += earnings;
+          showFloatingIncome(stationName, earnings);
+        }
+        
+        const ownedIndices = [];
+        for (let i = 0; i < line.stations.length; i++) {
+          if (ownedStations[train.lineId]?.[i]) ownedIndices.push(i);
+        }
+        
+        if (ownedIndices.length < 2) {
+          trains.splice(i, 1);
+          i--;
+          continue;
+        }
+        
+        const currentPos = ownedIndices.indexOf(train.toIndex);
+        let nextPos;
+        if (train.direction === 'forward') {
+          nextPos = currentPos + 1;
+          if (nextPos >= ownedIndices.length) {
+            train.direction = 'backward';
+            nextPos = currentPos - 1;
+          }
+        } else {
+          nextPos = currentPos - 1;
+          if (nextPos < 0) {
+            train.direction = 'forward';
+            nextPos = currentPos + 1;
+          }
+        }
+        
+        train.fromIndex = train.toIndex;
+        train.toIndex = ownedIndices[nextPos];
+        train.currentIndex = train.fromIndex;
+        const distance = Math.abs(train.toIndex - train.fromIndex);
+        const speed = getTrainSpeed(train);
+        train.timeLeft = Math.max(2, distance * 30 / speed);
+      }
+    }
+    
+    if (earned > 0) {
+      saveToLocalStorage();
+      updateUI();
+    }
+  }
+
+  function showFloatingIncome(stationName, amount) {
+    const div = document.createElement('div');
+    div.className = 'floating-income';
+    div.textContent = `+${amount} 🪙`;
+    div.style.left = (30 + Math.random() * 40) + '%';
+    div.style.top = '40%';
+    document.body.appendChild(div);
+    setTimeout(() => div.remove(), 1000);
+  }
+
+  // ==================== UI ====================
+  function renderMap() {
+    const container = document.getElementById('mapContainer');
+    container.innerHTML = '';
+    
+    for (const line of lines) {
+      const lineCard = document.createElement('div');
+      lineCard.className = 'line-card';
+      
+      const header = document.createElement('div');
+      header.className = 'line-header';
+      header.innerHTML = `
+        <div class="line-color" style="background: ${line.color};"></div>
+        <div class="line-name">${line.name}</div>
+        <div class="line-status">✅ Открыта</div>
+      `;
+      lineCard.appendChild(header);
+      
+      const scrollDiv = document.createElement('div');
+      scrollDiv.className = 'stations-scroll';
+      const stationsRow = document.createElement('div');
+      stationsRow.className = 'stations-row';
+      
+      for (let i = 0; i < line.stations.length; i++) {
+        const stationName = line.stations[i];
+        const isOwned = ownedStations[line.id]?.[i] || false;
+        const canBuy = !isOwned && 
+          ((i > 0 && ownedStations[line.id]?.[i-1]) || (i < line.stations.length-1 && ownedStations[line.id]?.[i+1]) || getOwnedStationsCount() === 0);
+        
+        const stationDiv = document.createElement('div');
+        stationDiv.className = 'station-item';
+        
+        const circle = document.createElement('div');
+        circle.className = `station-circle ${isOwned ? 'owned' : ''} ${!canBuy && !isOwned ? 'locked' : ''}`;
+        circle.style.borderColor = line.color;
+        circle.textContent = '🚉';
+        
+        const hasTrain = trains.some(t => t.lineId === line.id && t.currentIndex === i);
+        if (hasTrain) circle.classList.add('has-train');
+        
+        const nameSpan = document.createElement('div');
+        nameSpan.className = 'station-name';
+        nameSpan.textContent = stationName.length > 12 ? stationName.slice(0, 10)+'…' : stationName;
+        
+        stationDiv.appendChild(circle);
+        stationDiv.appendChild(nameSpan);
+        
+        if (!isOwned && canBuy) {
+          const priceSpan = document.createElement('div');
+          priceSpan.className = 'station-price';
+          priceSpan.textContent = '20 🪙';
+          stationDiv.appendChild(priceSpan);
+          stationDiv.onclick = () => openStationModal(line.id, i, stationName);
+        }
+        
+        stationsRow.appendChild(stationDiv);
+      }
+      
+      scrollDiv.appendChild(stationsRow);
+      lineCard.appendChild(scrollDiv);
+      container.appendChild(lineCard);
+    }
+  }
+
+  function renderWagons() {
+    const container = document.getElementById('wagonsGrid');
+    container.innerHTML = '';
+    
+    for (const wagon of wagons) {
+      const wagonDiv = document.createElement('div');
+      wagonDiv.className = `wagon-card ${wagon.owned ? 'owned' : ''}`;
+      wagonDiv.innerHTML = `
+        <div class="wagon-name">${wagon.icon} ${wagon.name}</div>
+        <div class="wagon-specs">⚡ ${wagon.speed} км/ч</div>
+        ${!wagon.owned ? `<div class="wagon-price">${wagon.price} 🪙</div>` : '✅ Владеете'}
+      `;
+      if (!wagon.owned && coins >= wagon.price) {
+        wagonDiv.onclick = () => openWagonModal(wagon.id);
+      } else if (!wagon.owned && coins < wagon.price) {
+        wagonDiv.classList.add('disabled');
+      }
+      container.appendChild(wagonDiv);
+    }
+  }
+
+  function renderTrains() {
+    const container = document.getElementById('trainsList');
+    container.innerHTML = '';
+    
+    const stationsList = [];
+    for (const line of lines) {
+      for (let i = 0; i < line.stations.length; i++) {
+        if (ownedStations[line.id]?.[i]) {
+          stationsList.push({ lineId: line.id, stationIndex: i, name: line.stations[i], lineName: line.name });
+        }
+      }
+    }
+    
+    for (const train of trains) {
+      const line = lines.find(l => l.id === train.lineId);
+      const fromStation = line ? line.stations[train.fromIndex] : '?';
+      const toStation = line ? line.stations[train.toIndex] : '?';
+      const wagon = wagons.find(w => w.id === train.wagonId);
+      
+      const trainDiv = document.createElement('div');
+      trainDiv.className = 'train-card';
+      trainDiv.innerHTML = `
+        <div class="train-info">
+          🚆 ${wagon?.name || 'Старый'} | ${fromStation} → ${toStation}<br>
+          ⏱️ ${Math.ceil(train.timeLeft)}с
+        </div>
+        <div class="train-route">
+          <select data-train-id="${train.id}" data-field="line">
+            ${lines.map(l => `<option value="${l.id}" ${l.id === train.lineId ? 'selected' : ''}>${l.name.slice(0,10)}</option>`).join('')}
+          </select>
+          <select data-train-id="${train.id}" data-field="station">
+            ${stationsList.filter(s => s.lineId === train.lineId).map(s => `<option value="${s.stationIndex}" ${s.stationIndex === train.toIndex ? 'selected' : ''}>${s.name.slice(0,10)}</option>`).join('')}
+          </select>
+          <button class="delete-train" data-train-id="${train.id}">❌</button>
+        </div>
+      `;
+      container.appendChild(trainDiv);
+    }
+    
+    document.querySelectorAll('.train-route select[data-field="line"]').forEach(select => {
+      select.addEventListener('change', (e) => {
+        const trainId = parseInt(select.dataset.trainId);
+        const newLineId = select.value;
+        const stationSelect = select.parentElement.querySelector('select[data-field="station"]');
+        if (stationSelect) {
+          const newStations = stationsList.filter(s => s.lineId === newLineId);
+          stationSelect.innerHTML = newStations.map(s => `<option value="${s.stationIndex}">${s.name.slice(0,10)}</option>`).join('');
+          if (newStations.length > 0) {
+            updateTrainRoute(trainId, newLineId, newStations[0].stationIndex);
+          }
+        }
+      });
+    });
+    
+    document.querySelectorAll('.train-route select[data-field="station"]').forEach(select => {
+      select.addEventListener('change', (e) => {
+        const trainId = parseInt(select.dataset.trainId);
+        const newStationIndex = parseInt(select.value);
+        const train = trains.find(t => t.id === trainId);
+        if (train) {
+          updateTrainRoute(trainId, train.lineId, newStationIndex);
+        }
+      });
+    });
+    
+    document.querySelectorAll('.delete-train').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const trainId = parseInt(btn.dataset.trainId);
+        deleteTrain(trainId);
+      });
+    });
+    
+    document.getElementById('maxTrains').textContent = getMaxTrains();
+    document.getElementById('trainsCount').textContent = trains.length;
+  }
+
+  function updateUI() {
+    document.getElementById('coinsDisplay').textContent = Math.floor(coins);
+    document.getElementById('stationsCount').textContent = getOwnedStationsCount();
+    document.getElementById('trainsCount').textContent = trains.length;
+    document.getElementById('transfersCount').textContent = getTransferCount();
+  }
+
+  function updateAllUI() {
+    renderMap();
+    renderWagons();
+    renderTrains();
+    updateUI();
+  }
+
+  // ==================== МОДАЛКИ ====================
+  let currentAction = null;
+  
+  function openStationModal(lineId, stationIndex, stationName) {
+    currentAction = () => buyStation(lineId, stationIndex);
+    document.getElementById('modalTitle').textContent = `🚉 ${stationName}`;
+    document.getElementById('modalDesc').innerHTML = `Станция ${stationName}<br>Цена: 20 🪙`;
+    document.getElementById('modal').style.display = 'flex';
+  }
+  
+  function openWagonModal(wagonId) {
+    currentAction = () => buyWagon(wagonId);
+    const wagon = wagons.find(w => w.id === wagonId);
+    document.getElementById('modalTitle').textContent = `🚆 ${wagon.name} вагон`;
+    document.getElementById('modalDesc').innerHTML = `Скорость: ${wagon.speed} км/ч<br>Цена: ${wagon.price} 🪙`;
+    document.getElementById('modal').style.display = 'flex';
+  }
+  
+  document.getElementById('modalConfirmBtn').onclick = () => {
+    if (currentAction) currentAction();
+    currentAction = null;
+    document.getElementById('modal').style.display = 'none';
+    updateAllUI();
+    saveToLocalStorage();
+  };
+  document.getElementById('modalCancelBtn').onclick = () => {
+    currentAction = null;
+    document.getElementById('modal').style.display = 'none';
+  };
+  
+  document.getElementById('buyTrainBtn').onclick = () => buyTrain();
+  
+  // ==================== АНИМАЦИЯ ====================
+  function gameLoop() {
+    const now = Date.now();
+    if (lastUpdateTime > 0) {
+      const delta = Math.min(0.1, (now - lastUpdateTime) / 1000);
+      updateTrains(delta);
+    }
+    lastUpdateTime = now;
+    updateAllUI();
+    requestAnimationFrame(gameLoop);
+  }
+  
+  function saveToLocalStorage() {
+    localStorage.setItem('memory_coins', Math.floor(coins));
+    localStorage.setItem('builder_lines', JSON.stringify(lines));
+    localStorage.setItem('builder_wagons', JSON.stringify(wagons));
+    localStorage.setItem('builder_owned', JSON.stringify(ownedStations));
+    localStorage.setItem('builder_trains', JSON.stringify(trains));
+    localStorage.setItem('builder_nextTrainId', nextTrainId);
+  }
+  
+  initOwned();
+  updateAllUI();
+  gameLoop();
+</script>
+</body>
+</html>
