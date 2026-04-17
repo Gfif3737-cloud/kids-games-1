@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>🚇 Строй метро</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, 'Segoe UI', -apple-system, sans-serif;
+    }
+
+    body {
+      background: #0f1724;
+      color: #e8e8e8;
+      min-height: 100vh;
+      padding: 12px;
+    }
+
+    .app-container {
+      max-width: 550px;
+      margin: 0 auto;
+      background: #0f1a24;
+      border-radius: 32px;
+      border: 1px solid #ffb34730;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Шапка */
+    .header {
+      padding: 16px 20px;
+      background: #0a121c;
+      border-bottom: 2px solid #ffb347;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .balance {
+      background: #1a2a3a;
+      padding: 8px 20px;
+      border-radius: 40px;
+      border: 1px solid #ffb347;
+    }
+
+    .balance span:first-child { font-size: 18px; }
+    .balance span:last-child { font-size: 26px; font-weight: bold; color: #ffd966; }
+
+    .stats-row {
+      display: flex;
+      gap: 16px;
+    }
+
+    .stat {
+      text-align: center;
+      background: #1a2a3a;
+      padding: 6px 14px;
+      border-radius: 30px;
+    }
+    .stat-label { font-size: 10px; color: #a8e6ff; }
+    .stat-value { font-size: 18px; font-weight: bold; color: #ffd966; }
+
+    /* Карта метро */
+    .map-container {
+      padding: 20px;
+      overflow-x: auto;
+    }
+
+    .metro-schema {
+      min-width: 500px;
+      background: #0a1118;
+      border-radius: 24px;
+      padding: 16px;
+    }
+
+    .line-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .line-label {
+      width: 100px;
+      font-size: 14px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .line-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+    }
+
+    .stations-line {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .station-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: 0.2s;
+      min-width: 65px;
+    }
+    .station-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      background: #1e2a3a;
+      border: 3px solid;
+      transition: 0.2s;
+      position: relative;
+    }
+    .station-circle.owned {
+      background: #2d6a4f;
+      box-shadow: 0 0 8px #ffd966;
+    }
+    .station-circle.locked {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .station-circle.has-train {
+      box-shadow: 0 0 12px #ffaa44;
+      animation: pulse 0.5s;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    .station-name {
+      font-size: 10px;
+      margin-top: 4px;
+      text-align: center;
+      max-width: 65px;
+    }
+    .station-price {
+      font-size: 9px;
+      color: #ffd966;
+    }
+    .train-indicator {
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      background: #ffaa44;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+    }
+
+    .line-connector {
+      font-size: 18px;
+      color: #ffb347;
+    }
+
+    /* Секция вагонов */
+    .wagons-section {
+      padding: 16px 20px;
+      border-top: 1px solid #ffb34720;
+      border-bottom: 1px solid #ffb34720;
+    }
+    .section-title {
+      font-size: 16px;
+      margin-bottom: 12px;
+      color: #ffd966;
+    }
+    .wagons-grid {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .wagon-card {
+      background: #1e2a3a;
+      border-radius: 20px;
+      padding: 8px 12px;
+      flex: 1;
+      min-width: 100px;
+      text-align: center;
+      cursor: pointer;
+      border: 1px solid #3a5a6a;
+    }
+    .wagon-card.owned { background: #2d6a4f; border-color: #ffd966; }
+    .wagon-card.disabled { opacity: 0.4; cursor: not-allowed; }
+    .wagon-name { font-size: 13px; font-weight: bold; }
+    .wagon-specs { font-size: 10px; color: #a8e6ff; }
+    .wagon-price { font-size: 11px; color: #ffd966; }
+
+    /* Инфо панель */
+    .info-panel {
+      padding: 16px 20px;
+      background: #0a121c;
+    }
+    .income-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .income-card {
+      background: #1a2a3a;
+      border-radius: 24px;
+      padding: 10px;
+      text-align: center;
+      flex: 1;
+    }
+    .income-label { font-size: 10px; color: #a8e6ff; }
+    .income-value { font-size: 20px; font-weight: bold; color: #ffd966; }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin: 16px 20px 20px;
+      color: #b0e0ff;
+      text-decoration: none;
+      background: #1e3a5f;
+      padding: 10px;
+      border-radius: 40px;
+      border: 2px solid #4f9fff;
+    }
+
+    /* Модальное окно */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: #1a2a3f;
+      border-radius: 32px;
+      padding: 24px;
+      max-width: 280px;
+      width: 85%;
+      text-align: center;
+      border: 2px solid #ffb347;
+    }
+    .modal-buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .modal-buttons button {
+      flex: 1;
+      padding: 10px;
+      border-radius: 40px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .confirm-btn { background: #ff7b4f; color: white; }
+    .cancel-btn { background: #4a5a6a; color: white; }
+
+    .floating-income {
+      position: fixed;
+      background: #ffd966;
+      color: #000;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      pointer-events: none;
+      z-index: 100;
+      animation: floatUp 1s ease-out forwards;
+    }
+    @keyframes floatUp {
+      0% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-40px); }
+    }
+  </style>
+</head>
+<body>
+<div class="app-container">
+  <div class="header">
+    <div class="balance">
+      <span>🪙</span>
+      <span id="coinsDisplay">0</span>
+    </div>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-label">🚉 Станций</div><div class="stat-value" id="stationsCount">0</div></div>
+      <div class="stat"><div class="stat-label">🚆 Поездов</div><div class="stat-value" id="trainsCount">0</div></div>
+      <div class="stat"><div class="stat-label">🔄 Пересадок</div><div class="stat-value" id="transfersCount">0</div></div>
+    </div>
+  </div>
+
+  <div class="map-container">
+    <div class="metro-schema" id="metroMap"></div>
+  </div>
+
+  <div class="wagons-section">
+    <div class="section-title">🚆 Подвижной состав (макс. <span id="maxTrains">0</span>)</div>
+    <div class="wagons-grid" id="wagonsList"></div>
+  </div>
+
+  <div class="info-panel">
+    <div class="income-row">
+      <div class="income-card"><div class="income-label">💰 Доход/мин</div><div class="income-value" id="incomePerMin">0</div></div>
+      <div class="income-card"><div class="income-label">📉 Расходы/мин</div><div class="income-value" id="expensePerMin">0</div></div>
+      <div class="income-card"><div class="income-label">📈 Прибыль/мин</div><div class="income-value" id="profitPerMin">0</div></div>
+    </div>
+  </div>
+
+  <a href="index.html" class="back">⬅ На главную</a>
+</div>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h3 id="modalTitle">Покупка</h3>
+    <p id="modalDesc"></p>
+    <div class="modal-buttons">
+      <button class="confirm-btn" id="modalConfirmBtn">✅ Купить</button>
+      <button class="cancel-btn" id="modalCancelBtn">❌ Отмена</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ==================== ДАННЫЕ МЕТРО ====================
+  const LINES = [
+    {
+      id: 'red',
+      name: 'Красная',
+      color: '#e74c3c',
+      stations: [
+        { name: 'Аэропорт', icon: '✈️', owned: true, price: 20, x: 0, y: 0 },
+        { name: 'Белорусская', icon: '🚂', owned: true, price: 20, x: 1, y: 0 },
+        { name: 'Маяковская', icon: '🎭', owned: false, price: 20, x: 2, y: 0 },
+        { name: 'Тверская', icon: '🏛️', owned: false, price: 20, x: 3, y: 0 },
+        { name: 'Театральная', icon: '🎭', owned: false, price: 20, x: 4, y: 0 }
+      ],
+      unlocked: true
+    },
+    {
+      id: 'blue',
+      name: 'Синяя',
+      color: '#3498db',
+      stations: [
+        { name: 'Пушкинская', icon: '📖', owned: false, price: 20, x: 2, y: 1, transfer: true, connectTo: { line: 'red', station: 'Маяковская' } },
+        { name: 'Кузнецкий мост', icon: '🌉', owned: false, price: 20, x: 3, y: 1 },
+        { name: 'Китай-город', icon: '🏯', owned: false, price: 20, x: 4, y: 1 }
+      ],
+      unlocked: false,
+      price: 3  // стоимость перехода
+    },
+    {
+      id: 'green',
+      name: 'Зелёная',
+      color: '#2ecc71',
+      stations: [
+        { name: 'Чеховская', icon: '📚', owned: false, price: 20, x: 2, y: -1, transfer: true, connectTo: { line: 'red', station: 'Маяковская' } },
+        { name: 'Боровицкая', icon: '🏰', owned: false, price: 20, x: 2, y: -2 },
+        { name: 'Полянка', icon: '🌳', owned: false, price: 20, x: 2, y: -3 }
+      ],
+      unlocked: false,
+      price: 3
+    }
+  ];
+
+  const WAGONS = [
+    { id: 'old', name: 'Старый', icon: '🚋', speed: 20, capacity: 100, price: 50, owned: true },
+    { id: 'standard', name: 'Стандартный', icon: '🚆', speed: 40, capacity: 200, price: 100, owned: false },
+    { id: 'modern', name: 'Современный', icon: '🚄', speed: 60, capacity: 350, price: 200, owned: false },
+    { id: 'express', name: 'Экспресс', icon: '🚅', speed: 100, capacity: 500, price: 500, owned: false }
+  ];
+
+  // ==================== СОСТОЯНИЕ ====================
+  let coins = parseInt(localStorage.getItem('memory_coins') || '150');
+  let lines = JSON.parse(localStorage.getItem('builder_lines')) || LINES;
+  let wagons = JSON.parse(localStorage.getItem('builder_wagons')) || WAGONS;
+  
+  // Поезда: каждый поезд имеет { currentStationIndex, lineId, destinationStationIndex, timeLeft }
+  let trains = JSON.parse(localStorage.getItem('builder_trains')) || [];
+  let lastUpdateTime = Date.now();
+  let animationFrame = null;
+
+  // Вспомогательные функции
+  function getOwnedStations() {
+    let stations = [];
+    for (const line of lines) {
+      for (let i = 0; i < line.stations.length; i++) {
+        if (line.stations[i].owned) {
+          stations.push({ line, stationIndex: i, station: line.stations[i] });
+        }
+      }
+    }
+    return stations;
+  }
+
+  function getTotalStations() {
+    let count = 0;
+    for (const line of lines) {
+      for (const station of line.stations) {
+        if (station.owned) count++;
+      }
+    }
+    return count;
+  }
+
+  function getTotalTrains() {
+    return trains.length;
+  }
+
+  function getMaxTrains() {
+    const stations = getTotalStations();
+    return Math.floor(stations * 1.5); // максимум 1.5 поезда на станцию
+  }
+
+  function getTransferStations() {
+    const stationNames = {};
+    for (const line of lines) {
+      for (const station of line.stations) {
+        if (station.owned) {
+          if (!stationNames[station.name]) stationNames[station.name] = [];
+          stationNames[station.name].push(line.id);
+        }
+      }
+    }
+    let transfers = 0;
+    for (const name in stationNames) {
+      if (stationNames[name].length >= 2) transfers++;
+    }
+    return transfers;
+  }
+
+  function getAverageSpeed() {
+    let totalSpeed = 0;
+    let count = 0;
+    for (const wagon of wagons) {
+      if (wagon.owned) {
+        totalSpeed += wagon.speed;
+        count++;
+      }
+    }
+    return count > 0 ? totalSpeed / count : 20;
+  }
+
+  // Расчёт дохода в минуту (на основе скорости и количества поездов)
+  function calculateIncomePerMinute() {
+    const stations = getTotalStations();
+    const trainsCount = getTotalTrains();
+    const avgSpeed = getAverageSpeed();
+    const transfers = getTransferStations();
+    
+    if (stations < 2 || trainsCount === 0) return 0;
+    
+    // Базовый доход: 2 монеты за станцию + бонус за скорость
+    let income = stations * 2;
+    income += avgSpeed / 10;
+    income += transfers * 3;
+    income += trainsCount * 0.5;
+    
+    return Math.floor(income);
+  }
+
+  function calculateExpensesPerMinute() {
+    const stations = getTotalStations();
+    const trainsCount = getTotalTrains();
+    return stations * 1 + trainsCount * 2;
+  }
+
+  // Создание нового поезда
+  function addTrain() {
+    const ownedStations = getOwnedStations();
+    if (ownedStations.length < 2) return false;
+    if (trains.length >= getMaxTrains()) return false;
+    
+    const startStation = ownedStations[Math.floor(Math.random() * ownedStations.length)];
+    let endStation;
+    do {
+      endStation = ownedStations[Math.floor(Math.random() * ownedStations.length)];
+    } while (endStation === startStation);
+    
+    const distance = Math.abs(endStation.stationIndex - startStation.stationIndex);
+    const avgSpeed = getAverageSpeed();
+    const travelTime = Math.max(3, distance * 60 / avgSpeed); // секунды
+    
+    trains.push({
+      lineId: startStation.line.id,
+      startStationIndex: startStation.stationIndex,
+      endStationIndex: endStation.stationIndex,
+      currentStationIndex: startStation.stationIndex,
+      targetStationIndex: endStation.stationIndex,
+      timeLeft: travelTime,
+      totalTime: travelTime,
+      direction: 'forward'
+    });
+    
+    saveToLocalStorage();
+    return true;
+  }
+
+  // Обновление поездов (вызывается каждый кадр)
+  function updateTrains(deltaTime) {
+    const incomePerSec = calculateIncomePerMinute() / 60;
+    let stationsToEarn = [];
+    
+    for (let i = 0; i < trains.length; i++) {
+      const train = trains[i];
+      train.timeLeft -= deltaTime;
+      
+      if (train.timeLeft <= 0) {
+        // Поезд прибыл на станцию
+        const line = lines.find(l => l.id === train.lineId);
+        if (line) {
+          const station = line.stations[train.targetStationIndex];
+          if (station && station.owned) {
+            // Начисление монет за прибытие
+            let earnings = 2; // база
+            const avgSpeed = getAverageSpeed();
+            earnings += Math.floor(avgSpeed / 20);
+            if (station.transfer) earnings += 3; // бонус за пересадку
+            
+            coins += earnings;
+            stationsToEarn.push({ station, earnings, line });
+            
+            // Показать всплывающую надпись
+            showFloatingIncome(station.name, earnings);
+          }
+        }
+        
+        // Отправляем поезд дальше (к следующей станции или обратно)
+        const lineData = lines.find(l => l.id === train.lineId);
+        if (lineData) {
+          const ownedStations = [];
+          for (let i = 0; i < lineData.stations.length; i++) {
+            if (lineData.stations[i].owned) ownedStations.push(i);
+          }
+          
+          const currentIdx = ownedStations.indexOf(train.targetStationIndex);
+          let nextIdx;
+          if (train.direction === 'forward') {
+            nextIdx = currentIdx + 1;
+            if (nextIdx >= ownedStations.length) {
+              train.direction = 'backward';
+              nextIdx = currentIdx - 1;
+            }
+          } else {
+            nextIdx = currentIdx - 1;
+            if (nextIdx < 0) {
+              train.direction = 'forward';
+              nextIdx = currentIdx + 1;
+            }
+          }
+          
+          if (nextIdx >= 0 && nextIdx < ownedStations.length) {
+            const nextStationIdx = ownedStations[nextIdx];
+            const distance = Math.abs(nextStationIdx - train.targetStationIndex);
+            const avgSpeed = getAverageSpeed();
+            train.timeLeft = Math.max(2, distance * 60 / avgSpeed);
+            train.currentStationIndex = train.targetStationIndex;
+            train.targetStationIndex = nextStationIdx;
+          } else {
+            // Нет доступных станций, удаляем поезд
+            trains.splice(i, 1);
+            i--;
+          }
+        } else {
+          trains.splice(i, 1);
+          i--;
+        }
+      }
+    }
+    
+    // Анимируем станции с прибывшими поездами
+    if (stationsToEarn.length > 0) {
+      updateMapUI();
+      setTimeout(() => updateMapUI(), 500);
+    }
+    
+    saveToLocalStorage();
+  }
+
+  function showFloatingIncome(stationName, amount) {
+    const div = document.createElement('div');
+    div.className = 'floating-income';
+    div.textContent = `+${amount} 🪙`;
+    div.style.left = Math.random() * window.innerWidth + 'px';
+    div.style.top = '50%';
+    document.body.appendChild(div);
+    setTimeout(() => div.remove(), 1000);
+  }
+
+  // Покупка станции
+  function buyStation(line, stationIndex) {
+    const station = line.stations[stationIndex];
+    if (!station.owned && coins >= station.price) {
+      // Проверка на соседнюю купленную станцию
+      let canBuy = false;
+      if (stationIndex > 0 && line.stations[stationIndex - 1].owned) canBuy = true;
+      if (stationIndex < line.stations.length - 1 && line.stations[stationIndex + 1].owned) canBuy = true;
+      
+      if (!canBuy && getTotalStations() > 0) {
+        alert('🚫 Сначала купи соседнюю станцию на этой линии!');
+        return false;
+      }
+      
+      coins -= station.price;
+      station.owned = true;
+      
+      // При покупке станции добавляем новый поезд, если нужно
+      if (getTotalStations() >= 2 && getTotalTrains() < getMaxTrains()) {
+        addTrain();
+      }
+      
+      saveToLocalStorage();
+      updateAllUI();
+      return true;
+    }
+    return false;
+  }
+
+  // Покупка перехода на линию
+  function buyLine(line) {
+    if (!line.unlocked && line.price && coins >= line.price) {
+      coins -= line.price;
+      line.unlocked = true;
+      saveToLocalStorage();
+      updateAllUI();
+      return true;
+    }
+    return false;
+  }
+
+  // Покупка вагона
+  function buyWagon(wagon) {
+    if (!wagon.owned && coins >= wagon.price && getTotalTrains() < getMaxTrains()) {
+      coins -= wagon.price;
+      wagon.owned = true;
+      // Добавляем новый поезд
+      addTrain();
+      saveToLocalStorage();
+      updateAllUI();
+      return true;
+    }
+    return false;
+  }
+
+  // ==================== UI ====================
+  function updateMapUI() {
+    const container = document.getElementById('metroMap');
+    container.innerHTML = '';
+    
+    // Создаём позиционирование для линий
+    const lineElements = {};
+    
+    for (const line of lines) {
+      const lineDiv = document.createElement('div');
+      lineDiv.className = 'line-row';
+      
+      const label = document.createElement('div');
+      label.className = 'line-label';
+      label.innerHTML = `<div class="line-dot" style="background: ${line.color};"></div> ${line.name}`;
+      lineDiv.appendChild(label);
+      
+      const stationsDiv = document.createElement('div');
+      stationsDiv.className = 'stations-line';
+      
+      for (let i = 0; i < line.stations.length; i++) {
+        const station = line.stations[i];
+        const stationDiv = document.createElement('div');
+        stationDiv.className = 'station-node';
+        
+        const circle = document.createElement('div');
+        circle.className = `station-circle ${station.owned ? 'owned' : ''} ${!line.unlocked && !station.owned ? 'locked' : ''}`;
+        circle.style.borderColor = line.color;
+        circle.textContent = station.icon;
+        
+        // Проверка, есть ли поезд на этой станции
+        const hasTrain = trains.some(t => {
+          const trainLine = lines.find(l => l.id === t.lineId);
+          return trainLine && trainLine.id === line.id && t.currentStationIndex === i;
+        });
+        if (hasTrain) {
+          circle.classList.add('has-train');
+          const trainIcon = document.createElement('div');
+          trainIcon.className = 'train-indicator';
+          trainIcon.textContent = '🚆';
+          circle.appendChild(trainIcon);
+        }
+        
+        const nameSpan = document.createElement('div');
+        nameSpan.className = 'station-name';
+        nameSpan.textContent = station.name;
+        
+        stationDiv.appendChild(circle);
+        stationDiv.appendChild(nameSpan);
+        
+        if (!station.owned) {
+          if (line.unlocked) {
+            // Проверка на возможность покупки
+            let canBuy = false;
+            if (i > 0 && line.stations[i - 1].owned) canBuy = true;
+            if (i < line.stations.length - 1 && line.stations[i + 1].owned) canBuy = true;
+            if (getTotalStations() === 0) canBuy = true;
+            
+            if (canBuy) {
+              const priceSpan = document.createElement('div');
+              priceSpan.className = 'station-price';
+              priceSpan.textContent = `${station.price} 🪙`;
+              stationDiv.appendChild(priceSpan);
+              stationDiv.style.cursor = 'pointer';
+              stationDiv.onclick = () => openStationModal(line, i, station);
+            } else {
+              stationDiv.style.opacity = '0.5';
+            }
+          } else {
+            stationDiv.style.opacity = '0.3';
+          }
+        }
+        
+        stationsDiv.appendChild(stationDiv);
+        
+        // Добавляем соединительную линию между станциями
+        if (i < line.stations.length - 1) {
+          const connector = document.createElement('div');
+          connector.className = 'line-connector';
+          connector.textContent = '—';
+          stationsDiv.appendChild(connector);
+        }
+      }
+      
+      lineDiv.appendChild(stationsDiv);
+      container.appendChild(lineDiv);
+      
+      // Кнопка покупки линии, если не открыта
+      if (!line.unlocked && line.price) {
+        const buyLineDiv = document.createElement('div');
+        buyLineDiv.style.marginTop = '8px';
+        buyLineDiv.style.marginLeft = '100px';
+        buyLineDiv.style.fontSize = '12px';
+        buyLineDiv.style.cursor = 'pointer';
+        buyLineDiv.style.color = '#ffd966';
+        buyLineDiv.innerHTML = `➕ Открыть переход на ${line.name} линию за ${line.price} 🪙`;
+        buyLineDiv.onclick = () => openLineModal(line);
+        container.appendChild(buyLineDiv);
+      }
+    }
+  }
+
+  function updateWagonsUI() {
+    const container = document.getElementById('wagonsList');
+    container.innerHTML = '';
+    const maxTrains = getMaxTrains();
+    document.getElementById('maxTrains').textContent = maxTrains;
+    
+    for (const wagon of wagons) {
+      const wagonDiv = document.createElement('div');
+      wagonDiv.className = `wagon-card ${wagon.owned ? 'owned' : ''} ${(!wagon.owned && coins < wagon.price) || getTotalTrains() >= maxTrains ? 'disabled' : ''}`;
+      wagonDiv.innerHTML = `
+        <div class="wagon-name">${wagon.icon} ${wagon.name}</div>
+        <div class="wagon-specs">⚡ ${wagon.speed} км/ч | 🚶 ${wagon.capacity} чел</div>
+        ${!wagon.owned ? `<div class="wagon-price">${wagon.price} 🪙</div>` : '<div class="wagon-price">✅ Владеете</div>'}
+      `;
+      
+      if (!wagon.owned && coins >= wagon.price && getTotalTrains() < maxTrains) {
+        wagonDiv.onclick = () => openWagonModal(wagon);
+      } else if (!wagon.owned && (coins < wagon.price || getTotalTrains() >= maxTrains)) {
+        wagonDiv.classList.add('disabled');
+      }
+      
+      container.appendChild(wagonDiv);
+    }
+  }
+
+  function updateStatsUI() {
+    document.getElementById('coinsDisplay').textContent = Math.floor(coins);
+    document.getElementById('stationsCount').textContent = getTotalStations();
+    document.getElementById('trainsCount').textContent = getTotalTrains();
+    document.getElementById('transfersCount').textContent = getTransferStations();
+    
+    const income = calculateIncomePerMinute();
+    const expense = calculateExpensesPerMinute();
+    document.getElementById('incomePerMin').textContent = income;
+    document.getElementById('expensePerMin').textContent = expense;
+    document.getElementById('profitPerMin').textContent = Math.max(0, income - expense);
+  }
+
+  function updateAllUI() {
+    updateMapUI();
+    updateWagonsUI();
+    updateStatsUI();
+  }
+
+  // ==================== МОДАЛЬНЫЕ ОКНА ====================
+  let currentAction = null;
+  
+  function openStationModal(line, stationIndex, station) {
+    currentAction = () => buyStation(line, stationIndex);
+    document.getElementById('modalTitle').textContent = `🚉 ${station.name}`;
+    document.getElementById('modalDesc').innerHTML = `Станция ${station.name}<br>Цена: ${station.price} 🪙`;
+    document.getElementById('modal').style.display = 'flex';
+  }
+  
+  function openLineModal(line) {
+    currentAction = () => buyLine(line);
+    document.getElementById('modalTitle').textContent = `🔄 Переход на ${line.name} линию`;
+    document.getElementById('modalDesc').innerHTML = `Открытие линии «${line.name}»<br>Цена перехода: ${line.price} 🪙`;
+    document.getElementById('modal').style.display = 'flex';
+  }
+  
+  function openWagonModal(wagon) {
+    currentAction = () => buyWagon(wagon);
+    document.getElementById('modalTitle').textContent = `🚆 ${wagon.name} вагон`;
+    document.getElementById('modalDesc').innerHTML = `Скорость: ${wagon.speed} км/ч<br>Вместимость: ${wagon.capacity} чел<br>Цена: ${wagon.price} 🪙`;
+    document.getElementById('modal').style.display = 'flex';
+  }
+  
+  document.getElementById('modalConfirmBtn').onclick = () => {
+    if (currentAction) {
+      currentAction();
+      currentAction = null;
+    }
+    document.getElementById('modal').style.display = 'none';
+    updateAllUI();
+    saveToLocalStorage();
+  };
+  document.getElementById('modalCancelBtn').onclick = () => {
+    currentAction = null;
+    document.getElementById('modal').style.display = 'none';
+  };
+  
+  // ==================== АНИМАЦИОННЫЙ ЦИКЛ ====================
+  let lastTimestamp = 0;
+  function gameLoop(now) {
+    const nowMs = Date.now();
+    if (lastTimestamp > 0) {
+      const delta = Math.min(0.1, (nowMs - lastTimestamp) / 1000);
+      updateTrains(delta);
+      updateAllUI();
+    }
+    lastTimestamp = nowMs;
+    requestAnimationFrame(gameLoop);
+  }
+  
+  function saveToLocalStorage() {
+    localStorage.setItem('memory_coins', Math.floor(coins));
+    localStorage.setItem('builder_lines', JSON.stringify(lines));
+    localStorage.setItem('builder_wagons', JSON.stringify(wagons));
+    localStorage.setItem('builder_trains', JSON.stringify(trains));
+  }
+  
+  // ==================== ИНИЦИАЛИЗАЦИЯ ====================
+  function init() {
+    // Убеждаемся, что первые две станции красной линии куплены
+    const redLine = lines.find(l => l.id === 'red');
+    if (redLine) {
+      if (!redLine.stations[0].owned) redLine.stations[0].owned = true;
+      if (!redLine.stations[1].owned) redLine.stations[1].owned = true;
+    }
+    
+    // Создаём начальные поезда
+    if (getTotalStations() >= 2 && getTotalTrains() === 0) {
+      addTrain();
+    }
+    
+    updateAllUI();
+    gameLoop();
+  }
+  
+  init();
+</script>
+</body>
+</html>
