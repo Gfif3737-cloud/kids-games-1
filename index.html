@@ -7,114 +7,50 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     body {
-      background: linear-gradient(145deg, #0a1c2f, #0b2b3f);
+      background: linear-gradient(145deg, #8b0000, #5a0000);
       color: white;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 20px;
+      transition: background 0.5s ease;
+      position: relative;
     }
-    .container {
-      max-width: 350px;
+    /* Основной красный фон */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
-      background: rgba(10, 25, 40, 0.8);
-      backdrop-filter: blur(10px);
-      border-radius: 48px;
-      padding: 30px 25px;
-      box-shadow: 0 20px 30px rgba(0,0,0,0.6);
-      border: 1px solid rgba(255,255,255,0.2);
-      text-align: center;
+      height: 100%;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+      z-index: 0;
     }
-    h1 {
-      font-size: 28px;
-      margin-bottom: 20px;
-      color: #ffd966;
-      text-shadow: 0 0 10px #ffb347;
+    /* Полупрозрачные наложения (покупаемые фоны) */
+    body.overlay-default::before { opacity: 0; }
+    body.overlay-airport::before { 
+      background: radial-gradient(circle at 20% 40%, rgba(255,215,0,0.15) 0%, transparent 50%);
+      opacity: 1;
     }
-    .coins-display {
-      background: #0a1e2c;
-      border-radius: 40px;
-      padding: 10px 20px;
-      margin-bottom: 25px;
-      display: inline-block;
-      font-size: 20px;
-      font-weight: bold;
-      color: #ffd966;
-      border: 2px solid #ffaa33;
+    body.overlay-mayakovskaya::before { 
+      background: repeating-linear-gradient(45deg, rgba(255,215,0,0.1) 0px, rgba(255,215,0,0.1) 2px, transparent 2px, transparent 8px);
+      opacity: 1;
     }
-    .coins-display span {
-      font-size: 28px;
-      color: #ffaa33;
+    body.overlay-kievskaya::before { 
+      background: radial-gradient(ellipse at 70% 60%, rgba(255,100,50,0.2) 0%, transparent 70%);
+      opacity: 1;
     }
-    .menu {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      margin: 20px 0;
+    body.overlay-komsomolskaya::before { 
+      background: repeating-linear-gradient(90deg, rgba(255,215,0,0.08) 0px, rgba(255,215,0,0.08) 3px, transparent 3px, transparent 15px);
+      opacity: 1;
     }
-    .btn {
-      display: block;
-      padding: 15px 20px;
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-      font-size: 18px;
-      border-radius: 40px;
-      transition: 0.3s;
-      text-align: center;
-      box-shadow: 0 5px 0 rgba(0,0,0,0.3);
+    body.overlay-revolution::before { 
+      background: radial-gradient(circle at 50% 50%, rgba(255,200,50,0.12) 0%, transparent 60%);
+      opacity: 1;
     }
-    .btn:active { transform: translateY(3px); box-shadow: 0 2px 0 rgba(0,0,0,0.3); }
-    .memory { background: #ff7b4f; border: 2px solid #ffaa33; }
-    .maze { background: #8b0000; border: 2px solid #ffaa33; }
-    .match3 { background: #1e3a5f; border: 2px solid #4f9fff; }
-    .museum { background: #4a2c00; border: 2px solid #ffd966; }
-    .builder { background: #2d6a4f; border: 2px solid #ffaa33; }
-    .hint {
-      text-align: center;
-      color: #ffd966;
-      font-size: 14px;
-      margin-top: 20px;
-      background: rgba(0,0,0,0.3);
-      padding: 10px;
-      border-radius: 30px;
-    }
-    @media (max-width: 500px) {
-      h1 { font-size: 24px; }
-      .btn { font-size: 16px; padding: 12px 15px; }
-      .coins-display { font-size: 16px; }
-      .coins-display span { font-size: 24px; }
-    }
-  </style>
-</head>
-<body>
-<div class="container">
-  <h1>🚇 ИГРЫ В МЕТРО</h1>
-  
-  <div class="coins-display">
-    🪙 Монеток: <span id="globalCoins">0</span>
-  </div>
-  
-  <div class="menu">
-    <a href="memory.html" class="btn memory">🧠 Линия памяти</a>
-    <a href="maze.html" class="btn maze">🌀 Лабиринт</a>
-    <a href="match3.html" class="btn match3">💎 Три в ряд</a>
-    <a href="builder.html" class="btn builder">🏗️ Строительство метро</a>
-    <a href="museum.html" class="btn museum">🏛️ Музей метро</a>
-  </div>
-  
-  <p class="hint">🏆 Собирай персонажей, получай монетки, строй метро и открывай историю!</p>
-</div>
-
-<script>
-  function updateCoins() {
-    const coins = localStorage.getItem('memory_coins') || 0;
-    const coinsSpan = document.getElementById('globalCoins');
-    if (coinsSpan) coinsSpan.textContent = coins;
-  }
-  updateCoins();
-  setInterval(updateCoins, 1000);
-</script>
-</body>
-</html>
+    
+    .container {
+      max-width
