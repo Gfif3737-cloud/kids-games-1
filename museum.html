@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🏛️ Музей метро</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, 'Segoe UI', sans-serif; }
+    body {
+      background: linear-gradient(145deg, #f5f0e0, #e8e0d0);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(255, 248, 225, 0.95);
+      border-radius: 48px;
+      padding: 25px;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+      border: 1px solid #d4b87a;
+    }
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #b8860b;
+      font-family: 'Times New Roman', serif;
+    }
+    .stats {
+      background: #fff8e7;
+      border: 3px solid #d4a017;
+      border-radius: 50px;
+      padding: 12px 25px;
+      width: fit-content;
+      margin: 0 auto 25px;
+      text-align: center;
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .stats span { color: #b8860b; font-weight: bold; font-size: 28px; }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      background: #f0e0c0;
+      border: 2px solid #d4a017;
+      padding: 10px 25px;
+      border-radius: 40px;
+      color: #8b5a2b;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .tab-btn.active { background: #d4a017; color: white; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #fffaf0;
+      border: 3px solid #d4a017;
+      border-radius: 20px;
+      padding: 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 5px 0 #b8860b;
+    }
+    .card.obtained { background: #e8f5e8; border-color: #4caf50; }
+    .card.locked { opacity: 0.7; filter: grayscale(0.3); background: #f5e8d0; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 8px 0 #b8860b; }
+    .icon { font-size: 60px; margin-bottom: 8px; }
+    .icon-img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin: 0 auto 8px;
+    }
+    .name { font-size: 16px; font-weight: bold; color: #8b5a2b; margin-bottom: 5px; }
+    .fact {
+      font-size: 11px;
+      color: #666;
+      margin-top: 8px;
+      padding: 6px;
+      background: #f0e8d8;
+      border-radius: 15px;
+      line-height: 1.4;
+    }
+    .status { font-size: 12px; color: #b8860b; margin-top: 6px; font-weight: bold; }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: #fffaf0;
+      border: 4px solid #d4a017;
+      border-radius: 40px;
+      padding: 25px;
+      max-width: 320px;
+      width: 85%;
+      text-align: center;
+    }
+    .close {
+      float: right;
+      font-size: 28px;
+      cursor: pointer;
+      color: #b8860b;
+    }
+    .modal-icon { font-size: 80px; margin: 10px 0; }
+    .modal-title { font-size: 22px; margin: 10px 0; color: #b8860b; font-weight: bold; }
+    .modal-fact { background: #fff0e0; padding: 12px; border-radius: 20px; margin: 15px 0; font-size: 14px; text-align: left; }
+    .modal-status { margin-top: 15px; padding: 8px; border-radius: 30px; background: #d4a017; color: white; font-weight: bold; }
+    .back {
+      display: block;
+      width: fit-content;
+      margin: 30px auto 0;
+      background: #d4a017;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 40px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      text-align: center;
+      box-shadow: 0 5px 0 #8b5a2b;
+    }
+    .back:active { transform: translateY(3px); box-shadow: 0 2px 0 #8b5a2b; }
+    @media (max-width: 550px) { 
+      .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .icon-img { width: 60px; height: 60px; }
+      .fact { font-size: 9px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>🏛️ МУЗЕЙ МЕТРО</h1>
+  <div class="stats">
+    <div>🎭 Собрано: <span id="figuresCount">0</span></div>
+    <div>🪙 Монеток: <span id="coinsCount">0</span></div>
+  </div>
+  <div class="tabs" id="tabs"></div>
+  <div id="grid" class="grid"></div>
+  <a href="index.html" class="back">⬅ На главную</a>
+</div>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeModal">&times;</span>
+    <div class="modal-icon" id="modalIcon">🏆</div>
+    <div class="modal-title" id="modalTitle">Название</div>
+    <div class="modal-fact" id="modalFact">📜 Интересный факт</div>
+    <div id="modalStatus" class="modal-status">🔒 Не получено</div>
+  </div>
+</div>
+
+<script>
+const BASE_URL = 'https://gfif3737-cloud.github.io/kids-games-1/images/';
+
+// ==================== ПЕРСОНАЖИ ====================
+const ALL_THEMES = [
+  { 
+    name: 'Смешарики', 
+    icon: '🐰', 
+    characters: [
+      { name: 'Крош', icon: '🐰', img: BASE_URL + 'Crosh%20.WEBP', desc: 'Весёлый и энергичный кролик.' },
+      { name: 'Ёжик', icon: '🦔', img: BASE_URL + 'Esg.WEBP', desc: 'Застенчивый и добрый ёжик.' },
+      { name: 'Нюша', icon: '🐷', img: BASE_URL + 'Nusha.WEBP', desc: 'Красавица-хрюшка.' },
+      { name: 'Бараш', icon: '🐑', img: BASE_URL + 'Barah.WEBP', desc: 'Поэтичный и чувствительный баран.' },
+      { name: 'Лосяш', icon: '🦌', img: BASE_URL + 'Losash.PNG', desc: 'Умный лось-учёный.' }
+    ]
+  },
+  { 
+    name: 'Простоквашино', 
+    icon: '🐱', 
+    characters: [
+      { name: 'Матроскин', icon: '🐱', img: BASE_URL + 'matroskin.PNG', desc: 'Хозяйственный кот в тельняшке.' },
+      { name: 'Шарик', icon: '🐶', img: BASE_URL + 'Sharik%20.PNG', desc: 'Пёс-охотник.' },
+      { name: 'Дядя Фёдор', icon: '👦', img: BASE_URL + 'DadaFedor.WEBP', desc: 'Добрый мальчик.' },
+      { name: 'Печкин', icon: '📮', img: BASE_URL + 'Pechkin%20.WEBP', desc: 'Почтальон с велосипедом.' },
+      { name: 'Галчонок', icon: '🐦', img: BASE_URL + 'Galchonok.WEBP', desc: 'Маленькая галка.' }
+    ]
+  },
+  { 
+    name: 'Фиксики', 
+    icon: '🔧', 
+    characters: [
+      { name: 'Нолик', icon: '0️⃣', img: BASE_URL + 'Nolik%20.WEBP', desc: 'Маленький фиксик.' },
+      { name: 'Симка', icon: '1️⃣', img: BASE_URL + 'Simka.WEBP', desc: 'Умная и ответственная.' },
+      { name: 'Папус', icon: '👨', img: BASE_URL + 'Papus%20.WEBP', desc: 'Папа фиксиков.' },
+      { name: 'Мася', icon: '👩', img: BASE_URL + 'Maca%20.WEBP', desc: 'Мама фиксиков.' },
+      { name: 'Дедус', icon: '👴', img: BASE_URL + 'Ded.WEBP', desc: 'Мудрый дедушка.' }
+    ]
+  },
+  { 
+    name: 'Винни Пух', 
+    icon: '🐻', 
+    characters: [
+      { name: 'Винни', icon: '🐻', img: BASE_URL + 'Vivipux.WEBP', desc: 'Медвежонок, любит мёд.' },
+      { name: 'Пятачок', icon: '🐖', img: BASE_URL + 'Patashok%20.WEBP', desc: 'Маленький поросёнок.' },
+      { name: 'Кролик', icon: '🐇', img: BASE_URL + 'Zaacz.WEBP', desc: 'Практичный кролик.' },
+      { name: 'Иа', icon: '🐴', img: BASE_URL + 'Ia.WEBP', desc: 'Осёл с грустным голосом.' },
+      { name: 'Сова', icon: '🦉', img: BASE_URL + 'Sova.WEBP', desc: 'Мудрая сова.' }
+    ]
+  },
+  { 
+    name: 'Маша и Медведь', 
+    icon: '👧', 
+    characters: [
+      { name: 'Маша', icon: '👧', img: BASE_URL + 'Masha.WEBP', desc: 'Непоседливая девочка.' },
+      { name: 'Медведь', icon: '🐻', img: BASE_URL + 'Medvedi.WEBP', desc: 'Добрый медведь.' },
+      { name: 'Панда', icon: '🐼', img: BASE_URL + 'Panda.PNG', desc: 'Племянник Медведя.' },
+      { name: 'Розочка', icon: '🌸', img: BASE_URL + 'Ross.WEBP', desc: 'Маленькая свинка.' },
+      { name: 'Зайка', icon: '🐰', img: BASE_URL + 'Zaichik.PNG', desc: 'Быстрый зайка.' }
+    ]
+  }
+];
+
+// ==================== ВАГОНЫ С ФАКТАМИ ====================
+const WAGONS = [
+  { 
+    name: 'Вагон типа А (1935)', 
+    icon: '🚋', 
+    img: BASE_URL + 'VagonA.WEBP',
+    fact: 'Первый серийный вагон московского метро. Выпускался с 1935 по 1937 год. Имел деревянные сиденья и кожаные петли для стоящих пассажиров.',
+    desc: 'Самый первый вагон московского метро.'
+  },
+  { 
+    name: 'Вагон типа Б (1937)', 
+    icon: '🚋', 
+    img: BASE_URL + 'VagonB.WEBP',
+    fact: 'Усовершенствованная версия вагона типа А. В нём впервые появились автоматические двери и пневматические тормоза.',
+    desc: 'Вагон с автоматическими дверями.'
+  },
+  { 
+    name: 'Вагон типа Г (1940)', 
+    icon: '🚋', 
+    img: BASE_URL + 'VagonG.WEBP',
+    fact: 'Вагон типа Г выпускался с 1940 по 1955 год. Именно такие вагоны перевозили пассажиров во время Великой Отечественной войны, когда метро работало как бомбоубежище.',
+    desc: 'Военный вагон, работал во время бомбёжек.'
+  },
+  { 
+    name: 'Вагон типа Д (1955)', 
+    icon: '🚋', 
+    img: BASE_URL + 'VagonD.WEBP',
+    fact: 'Вагон типа Д — первый вагон с цельнометаллическим кузовом. Именно такие вагоны открывали Ленинградский (ныне Петербургский) метрополитен в 1955 году.',
+    desc: 'Первый цельнометаллический вагон.'
+  }
+];
+
+// ==================== ПРОФЕССИИ ====================
+const MAZE_PROFESSIONS = {
+  3: '🧹 Уборщик тоннелей', 6: '🔧 Слесарь депо', 9: '🚇 Дежурный по станции',
+  12: '📢 Диспетчер', 15: '🚆 Машинист 3-го класса', 18: '🚆 Машинист 2-го класса',
+  21: '🚆 Машинист 1-го класса', 24: '🏭 Начальник депо', 27: '📊 Начальник службы движения',
+  30: '👔 Начальник линии', 33: '📈 Начальник управления', 36: '🏛️ Зам. начальника метро',
+  39: '👑 Начальник метрополитена', 42: '⭐ Заслуженный работник', 45: '🏅 Почётный ветеран',
+  48: '📜 Хранитель традиций', 51: '🚇 Легенда подземки', 54: '🔮 Проводник времени',
+  57: '⚡ Повелитель тоннелей', 60: '🌟 Звезда метро', 63: '💎 Алмазный машинист',
+  66: '🏆 Мастер подземелий', 69: '🎖️ Герой метро', 72: '👑 Король эскалаторов',
+  75: '📖 Летописец линий', 78: '⚙️ Хранитель механизмов', 81: '🚀 Первопроходец',
+  84: '🌌 Повелитель поездов', 87: '💫 Абсолют метро', 90: '🏛️ Легендарный начальник',
+  93: '👑 Император подземки', 96: '⭐ Великий машинист', 99: '🏆 Легенда №1'
+};
+
+let currentTab = 'characters';
+
+function loadProgress() {
+  const levelProgress = JSON.parse(localStorage.getItem('memory_level_progress')) || { collectedCharacters: {} };
+  for (let theme of ALL_THEMES) {
+    if (!levelProgress.collectedCharacters[theme.name]) {
+      levelProgress.collectedCharacters[theme.name] = [false, false, false, false, false];
+    }
+  }
+  const artifacts = JSON.parse(localStorage.getItem('metro_artifacts')) || { mazeRewards: {}, wagons: [false, false, false, false] };
+  const coins = parseInt(localStorage.getItem('memory_coins') || '0');
+  return { levelProgress, artifacts, coins };
+}
+
+function updateCoinsDisplay() {
+  const coins = parseInt(localStorage.getItem('memory_coins') || '0');
+  document.getElementById('coinsCount').textContent = coins;
+}
+
+function renderTabs() {
+  const tabsContainer = document.getElementById('tabs');
+  tabsContainer.innerHTML = '';
+  const tabs = [
+    { id: 'characters', name: '🎭 Персонажи' },
+    { id: 'wagons', name: '🚋 Вагоны' },
+    { id: 'professions', name: '👨‍✈️ Профессии' }
+  ];
+  tabs.forEach(tab => {
+    const btn = document.createElement('button');
+    btn.className = `tab-btn ${currentTab === tab.id ? 'active' : ''}`;
+    btn.textContent = tab.name;
+    btn.onclick = () => {
+      currentTab = tab.id;
+      renderTabs();
+      renderGrid();
+    };
+    tabsContainer.appendChild(btn);
+  });
+}
+
+function renderGrid() {
+  const { levelProgress, artifacts, coins } = loadProgress();
+  const gridDiv = document.getElementById('grid');
+  updateCoinsDisplay();
+  
+  let items = [];
+  let obtainedCount = 0;
+  let totalCount = 0;
+  
+  if (currentTab === 'characters') {
+    for (let theme of ALL_THEMES) {
+      for (let i = 0; i < theme.characters.length; i++) {
+        const isObtained = levelProgress.collectedCharacters[theme.name]?.[i] || false;
+        totalCount++;
+        if (isObtained) obtainedCount++;
+        items.push({
+          type: 'character',
+          id: `${theme.name}_${i}`,
+          name: theme.characters[i].name,
+          icon: theme.characters[i].img,
+          iconIsImage: true,
+          fact: theme.characters[i].desc,
+          howto: `Играй в «Линию памяти» — этот персонаж может выпасть на любом уровне!`,
+          isObtained: isObtained
+        });
+      }
+    }
+  }
+  else if (currentTab === 'wagons') {
+    for (let i = 0; i < WAGONS.length; i++) {
+      const isObtained = artifacts.wagons?.[i] || false;
+      totalCount++;
+      if (isObtained) obtainedCount++;
+      items.push({
+        type: 'wagon',
+        id: `wagon_${i}`,
+        name: WAGONS[i].name,
+        icon: WAGONS[i].img,
+        iconIsImage: true,
+        fact: WAGONS[i].fact,
+        howto: `Пройди уровень в игре «Три в ряд» — за каждый пройденный уровень даётся вагон!`,
+        isObtained: isObtained
+      });
+    }
+  }
+  else if (currentTab === 'professions') {
+    for (let level in MAZE_PROFESSIONS) {
+      const isObtained = artifacts.mazeRewards?.[level] || false;
+      totalCount++;
+      if (isObtained) obtainedCount++;
+      items.push({
+        type: 'profession',
+        id: `prof_${level}`,
+        name: MAZE_PROFESSIONS[level],
+        icon: '🏆',
+        iconIsImage: false,
+        fact: `Профессиональное достижение в метро. Получено за ${level} пройденных уровней в лабиринте.`,
+        howto: `Пройди уровни в игре «Лабиринт» — каждые 3 уровня даётся новая профессия!`,
+        isObtained: isObtained
+      });
+    }
+  }
+  
+  document.getElementById('figuresCount').textContent = `${obtainedCount}/${totalCount}`;
+  
+  gridDiv.innerHTML = '';
+  for (let item of items) {
+    const card = document.createElement('div');
+    card.className = `card ${item.isObtained ? 'obtained' : 'locked'}`;
+    
+    let iconHtml = '';
+    if (item.iconIsImage) {
+      iconHtml = `<img src="${item.icon}" class="icon-img" alt="${item.name}">`;
+    } else {
+      iconHtml = `<div class="icon">${item.icon}</div>`;
+    }
+    
+    card.innerHTML = `
+      ${iconHtml}
+      <div class="name">${item.name}</div>
+      <div class="fact">📜 ${item.type === 'wagon' ? 'Факт: ' : ''}${item.fact ? (item.fact.length > 80 ? item.fact.slice(0, 77) + '…' : item.fact) : 'Интересный экспонат'}</div>
+      <div class="status">${item.isObtained ? '✓ Получено' : '🔒 Не получено'}</div>
+    `;
+    card.onclick = () => showModal(item);
+    gridDiv.appendChild(card);
+  }
+}
+
+function showModal(item) {
+  const modalIcon = document.getElementById('modalIcon');
+  if (item.iconIsImage) {
+    modalIcon.innerHTML = `<img src="${item.icon}" style="width:80px;height:80px;border-radius:50%;object-fit:cover;">`;
+  } else {
+    modalIcon.innerHTML = `<div style="font-size:80px;">${item.icon}</div>`;
+  }
+  document.getElementById('modalTitle').textContent = item.name;
+  document.getElementById('modalFact').innerHTML = `📜 <strong>Интересный факт:</strong><br>${item.fact || 'Нет дополнительной информации'}`;
+  const statusDiv = document.getElementById('modalStatus');
+  statusDiv.textContent = item.isObtained ? '✅ ПОЛУЧЕНО' : '🔒 ЕЩЁ НЕ ПОЛУЧЕНО';
+  statusDiv.style.background = item.isObtained ? '#4a2c00' : '#a87c3a';
+  document.getElementById('modal').style.display = 'flex';
+}
+
+document.getElementById('closeModal').onclick = () => {
+  document.getElementById('modal').style.display = 'none';
+};
+window.onclick = (e) => {
+  if (e.target === document.getElementById('modal')) {
+    document.getElementById('modal').style.display = 'none';
+  }
+};
+
+renderTabs();
+renderGrid();
+setInterval(() => {
+  updateCoinsDisplay();
+  renderGrid();
+}, 2000);
+</script>
+</body>
+</html>
